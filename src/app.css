@@ -1,0 +1,288 @@
+/* ── Character wave animation for gradient headline ── */
+@keyframes charWave {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-6px); }
+}
+.wave-char {
+  animation: charWave 3.2s ease-in-out infinite;
+}
+
+/* ============================================================
+   AURORA HERO  — Minimal, centered, soothing
+   Inspired by Linear · Basement · Vercel editorial style
+   Heading capped at 46px — perfect on any laptop size
+   ============================================================ */
+
+.aurora-hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding-top: 72px;
+}
+
+/* ── Aurora atmosphere orbs ──
+   Very blurred, very slow, very low opacity.
+   They create a subtle color field, not a visual feature. */
+.aurora-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(130px);
+  pointer-events: none;
+  will-change: transform;
+}
+.aurora-orb-a {
+  width: 70vw; height: 70vw;
+  max-width: 700px; max-height: 700px;
+  top: -15%; left: -15%;
+  background: radial-gradient(circle, rgba(255,156,0,0.13) 0%, transparent 65%);
+  animation: auroraA 18s ease-in-out infinite;
+}
+.aurora-orb-b {
+  width: 60vw; height: 60vw;
+  max-width: 600px; max-height: 600px;
+  bottom: -10%; right: -10%;
+  background: radial-gradient(circle, rgba(123,47,247,0.10) 0%, transparent 65%);
+  animation: auroraB 22s ease-in-out infinite;
+}
+.aurora-orb-c {
+  width: 50vw; height: 50vw;
+  max-width: 500px; max-height: 500px;
+  top: 30%; left: 50%; transform: translateX(-50%);
+  background: radial-gradient(circle, rgba(255,45,85,0.07) 0%, transparent 65%);
+  animation: auroraC 14s ease-in-out infinite;
+}
+
+@keyframes auroraA {
+  0%,100% { transform: translate(0, 0) scale(1); }
+  33%      { transform: translate(6%, 8%) scale(1.08); }
+  66%      { transform: translate(-4%, 4%) scale(0.95); }
+}
+@keyframes auroraB {
+  0%,100% { transform: translate(0, 0) scale(1); }
+  40%      { transform: translate(-8%, -6%) scale(1.1); }
+  70%      { transform: translate(4%, -3%) scale(0.97); }
+}
+@keyframes auroraC {
+  0%,100% { transform: translateX(-50%) scale(1); opacity: 0.8; }
+  50%      { transform: translateX(-50%) scale(1.15); opacity: 1; }
+}
+
+/* Grain overlay — adds premium texture, reduces "digital" harshness */
+.aurora-grain {
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 1; opacity: 0.5;
+}
+
+/* ── Center content column ── */
+.aurora-content {
+  position: relative; z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 720px;
+  width: 100%;
+  padding: 0 24px 80px;
+}
+
+/* ── Eyebrow pill ── */
+.aurora-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: 36px;
+  font-family: 'Inter', sans-serif;
+}
+.aurora-eyebrow-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: #FF2D55;
+  animation: pulse 2.5s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.3; transform: scale(0.6); }
+}
+
+/* ── Heading — the centrepiece ──
+   clamp: 26px (360px phone) → 3vw (fluid) → 46px (1440px+)
+   At 1366px (13" laptop): 3vw = ~41px ← comfortable, not overwhelming */
+.aurora-heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  font-family: 'Inter', sans-serif;
+  margin: 0 0 36px;
+}
+.aurora-line {
+  display: block;
+  font-size: clamp(26px, 3vw, 46px);
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+}
+/* Gradient animated last line — draws the eye, anchors the heading */
+.aurora-line-grad {
+  background: var(--brand-grad-diag);
+  background-size: 200% 200%;
+  animation: gradientShift 5s ease infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 500 !important;
+}
+
+/* ── Thin separator ── */
+.aurora-sep {
+  width: 48px;
+  height: 1px;
+  background: var(--brand-grad);
+  border-radius: 99px;
+  margin-bottom: 24px;
+  transform-origin: left;
+}
+
+/* ── Sub caption ── */
+.aurora-sub {
+  font-size: clamp(13px, 1.3vw, 15px);
+  color: var(--text-3);
+  letter-spacing: 0.04em;
+  margin-bottom: 40px;
+  font-weight: 400;
+  font-family: 'Nunito', sans-serif;
+}
+
+/* ── CTAs — deliberately lightweight ── */
+.aurora-ctas {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 64px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.aurora-cta-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  color: #fff;
+  background: var(--brand-grad-diag);
+  background-size: 200% 200%;
+  animation: gradientShift 4s ease infinite;
+  border: none;
+  border-radius: 100px;
+  padding: 12px 26px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.aurora-cta-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 32px rgba(255,45,85,0.3);
+}
+.aurora-cta-divider {
+  font-size: 12px;
+  color: var(--text-3);
+  font-style: italic;
+  font-family: 'Nunito', sans-serif;
+}
+.aurora-cta-ghost {
+  font-size: 14px;
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+  color: var(--text-2);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 2px;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.aurora-cta-ghost:hover {
+  color: var(--text);
+  border-color: var(--text-2);
+}
+
+/* ── Stats strip ── */
+.aurora-stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+  width: 100%;
+}
+.aurora-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.aurora-stat-num {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(18px, 2vw, 22px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  background: var(--brand-grad-diag);
+  background-size: 200% 200%;
+  animation: gradientShift 5s ease infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.aurora-stat-label {
+  font-size: 11px;
+  color: var(--text-3);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  font-family: 'Nunito', sans-serif;
+}
+
+/* ── Scroll indicator ── */
+.scroll-indicator {
+  position: absolute; bottom: 28px; left: 50%;
+  transform: translateX(-50%);
+  width: 20px; height: 34px;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  display: flex; justify-content: center; padding-top: 7px;
+  z-index: 2;
+}
+.scroll-dot {
+  width: 3px; height: 7px;
+  background: #FF2D55; border-radius: 99px;
+}
+
+/* ── APP SHELL ── */
+.app { min-height: 100vh; }
+main { position: relative; }
+.section + .section { border-top: 1px solid var(--border); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .aurora-heading { gap: 2px; }
+  .aurora-line { font-size: clamp(24px, 6vw, 36px); }
+  .aurora-stats { gap: 24px; }
+  .aurora-eyebrow { margin-bottom: 24px; }
+}
+
+@media (max-width: 480px) {
+  .aurora-line { font-size: clamp(22px, 7.5vw, 32px); letter-spacing: -0.015em; }
+  .aurora-ctas { flex-direction: column; align-items: center; gap: 14px; }
+  .aurora-cta-divider { display: none; }
+  .aurora-stats { gap: 16px; }
+  .aurora-stat-num { font-size: 18px; }
+}
