@@ -135,8 +135,8 @@ export default function ExperienceGate({ onUnlock }) {
         </form>
 
         <p className="gate-note">
-          No access ID?{' '}
-          <a href="mailto:support@medialooptech.com">Contact DT Solution</a>
+          Don't have an access ID?{' '}
+          <a href="https://dtsolution.in" target="_blank" rel="noopener noreferrer">Contact DT Solution</a>
         </p>
       </motion.div>
 
