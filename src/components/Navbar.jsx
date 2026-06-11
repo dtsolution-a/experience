@@ -122,6 +122,10 @@ export default function Navbar() {
           position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
           transition: all 0.4s cubic-bezier(0.23,1,0.32,1);
         }
+        /* Push navbar below experience chrome bar */
+        body[data-exp] .navbar {
+          top: 44px;
+        }
         .nav-inner {
           display: flex; align-items: center; justify-content: space-between;
           height: 72px;

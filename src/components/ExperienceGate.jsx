@@ -2,36 +2,34 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 // ─── Valid Unique IDs ─────────────────────────────────────
-// Share these privately — only holders can enter
 const VALID_IDS = new Set([
   'DTS001', 'DTS002', 'DTS003', 'DTS004', 'DTS005',
   'DTS006', 'DTS007', 'DTS008', 'DTS009', 'DTS010',
-  'MLDEMO', 'MAMADEMO', // special VIP codes
+  'MLDEMO', 'MAMADEMO',
 ])
 
 export default function ExperienceGate({ onUnlock }) {
-  const [uid, setUid]       = useState('')
-  const [name, setName]     = useState('')
-  const [error, setError]   = useState('')
+  const [uid, setUid]         = useState('')
+  const [name, setName]       = useState('')
+  const [error, setError]     = useState('')
   const [loading, setLoading] = useState(false)
-  const [shake, setShake]   = useState(false)
+  const [shake, setShake]     = useState(false)
 
   async function handleSubmit(e) {
     e.preventDefault()
     setError('')
     if (!uid.trim() || !name.trim()) {
-      setError('Please fill in both fields.')
+      setError('Both fields are required.')
       return
     }
     setLoading(true)
-    // Simulate a brief "verifying" feel
     await new Promise(r => setTimeout(r, 900))
     setLoading(false)
 
     if (VALID_IDS.has(uid.trim().toUpperCase())) {
       onUnlock(name.trim())
     } else {
-      setError('Invalid Access ID. Please check and try again.')
+      setError('Invalid Access ID. Please contact DT Solution.')
       setShake(true)
       setTimeout(() => setShake(false), 600)
     }
@@ -39,42 +37,51 @@ export default function ExperienceGate({ onUnlock }) {
 
   return (
     <div className="gate-root">
-      {/* Background */}
-      <div className="gate-bg" />
-      <div className="gate-orb gate-orb-1" />
-      <div className="gate-orb gate-orb-2" />
+      {/* Subtle particle grid */}
       <div className="gate-grid" />
+      {/* Faint center glow */}
+      <div className="gate-glow" />
 
-      {/* Card */}
+      {/* DTS. Logo — top left */}
+      <div className="gate-logo">
+        DTS<span className="gate-logo-dot">.</span>
+      </div>
+
+      {/* Center content */}
       <motion.div
-        className={`gate-card ${shake ? 'gate-shake' : ''}`}
-        initial={{ opacity: 0, y: 40, scale: 0.95 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
+        className="gate-center"
+        initial={{ opacity: 0, y: 32 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.9, ease: [0.23, 1, 0.32, 1] }}
       >
-        {/* Top brand */}
-        <div className="gate-brand">
-          <div className="gate-brand-dot" />
-          <span className="gate-brand-label">DT Solution</span>
+        {/* Eyebrow */}
+        <div className="gate-eyebrow">
+          <span className="gate-eyebrow-line" />
+          EXPERIENCE PORTAL
+          <span className="gate-eyebrow-line" />
         </div>
 
-        <h1 className="gate-title">Experience Centre</h1>
-        <p className="gate-subtitle">
-          Enter your access credentials to preview the exclusive client experience.
+        {/* Headline */}
+        <h1 className="gate-headline">
+          ENTER TO<br />
+          <span className="gate-headline-red">ACCESS.</span>
+        </h1>
+
+        <p className="gate-desc">
+          Exclusive preview of the MediaLoop Technologies experience.<br />
+          Enter your access credentials to continue.
         </p>
 
-        <form onSubmit={handleSubmit} className="gate-form">
-          {/* Unique ID */}
-          <div className="gate-field">
-            <label className="gate-label">Access ID</label>
-            <div className="gate-input-wrap">
-              <svg className="gate-input-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-              </svg>
+        {/* Form */}
+        <form onSubmit={handleSubmit} className={`gate-form ${shake ? 'gate-shake' : ''}`}>
+          <div className="gate-row">
+            {/* Access ID */}
+            <div className="gate-field">
+              <label className="gate-label">ACCESS ID</label>
               <input
                 className="gate-input"
                 type="text"
-                placeholder="e.g. DTS001"
+                placeholder="Enter your access ID"
                 value={uid}
                 onChange={e => { setUid(e.target.value); setError('') }}
                 autoComplete="off"
@@ -82,15 +89,10 @@ export default function ExperienceGate({ onUnlock }) {
                 maxLength={20}
               />
             </div>
-          </div>
 
-          {/* Name */}
-          <div className="gate-field">
-            <label className="gate-label">Your Name</label>
-            <div className="gate-input-wrap">
-              <svg className="gate-input-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
-              </svg>
+            {/* Name */}
+            <div className="gate-field">
+              <label className="gate-label">YOUR NAME</label>
               <input
                 className="gate-input"
                 type="text"
@@ -112,41 +114,35 @@ export default function ExperienceGate({ onUnlock }) {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
               >
-                {error}
+                ✕ {error}
               </motion.p>
             )}
           </AnimatePresence>
 
-          {/* Submit */}
+          {/* CTA */}
           <motion.button
             type="submit"
             className="gate-btn"
             disabled={loading}
             whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
+            whileTap={{ scale: 0.97 }}
           >
-            {loading ? (
-              <span className="gate-spinner" />
-            ) : (
-              <>
-                Enter Experience
-                <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </>
-            )}
+            {loading
+              ? <span className="gate-spinner" />
+              : <>ENTER EXPERIENCE <span className="gate-btn-arrow">→</span></>
+            }
           </motion.button>
         </form>
 
-        <p className="gate-footer-note">
-          Don't have an access ID? Contact us at{' '}
-          <a href="mailto:support@medialooptech.com">support@medialooptech.com</a>
+        <p className="gate-note">
+          No access ID?{' '}
+          <a href="mailto:support@medialooptech.com">Contact DT Solution</a>
         </p>
       </motion.div>
 
-      {/* Bottom watermark */}
-      <div className="gate-watermark">
-        Powered by <strong>DT Solution</strong> · Confidential Preview
+      {/* Bottom tag */}
+      <div className="gate-bottom-tag">
+        Powered by <strong>DT Solution</strong> · Confidential Preview · {new Date().getFullYear()}
       </div>
     </div>
   )
