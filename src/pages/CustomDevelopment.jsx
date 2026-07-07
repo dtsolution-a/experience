@@ -1,8 +1,27 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import Navbar from '../components/Navbar'
 import '../styles/cd-page.css'
+
+/* ── CountUp ───────────────────────────────────────────────────── */
+function CountUp({ target, suffix, inView }) {
+  const [count, setCount] = useState(0)
+  useEffect(() => {
+    if (!inView) return
+    setCount(0)
+    const duration = 1600
+    const start = Date.now()
+    const timer = setInterval(() => {
+      const progress = Math.min((Date.now() - start) / duration, 1)
+      const eased = 1 - Math.pow(1 - progress, 3)
+      setCount(Math.round(eased * target))
+      if (progress >= 1) clearInterval(timer)
+    }, 16)
+    return () => clearInterval(timer)
+  }, [inView, target])
+  return <>{count}{suffix}</>
+}
 
 /* ── Data ──────────────────────────────────────────────────────── */
 const tabs = [
@@ -87,10 +106,10 @@ const phases = [
 ]
 
 const metrics = [
-  { val: '99.9%', lbl: 'Uptime SLA guarantee' },
-  { val: '<2s',   lbl: 'Target page load time' },
-  { val: '80%+',  lbl: 'Automated test coverage' },
-  { val: '2 wks', lbl: 'Average sprint cycle' },
+  { val: '99.9%', target: 99.9, suffix: '%', lbl: 'Uptime SLA guarantee' },
+  { val: '<2s',   target: 2,    suffix: 's',  lbl: 'Target page load time' },
+  { val: '80%+',  target: 80,   suffix: '%+', lbl: 'Automated test coverage' },
+  { val: '2wks',  target: 2,    suffix: 'wks', lbl: 'Average sprint cycle' },
 ]
 
 /* ── Floating Code BG ─────────────────────────────────────────── */
@@ -108,7 +127,7 @@ export default function CustomDevelopment() {
   const [activeTab,   setActiveTab]   = useState('web')
   const [techFilter,  setTechFilter]  = useState('All')
   const [activePhase, setActivePhase] = useState(null)
-  const [metricsRef, metricsInView]   = useInView({ triggerOnce: true, threshold: 0.3 })
+  const [metricsRef,  metricsInView]  = useInView({ triggerOnce: true, threshold: 0.3 })
 
   const tab      = tabs.find(t => t.id === activeTab)
   const filtered = techFilter === 'All' ? allTech : allTech.filter(t => t.cat === techFilter)
@@ -209,7 +228,7 @@ export default function CustomDevelopment() {
                 <motion.div key={t.name} className="cd-tech-card" style={{ '--tc': t.color }}
                   layout initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.8 }}
                   transition={{ duration: 0.3, delay: i * 0.03 }}
-                  whileHover={{ y: -5, scale: 1.05 }}
+                  whileHover={{ y: -6, scale: 1.08, rotateY: 6, transition: { type: 'spring', stiffness: 280, damping: 18 } }}
                 >
                   <span className="cd-tech-dot" />
                   <span className="cd-tech-name">{t.name}</span>
@@ -232,8 +251,9 @@ export default function CustomDevelopment() {
           <div className="cd-timeline">
             {phases.map((p, i) => (
               <motion.div key={i} className={`cd-phase${activePhase === i ? ' open' : ''}`}
-                initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }} transition={{ delay: i * 0.1 }}
+                data-n={p.n}
+                initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }} transition={{ delay: i * 0.1, ease: [0.23, 1, 0.32, 1] }}
                 onClick={() => setActivePhase(activePhase === i ? null : i)}
               >
                 <div className="cd-phase-header">
@@ -273,9 +293,11 @@ export default function CustomDevelopment() {
             {metrics.map((m, i) => (
               <motion.div key={i} className="cd-metric"
                 initial={{ opacity: 0, y: 30 }} animate={metricsInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: i * 0.1, duration: 0.7 }}
+                transition={{ delay: i * 0.12, duration: 0.8 }}
               >
-                <div className="cd-metric-val">{m.val}</div>
+                <div className="cd-metric-val">
+                  <CountUp target={m.target} suffix={m.suffix} inView={metricsInView} />
+                </div>
                 <div className="cd-metric-lbl">{m.lbl}</div>
               </motion.div>
             ))}
