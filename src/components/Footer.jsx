@@ -1,10 +1,32 @@
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 
 const footerLinks = {
-  Services: ['Digital Marketing', 'Web Development', 'Brand Identity', 'AI & Automation', 'Cloud Solutions'],
-  Company: ['About Us', 'Our Work', 'Case Studies', 'Careers', 'Blog'],
-  Resources: ['Strategy Guide', 'AI Marketing Kit', 'Brand Playbook', 'Dev Resources'],
-  Legal: ['Privacy Policy', 'Terms of Service', 'Cookie Policy'],
+  Services: [
+    { label: 'Digital Marketing', path: '/#services' },
+    { label: 'Web Development', path: '/#services' },
+    { label: 'AI & Automation', path: '/ai-automation' },
+    { label: 'Custom Development', path: '/custom-development' },
+    { label: 'Cloud Solutions', path: '/#services' }
+  ],
+  Company: [
+    { label: 'About Us', path: '/about' },
+    { label: 'Our Work', path: '/work' },
+    { label: 'Case Studies', path: '/work' },
+    { label: 'Careers', path: '/careers' },
+    { label: 'Blog', path: '/blog' }
+  ],
+  Resources: [
+    { label: 'Strategy Guide', path: '#' },
+    { label: 'AI Marketing Kit', path: '#' },
+    { label: 'Brand Playbook', path: '#' },
+    { label: 'Dev Resources', path: '#' }
+  ],
+  Legal: [
+    { label: 'Privacy Policy', path: '/legal#privacy' },
+    { label: 'Terms of Service', path: '/legal#terms' },
+    { label: 'Cookie Policy', path: '/legal#cookies' }
+  ],
 }
 
 const socials = [
@@ -35,13 +57,13 @@ export default function Footer() {
           {/* Brand col */}
           <div className="footer-brand">
             {/* Full logo — dark background so white text is visible */}
-            <a href="#" className="footer-logo-full-wrap">
+            <Link to="/" className="footer-logo-full-wrap">
               <img
                 src="/ml_logo_full.png"
                 alt="MediaLoop Technologies — Tech That Connect"
                 className="footer-full-logo-img"
               />
-            </a>
+            </Link>
             <p className="footer-tagline">Engineering intelligent digital ecosystems for brands that demand excellence.</p>
 
             {/* Contact quick-links */}
@@ -81,7 +103,13 @@ export default function Footer() {
               <h4 className="footer-col-title">{group}</h4>
               <ul className="footer-col-links">
                 {links.map(link => (
-                  <li key={link}><a href="#" className="footer-link">{link}</a></li>
+                  <li key={link.label}>
+                    {link.path.startsWith('http') || link.path.startsWith('#') ? (
+                      <a href={link.path} className="footer-link">{link.label}</a>
+                    ) : (
+                      <Link to={link.path} className="footer-link">{link.label}</Link>
+                    )}
+                  </li>
                 ))}
               </ul>
             </div>

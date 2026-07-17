@@ -13,8 +13,15 @@ import Testimonials from './components/Testimonials'
 import CTABanner from './components/CTABanner'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
+import ContactPage from './pages/ContactPage'
+import About from './pages/About'
+import Careers from './pages/Careers'
+import Blog from './pages/Blog'
+import CaseStudies from './pages/CaseStudies'
+import Legal from './pages/Legal'
 import AIAutomation from './pages/AIAutomation'
 import CustomDevelopment from './pages/CustomDevelopment'
+import ScrollToTop from './components/ScrollToTop'
 import './index.css'
 import './app.css'
 import './components.css'
@@ -49,10 +56,17 @@ export default function App() {
   return (
     <ThemeProvider>
       <BrowserRouter>
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/ai-automation" element={<AIAutomation />} />
           <Route path="/custom-development" element={<CustomDevelopment />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/careers" element={<Careers />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/work" element={<CaseStudies />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/legal" element={<Legal />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
