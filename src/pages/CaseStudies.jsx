@@ -12,16 +12,22 @@ const projects = [
 
 export default function CaseStudies() {
   return (
-    <div className="inner-page">
+    <div className="inner-page noise">
+      {/* Ambient Orbs */}
+      <div className="inner-bg-orb inner-orb-1"></div>
+      <div className="inner-bg-orb inner-orb-2"></div>
+
       <Navbar />
       
       <main>
         {/* HERO */}
         <section className="page-hero">
           <div className="container">
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+            <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}>
               <span className="page-eyebrow">Our Work</span>
-              <h1 className="page-title">Case Studies</h1>
+              <h1 className="page-title">
+                <span className="gradient-text">Case</span> Studies
+              </h1>
               <p className="page-subtitle">A selection of recent projects where we applied engineering and design to solve complex business challenges.</p>
             </motion.div>
           </div>
@@ -32,22 +38,25 @@ export default function CaseStudies() {
           <div className="container">
             <div className="grid-2">
               {projects.map((proj, i) => (
-                <motion.div 
+                <motion.a 
+                  href="#"
                   key={proj.id} 
-                  className="simple-card"
+                  className="elevated-card"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
+                  transition={{ delay: i * 0.1, duration: 0.5, ease: 'easeOut' }}
                 >
-                  <div className="simple-card-meta">
-                    <span style={{ fontWeight: 600, color: 'var(--text)' }}>{proj.client}</span>
-                    <span>{proj.tag}</span>
+                  <div className="ec-meta">
+                    <span style={{ fontWeight: 700, color: 'var(--text)', fontSize: '15px' }}>{proj.client}</span>
+                    <span className="ec-tag">{proj.tag}</span>
                   </div>
-                  <h3 className="simple-card-title">{proj.title}</h3>
-                  <p className="simple-card-desc">{proj.desc}</p>
-                  <a href="#" className="simple-card-link">View Case Study →</a>
-                </motion.div>
+                  <h3 className="ec-title" style={{ fontSize: '28px' }}>{proj.title}</h3>
+                  <p className="ec-desc">{proj.desc}</p>
+                  <span className="ec-link">
+                    View Case Study <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                  </span>
+                </motion.a>
               ))}
             </div>
           </div>

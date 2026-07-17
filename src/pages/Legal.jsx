@@ -57,7 +57,6 @@ export default function Legal() {
   const { hash } = useLocation()
   const [activeTab, setActiveTab] = useState('privacy')
 
-  // Support direct linking to tabs via hash (e.g., /legal#terms)
   useEffect(() => {
     if (hash === '#terms') setActiveTab('terms')
     else if (hash === '#cookies') setActiveTab('cookies')
@@ -65,14 +64,14 @@ export default function Legal() {
   }, [hash])
 
   return (
-    <div className="inner-page">
+    <div className="inner-page noise">
       <Navbar />
       
       <main>
         <section className="page-hero" style={{ paddingBottom: '30px' }}>
           <div className="container">
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-              <h1 className="page-title" style={{ fontSize: '48px' }}>Legal Hub</h1>
+            <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}>
+              <h1 className="page-title" style={{ fontSize: '64px' }}>Legal Hub</h1>
             </motion.div>
           </div>
         </section>
@@ -88,10 +87,12 @@ export default function Legal() {
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeTab}
-                initial={{ opacity: 0, y: 10 }}
+                initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.3 }}
+                exit={{ opacity: 0, y: -15 }}
+                transition={{ duration: 0.4 }}
+                className="elevated-card"
+                style={{ padding: '60px', marginTop: '20px' }}
               >
                 {content[activeTab]}
               </motion.div>
