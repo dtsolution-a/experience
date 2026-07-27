@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { ArrowRight } from 'lucide-react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import '../styles/inner-pages.css'
@@ -88,7 +89,7 @@ export default function CaseStudies() {
                 </div>
 
                 <a href="#" className="ec-link" style={{ marginTop: 0 }}>
-                  Read Full Case Study <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                  Read Full Case Study <motion.div whileHover={{ x: 5 }} transition={{ type: 'spring' }}><ArrowRight size={16} strokeWidth={2.5} /></motion.div>
                 </a>
               </div>
             </motion.div>
@@ -128,7 +129,7 @@ export default function CaseStudies() {
                         <span style={{ fontSize: '16px', fontWeight: 800, color: 'var(--accent-1)' }}>{proj.metric}</span>
                       </div>
                       <span className="ec-link" style={{ marginTop: 0 }}>
-                        View Project <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        View Project <motion.div whileHover={{ x: 5 }} transition={{ type: 'spring' }}><ArrowRight size={16} strokeWidth={2.5} /></motion.div>
                       </span>
                     </div>
                   </div>

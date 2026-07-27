@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { Laptop, Globe, Brain, ArrowRight, ChevronDown } from 'lucide-react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import '../styles/inner-pages.css'
@@ -44,9 +45,9 @@ const jobs = [
 ]
 
 const perks = [
-  { icon: '💻', title: 'Top-tier Gear', desc: 'MacBook Pro, 4K monitors, and any software you need to do your best work.' },
-  { icon: '🌍', title: 'Work Anywhere', desc: 'Remote-first culture with hubs in Surat and Dubai if you want an office.' },
-  { icon: '🧠', title: 'Continuous Learning', desc: 'Annual budget for courses, conferences, and books. We invest in you.' },
+  { icon: Laptop, title: 'Top-tier Gear', desc: 'MacBook Pro, 4K monitors, and any software you need to do your best work.' },
+  { icon: Globe, title: 'Work Anywhere', desc: 'Remote-first culture with hubs in Surat and Dubai if you want an office.' },
+  { icon: Brain, title: 'Continuous Learning', desc: 'Annual budget for courses, conferences, and books. We invest in you.' },
 ]
 
 export default function Careers() {
@@ -91,29 +92,45 @@ export default function Careers() {
 
               <motion.div 
                 className="elevated-card" 
-                style={{ gridColumn: 'span 4', padding: 0, overflow: 'hidden', border: 'none', minHeight: '300px' }}
+                style={{ gridColumn: 'span 4', padding: '40px', background: 'var(--brand-grad-diag)', color: '#fff', border: 'none', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}
                 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
               >
-                <img src="/images/culture-abstract.jpg" alt="Culture" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, #06080F, transparent)', opacity: 0.8 }}></div>
-                <div style={{ position: 'absolute', bottom: '32px', left: '32px', right: '32px' }}>
-                  <h3 style={{ fontSize: '24px', marginBottom: '8px', fontWeight: 800 }}>Global Impact</h3>
-                  <p style={{ opacity: 0.8, fontSize: '14px', lineHeight: 1.6 }}>Your code and designs will be used by thousands of users across global enterprises.</p>
-                </div>
+                <motion.div 
+                  initial={{ rotate: 0 }} 
+                  whileHover={{ rotate: 180, scale: 1.1 }} 
+                  transition={{ duration: 0.6, ease: "easeInOut" }}
+                  style={{ marginBottom: '24px', display: 'inline-block', originX: 0.5, originY: 0.5 }}
+                >
+                  <Globe size={48} strokeWidth={1.5} color="rgba(255,255,255,0.9)" />
+                </motion.div>
+                <h3 style={{ fontSize: '24px', marginBottom: '10px', fontWeight: 800 }}>Global Impact</h3>
+                <p style={{ opacity: 0.9, fontSize: '15px', lineHeight: 1.6 }}>Your code and designs will be used by thousands of users across global enterprises.</p>
               </motion.div>
 
-              {perks.map((perk, i) => (
-                <motion.div 
-                  key={perk.title}
-                  className="elevated-card" 
-                  style={{ gridColumn: 'span 4', padding: '40px' }}
-                  initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 * i }}
-                >
-                  <div style={{ fontSize: '32px', marginBottom: '24px' }}>{perk.icon}</div>
-                  <h4 style={{ fontSize: '20px', marginBottom: '12px', fontWeight: 700 }}>{perk.title}</h4>
-                  <p style={{ fontSize: '15px', color: 'var(--text-2)', lineHeight: 1.6 }}>{perk.desc}</p>
-                </motion.div>
-              ))}
+              {perks.map((perk, i) => {
+                const IconComponent = perk.icon;
+                return (
+                  <motion.div 
+                    key={perk.title}
+                    className="elevated-card" 
+                    style={{ gridColumn: 'span 4', padding: '40px' }}
+                    initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 * i }}
+                    whileHover="hover"
+                  >
+                    <motion.div 
+                      variants={{
+                        hover: { scale: 1.2, y: -5, color: 'var(--accent-1)' }
+                      }}
+                      transition={{ type: 'spring', stiffness: 300, damping: 15 }}
+                      style={{ marginBottom: '24px', display: 'inline-block', color: 'var(--text)' }}
+                    >
+                      <IconComponent size={36} strokeWidth={1.5} />
+                    </motion.div>
+                    <h4 style={{ fontSize: '20px', marginBottom: '12px', fontWeight: 700 }}>{perk.title}</h4>
+                    <p style={{ fontSize: '15px', color: 'var(--text-2)', lineHeight: 1.6 }}>{perk.desc}</p>
+                  </motion.div>
+                )
+              })}
 
             </div>
           </div>
@@ -149,9 +166,9 @@ export default function Careers() {
                     <div style={{ 
                       width: '40px', height: '40px', borderRadius: '50%', background: 'rgba(255,255,255,0.05)', border: '1px solid var(--border)',
                       display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'transform 0.3s',
-                      transform: expandedId === job.id ? 'rotate(45deg)' : 'rotate(0deg)'
+                      transform: expandedId === job.id ? 'rotate(180deg)' : 'rotate(0deg)'
                     }}>
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                      <ChevronDown size={20} color="var(--text-2)" />
                     </div>
                   </div>
 
@@ -181,7 +198,7 @@ export default function Careers() {
                               alignItems: 'center', gap: '8px'
                             }}
                           >
-                            Apply for this role <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                            Apply for this role <ArrowRight size={16} strokeWidth={2.5} />
                           </a>
                         </div>
                       </motion.div>

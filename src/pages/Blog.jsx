@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { ArrowRight } from 'lucide-react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import '../styles/inner-pages.css'
@@ -54,7 +55,7 @@ export default function Blog() {
                   <h3 className="ec-title">{post.title}</h3>
                   <p className="ec-desc">{post.desc}</p>
                   <span className="ec-link">
-                    Read Article <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    Read Article <motion.div whileHover={{ x: 5 }} transition={{ type: 'spring' }}><ArrowRight size={16} strokeWidth={2.5} /></motion.div>
                   </span>
                 </motion.a>
               ))}
