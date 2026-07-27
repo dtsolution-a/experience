@@ -8,19 +8,20 @@ const featuredProject = {
   client: 'Apex Fintech',
   tag: 'Fintech & Web App',
   title: 'Redefining High-Frequency Trading UI',
-  desc: 'We completely overhauled the user interface and underlying React architecture for Apex Fintech. By implementing a custom WebGL charting engine and optimizing React rendering cycles, we reduced TTI (Time to Interactive) by 60% and increased user retention by 40%.',
+  desc: 'We completely overhauled the user interface and underlying React architecture for Apex Fintech. By implementing a custom WebGL charting engine and optimizing React rendering cycles, we reduced TTI by 60% and increased user retention by 40%.',
   metrics: [
     { label: 'Increase in Retention', value: '+40%' },
-    { label: 'Render Speed Improvement', value: '2.5x' },
+    { label: 'Speed Improvement', value: '2.5x' },
     { label: 'Daily Active Users', value: '1.2M' }
-  ]
+  ],
+  image: '/images/cs-fintech.jpg'
 }
 
 const projects = [
-  { id: 1, client: 'Lumina Health', tag: 'AI/ML', title: 'Predictive patient triage', desc: 'Developed an AI model that predicts patient admission rates with 94% accuracy, optimising hospital staffing.', metric: '94% Accuracy' },
-  { id: 2, client: 'Orbit Logistics', tag: 'Automation', title: 'Zero-touch supply chain', desc: 'Automated 100% of invoice processing and dispatch routing using custom RPA and OCR pipelines.', metric: '100% Automated' },
-  { id: 3, client: 'Nexus Retail', tag: 'E-commerce', title: 'Headless commerce migration', desc: 'Rebuilt a monolithic storefront into a blazing fast Next.js headless architecture.', metric: 'Sub-second Load' },
-  { id: 4, client: 'Zenith Energy', tag: 'IoT Dashboard', title: 'Real-time grid monitoring', desc: 'A real-time data visualization dashboard tracking energy consumption across 10,000+ IoT nodes globally.', metric: '10k+ Nodes' },
+  { id: 1, client: 'Lumina Health', tag: 'AI/ML', title: 'Predictive patient triage', desc: 'Developed an AI model that predicts patient admission rates with 94% accuracy, optimising hospital staffing.', metric: '94% Accuracy', image: '/images/cs-ai.jpg' },
+  { id: 2, client: 'Orbit Logistics', tag: 'Automation', title: 'Zero-touch supply chain', desc: 'Automated 100% of invoice processing and dispatch routing using custom RPA and OCR pipelines.', metric: '100% Automated', image: '/images/cs-automation.jpg' },
+  { id: 3, client: 'Nexus Retail', tag: 'E-commerce', title: 'Headless commerce migration', desc: 'Rebuilt a monolithic storefront into a blazing fast Next.js headless architecture.', metric: 'Sub-second Load', image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800' },
+  { id: 4, client: 'Zenith Energy', tag: 'IoT Dashboard', title: 'Real-time grid monitoring', desc: 'A real-time data visualization dashboard tracking energy consumption across 10,000+ IoT nodes globally.', metric: '10k+ Nodes', image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800' },
 ]
 
 const approachSteps = [
@@ -32,7 +33,7 @@ const approachSteps = [
 
 export default function CaseStudies() {
   return (
-    <div className="inner-page noise">
+    <div className="inner-page-dark noise">
       <div className="inner-bg-orb inner-orb-1"></div>
       <div className="inner-bg-orb inner-orb-2"></div>
 
@@ -57,20 +58,21 @@ export default function CaseStudies() {
           <div className="container">
             <motion.div 
               className="elevated-card"
-              style={{ padding: 0, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 0, overflow: 'hidden' }}
+              style={{ padding: 0, display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: 0, overflow: 'hidden', minHeight: '500px' }}
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
             >
               {/* Visual Side */}
-              <div style={{ position: 'relative', background: 'var(--surface-1)', borderRight: '1px solid var(--border)', minHeight: '400px', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
-                <div style={{ position: 'absolute', inset: 0, background: 'var(--brand-grad-diag)', opacity: 0.1 }}></div>
-                <div style={{ width: '300px', height: '300px', background: 'var(--glow-2)', borderRadius: '50%', filter: 'blur(50px)', position: 'absolute' }}></div>
-                <h3 style={{ fontSize: '48px', fontWeight: 900, color: 'var(--text)', opacity: 0.1, zIndex: 1, textTransform: 'uppercase', letterSpacing: '-0.04em' }}>Apex Fintech</h3>
+              <div style={{ position: 'relative', borderRight: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+                <div className="feature-image-wrap">
+                  <img src={featuredProject.image} alt={featuredProject.title} />
+                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, transparent, var(--card-bg))' }}></div>
+                </div>
               </div>
 
               {/* Content Side */}
-              <div style={{ padding: '60px 50px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+              <div style={{ padding: '60px 50px', display: 'flex', flexDirection: 'column', justifyContent: 'center', position: 'relative', zIndex: 2 }}>
                 <div className="ec-meta" style={{ marginBottom: '24px' }}>
-                  <span className="ec-tag" style={{ background: 'var(--text)', color: 'var(--bg)', border: 'none' }}>Featured Project</span>
+                  <span className="ec-tag" style={{ background: 'var(--brand-grad-diag)', color: '#fff', border: 'none' }}>Featured Project</span>
                   <span style={{ color: 'var(--text-3)' }}>{featuredProject.tag}</span>
                 </div>
                 <h2 style={{ fontSize: '36px', fontWeight: 800, letterSpacing: '-0.02em', marginBottom: '20px', lineHeight: 1.1 }}>{featuredProject.title}</h2>
@@ -79,8 +81,8 @@ export default function CaseStudies() {
                 <div style={{ display: 'flex', gap: '32px', marginBottom: '40px' }}>
                   {featuredProject.metrics.map(m => (
                     <div key={m.label}>
-                      <div style={{ fontSize: '28px', fontWeight: 900, color: 'var(--accent-2)', marginBottom: '4px' }}>{m.value}</div>
-                      <div style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--text-3)', fontWeight: 700 }}>{m.label}</div>
+                      <div style={{ fontSize: '24px', fontWeight: 900, color: '#fff', marginBottom: '4px' }}>{m.value}</div>
+                      <div style={{ fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--text-3)', fontWeight: 700 }}>{m.label}</div>
                     </div>
                   ))}
                 </div>
@@ -102,27 +104,33 @@ export default function CaseStudies() {
                   href="#"
                   key={proj.id} 
                   className="elevated-card"
-                  style={{ padding: '40px' }}
+                  style={{ padding: 0 }}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1, duration: 0.5, ease: 'easeOut' }}
                 >
-                  <div className="ec-meta">
-                    <span style={{ fontWeight: 700, color: 'var(--text)', fontSize: '15px' }}>{proj.client}</span>
-                    <span className="ec-tag">{proj.tag}</span>
+                  <div className="ec-visual">
+                    <img src={proj.image} alt={proj.title} />
                   </div>
-                  <h3 className="ec-title" style={{ fontSize: '26px' }}>{proj.title}</h3>
-                  <p className="ec-desc">{proj.desc}</p>
                   
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 'auto', borderTop: '1px solid var(--border)', paddingTop: '24px' }}>
-                    <div style={{ display: 'flex', flexDirection: 'column' }}>
-                      <span style={{ fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--text-3)', fontWeight: 700, marginBottom: '4px' }}>Key Metric</span>
-                      <span style={{ fontSize: '16px', fontWeight: 800, color: 'var(--accent-1)' }}>{proj.metric}</span>
+                  <div className="ec-content">
+                    <div className="ec-meta">
+                      <span style={{ fontWeight: 800, color: '#fff', fontSize: '13px' }}>{proj.client}</span>
+                      <span className="ec-tag">{proj.tag}</span>
                     </div>
-                    <span className="ec-link" style={{ marginTop: 0 }}>
-                      View Project <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                    </span>
+                    <h3 className="ec-title" style={{ fontSize: '24px' }}>{proj.title}</h3>
+                    <p className="ec-desc">{proj.desc}</p>
+                    
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 'auto', borderTop: '1px solid var(--border)', paddingTop: '24px' }}>
+                      <div style={{ display: 'flex', flexDirection: 'column' }}>
+                        <span style={{ fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--text-3)', fontWeight: 700, marginBottom: '4px' }}>Key Metric</span>
+                        <span style={{ fontSize: '16px', fontWeight: 800, color: 'var(--accent-1)' }}>{proj.metric}</span>
+                      </div>
+                      <span className="ec-link" style={{ marginTop: 0 }}>
+                        View Project <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                      </span>
+                    </div>
                   </div>
                 </motion.a>
               ))}
@@ -142,10 +150,10 @@ export default function CaseStudies() {
               {approachSteps.map((step, i) => (
                 <motion.div 
                   key={step.num}
-                  style={{ display: 'flex', gap: '24px', alignItems: 'flex-start' }}
+                  style={{ display: 'flex', gap: '24px', alignItems: 'flex-start', padding: '32px', background: 'var(--card-bg)', borderRadius: '24px', border: '1px solid var(--border)' }}
                   initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
                 >
-                  <div style={{ fontSize: '48px', fontWeight: 900, color: 'var(--border)', lineHeight: 0.8 }}>{step.num}</div>
+                  <div style={{ fontSize: '48px', fontWeight: 900, color: 'var(--border)', lineHeight: 0.8, WebkitTextStroke: '1px var(--text-3)', color: 'transparent' }}>{step.num}</div>
                   <div>
                     <h3 style={{ fontSize: '20px', fontWeight: 700, marginBottom: '12px' }}>{step.title}</h3>
                     <p style={{ fontSize: '15px', color: 'var(--text-2)', lineHeight: 1.6 }}>{step.desc}</p>

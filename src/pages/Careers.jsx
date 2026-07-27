@@ -45,16 +45,15 @@ const jobs = [
 
 const perks = [
   { icon: '💻', title: 'Top-tier Gear', desc: 'MacBook Pro, 4K monitors, and any software you need to do your best work.' },
-  { icon: '🌍', title: 'Work Anywhere', desc: 'Remote-first culture with beautiful hubs in Surat and Dubai if you want an office.' },
-  { icon: '🧠', title: 'Continuous Learning', desc: 'Annual budget for courses, conferences, and books. We invest in your growth.' },
-  { icon: '🚀', title: 'Autonomy', desc: 'No micromanagement. We hire brilliant people and give them the freedom to execute.' },
+  { icon: '🌍', title: 'Work Anywhere', desc: 'Remote-first culture with hubs in Surat and Dubai if you want an office.' },
+  { icon: '🧠', title: 'Continuous Learning', desc: 'Annual budget for courses, conferences, and books. We invest in you.' },
 ]
 
 export default function Careers() {
   const [expandedId, setExpandedId] = useState(null)
 
   return (
-    <div className="inner-page noise">
+    <div className="inner-page-dark noise">
       <div className="inner-bg-orb inner-orb-1"></div>
       <div className="inner-bg-orb inner-orb-2" style={{ top: '60%', bottom: 'auto' }}></div>
 
@@ -84,32 +83,35 @@ export default function Careers() {
                 style={{ gridColumn: 'span 8', padding: '60px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}
                 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
               >
-                <h2 style={{ fontSize: '32px', marginBottom: '20px' }}>A culture of excellence.</h2>
-                <p style={{ fontSize: '18px', color: 'var(--text-2)', lineHeight: 1.7, maxWidth: '500px' }}>
+                <h2 style={{ fontSize: '36px', marginBottom: '20px', fontWeight: 800, letterSpacing: '-0.02em' }}>A culture of excellence.</h2>
+                <p style={{ fontSize: '18px', color: 'var(--text-2)', lineHeight: 1.7, maxWidth: '600px' }}>
                   At MediaLoop, we believe that great products are built by teams who care deeply about the details. We obsess over the final 1% of polish. If you take immense pride in your craft, you'll feel right at home here.
                 </p>
               </motion.div>
 
               <motion.div 
                 className="elevated-card" 
-                style={{ gridColumn: 'span 4', padding: '40px', background: 'var(--brand-grad-diag)', color: '#fff', border: 'none' }}
+                style={{ gridColumn: 'span 4', padding: 0, overflow: 'hidden', border: 'none', minHeight: '300px' }}
                 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
               >
-                <div style={{ fontSize: '48px', marginBottom: '20px' }}>🌐</div>
-                <h3 style={{ fontSize: '24px', marginBottom: '10px' }}>Global Impact</h3>
-                <p style={{ opacity: 0.9 }}>Your code and designs will be used by thousands of users across global enterprises.</p>
+                <img src="/images/culture-abstract.jpg" alt="Culture" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, #06080F, transparent)', opacity: 0.8 }}></div>
+                <div style={{ position: 'absolute', bottom: '32px', left: '32px', right: '32px' }}>
+                  <h3 style={{ fontSize: '24px', marginBottom: '8px', fontWeight: 800 }}>Global Impact</h3>
+                  <p style={{ opacity: 0.8, fontSize: '14px', lineHeight: 1.6 }}>Your code and designs will be used by thousands of users across global enterprises.</p>
+                </div>
               </motion.div>
 
               {perks.map((perk, i) => (
                 <motion.div 
                   key={perk.title}
                   className="elevated-card" 
-                  style={{ gridColumn: 'span 3', padding: '32px' }}
+                  style={{ gridColumn: 'span 4', padding: '40px' }}
                   initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 * i }}
                 >
-                  <div style={{ fontSize: '32px', marginBottom: '16px' }}>{perk.icon}</div>
-                  <h4 style={{ fontSize: '18px', marginBottom: '10px' }}>{perk.title}</h4>
-                  <p style={{ fontSize: '14px', color: 'var(--text-2)', lineHeight: 1.6 }}>{perk.desc}</p>
+                  <div style={{ fontSize: '32px', marginBottom: '24px' }}>{perk.icon}</div>
+                  <h4 style={{ fontSize: '20px', marginBottom: '12px', fontWeight: 700 }}>{perk.title}</h4>
+                  <p style={{ fontSize: '15px', color: 'var(--text-2)', lineHeight: 1.6 }}>{perk.desc}</p>
                 </motion.div>
               ))}
 
@@ -130,7 +132,7 @@ export default function Careers() {
                 <motion.div 
                   key={job.id} 
                   className="elevated-card"
-                  style={{ padding: '32px 40px', cursor: 'pointer', display: 'block', height: 'auto' }}
+                  style={{ padding: '32px 40px', cursor: 'pointer', display: 'block', height: 'auto', background: 'var(--surface-1)' }}
                   onClick={() => setExpandedId(expandedId === job.id ? null : job.id)}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -139,13 +141,13 @@ export default function Careers() {
                 >
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <div>
-                      <h3 style={{ fontSize: '24px', fontWeight: 700, marginBottom: '8px' }}>{job.title}</h3>
-                      <div style={{ display: 'flex', gap: '12px', fontSize: '14px', color: 'var(--text-3)', fontWeight: 600 }}>
-                        <span>{job.dept}</span> • <span>{job.loc}</span> • <span>{job.type}</span>
+                      <h3 style={{ fontSize: '24px', fontWeight: 700, marginBottom: '12px' }}>{job.title}</h3>
+                      <div style={{ display: 'flex', gap: '12px', fontSize: '14px', color: 'var(--text-3)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                        <span style={{ color: 'var(--accent-1)' }}>{job.dept}</span> • <span>{job.loc}</span> • <span>{job.type}</span>
                       </div>
                     </div>
                     <div style={{ 
-                      width: '40px', height: '40px', borderRadius: '50%', background: 'var(--surface-2)',
+                      width: '40px', height: '40px', borderRadius: '50%', background: 'rgba(255,255,255,0.05)', border: '1px solid var(--border)',
                       display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'transform 0.3s',
                       transform: expandedId === job.id ? 'rotate(45deg)' : 'rotate(0deg)'
                     }}>
@@ -162,24 +164,24 @@ export default function Careers() {
                         style={{ overflow: 'hidden' }}
                       >
                         <div style={{ paddingTop: '32px', marginTop: '32px', borderTop: '1px solid var(--border)' }}>
-                          <p style={{ fontSize: '16px', color: 'var(--text-2)', marginBottom: '24px', lineHeight: 1.7 }}>{job.desc}</p>
+                          <p style={{ fontSize: '16px', color: 'var(--text-2)', marginBottom: '32px', lineHeight: 1.7 }}>{job.desc}</p>
                           
-                          <h4 style={{ fontSize: '15px', marginBottom: '12px', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--text-3)' }}>What we're looking for</h4>
-                          <ul style={{ paddingLeft: '20px', marginBottom: '32px', color: 'var(--text-2)' }}>
+                          <h4 style={{ fontSize: '13px', marginBottom: '16px', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--text-3)' }}>What we're looking for</h4>
+                          <ul style={{ paddingLeft: '20px', marginBottom: '40px', color: 'var(--text-2)' }}>
                             {job.reqs.map((req, idx) => (
-                              <li key={idx} style={{ marginBottom: '8px', lineHeight: 1.6 }}>{req}</li>
+                              <li key={idx} style={{ marginBottom: '12px', lineHeight: 1.6 }}>{req}</li>
                             ))}
                           </ul>
 
                           <a 
                             href={`mailto:careers@medialooptech.com?subject=Application: ${job.title}`} 
                             style={{ 
-                              display: 'inline-flex', padding: '14px 32px', background: 'var(--text)', color: 'var(--bg)', 
-                              borderRadius: '100px', textDecoration: 'none', fontWeight: 600, fontSize: '15px',
+                              display: 'inline-flex', padding: '16px 36px', background: 'var(--text)', color: 'var(--bg)', 
+                              borderRadius: '100px', textDecoration: 'none', fontWeight: 700, fontSize: '15px',
                               alignItems: 'center', gap: '8px'
                             }}
                           >
-                            Apply for this role <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                            Apply for this role <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                           </a>
                         </div>
                       </motion.div>
