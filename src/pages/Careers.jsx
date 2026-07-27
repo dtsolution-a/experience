@@ -54,7 +54,7 @@ export default function Careers() {
   const [expandedId, setExpandedId] = useState(null)
 
   return (
-    <div className="inner-page-dark noise">
+    <div className="inner-page noise">
       <div className="inner-bg-orb inner-orb-1"></div>
       <div className="inner-bg-orb inner-orb-2" style={{ top: '60%', bottom: 'auto' }}></div>
 

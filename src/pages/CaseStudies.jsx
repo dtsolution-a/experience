@@ -34,7 +34,7 @@ const approachSteps = [
 
 export default function CaseStudies() {
   return (
-    <div className="inner-page-dark noise">
+    <div className="inner-page noise">
       <div className="inner-bg-orb inner-orb-1"></div>
       <div className="inner-bg-orb inner-orb-2"></div>
 
