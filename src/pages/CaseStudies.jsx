@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import ProcessGSAP from '../components/ProcessGSAP'
 import '../styles/inner-pages.css'
 
 const featuredProject = {
@@ -140,30 +141,7 @@ export default function CaseStudies() {
         </section>
 
         {/* OUR APPROACH */}
-        <section className="page-section page-section-alt">
-          <div className="container">
-            <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} style={{ textAlign: 'center', marginBottom: '80px' }}>
-              <span className="page-eyebrow">How We Work</span>
-              <h2 style={{ fontSize: '42px', fontWeight: 800, letterSpacing: '-0.02em' }}>The MediaLoop Process</h2>
-            </motion.div>
-
-            <div className="grid-2">
-              {approachSteps.map((step, i) => (
-                <motion.div 
-                  key={step.num}
-                  style={{ display: 'flex', gap: '24px', alignItems: 'flex-start', padding: '32px', background: 'var(--card-bg)', borderRadius: '24px', border: '1px solid var(--border)' }}
-                  initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
-                >
-                  <div style={{ fontSize: '48px', fontWeight: 900, color: 'var(--border)', lineHeight: 0.8, WebkitTextStroke: '1px var(--text-3)', color: 'transparent' }}>{step.num}</div>
-                  <div>
-                    <h3 style={{ fontSize: '20px', fontWeight: 700, marginBottom: '12px' }}>{step.title}</h3>
-                    <p style={{ fontSize: '15px', color: 'var(--text-2)', lineHeight: 1.6 }}>{step.desc}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
+        <ProcessGSAP />
       </main>
 
       <Footer />
