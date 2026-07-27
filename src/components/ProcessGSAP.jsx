@@ -64,7 +64,7 @@ export default function ProcessGSAP() {
         tl.to(currImage, { scale: 1, yPercent: 0, duration: 1, ease: 'power2.out' }, i)
         
         // Optional: darken or scale previous image slightly to push it back
-        tl.to(prevImageWrap, { opacity: 0.3, scale: 0.95, duration: 1 }, i)
+        tl.to(prevImageWrap, { scale: 0.95, filter: 'brightness(0.5)', duration: 1 }, i)
       })
     });
   }, { scope: container })
@@ -94,7 +94,7 @@ export default function ProcessGSAP() {
           <div className="pg-right">
             <div className="pg-images-stack">
               {steps.map((step, i) => (
-                <div key={i} className={`pg-image-wrapper pg-image-${i}`} style={{ zIndex: steps.length - i }}>
+                <div key={i} className={`pg-image-wrapper pg-image-${i}`} style={{ zIndex: i }}>
                   <img src={step.image} alt={step.title} />
                   <div className="pg-image-overlay"></div>
                 </div>
