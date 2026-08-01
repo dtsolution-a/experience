@@ -56,9 +56,9 @@ export default function WhyUs() {
         <div ref={ref} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'center' }}>
           {/* Left */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
+            initial={{ opacity: 0, y: 80, skewY: 5 }}
+            animate={inView ? { opacity: 1, y: 0, skewY: 0 } : {}}
+            transition={{ duration: 0.9, ease: [0.23, 1, 0.32, 1] }}
           >
             <span className="section-label">Why MediaLoop</span>
             <h2 style={{ fontSize: 'clamp(32px, 4vw, 52px)', fontWeight: 800, letterSpacing: '-0.04em', lineHeight: 1.1, margin: '16px 0 20px' }}>

@@ -45,8 +45,8 @@ export default function Services() {
           <p className="services-sub">Four core disciplines plus two deep specialisations — building digital systems that think, grow, and outperform.</p>
         </motion.div>
 
-        {/* ── Regular service cards ── */}
-        <div className="services-grid services-grid-4">
+        {/* ── Stacking service cards ── */}
+        <div className="services-stack">
           {services.map((s, i) => <ServiceCard key={i} service={s} index={i} inView={inView} />)}
         </div>
 
@@ -69,12 +69,13 @@ function ServiceCard({ service, index, inView }) {
   const [hovered, setHovered] = useState(false)
   return (
     <motion.div
-      className="svc-card card"
-      initial={{ opacity: 0, y: 50, filter: 'blur(8px)' }}
-      animate={inView ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}}
-      transition={{ duration: 0.7, delay: index * 0.1, ease: [0.23, 1, 0.32, 1] }}
+      className="svc-card card sticky-card"
+      style={{ top: `calc(120px + ${index * 24}px)`, zIndex: index }}
+      initial={{ opacity: 0, y: 100 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
       onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}
-      whileHover={{ y: -8, transition: { type: 'spring', stiffness: 300, damping: 30 } }}
     >
       <div className="svc-glow" style={{ background: `radial-gradient(circle at 30% 30%, ${service.color}20, transparent 70%)`, opacity: hovered ? 1 : 0 }} />
       <div className="svc-top">

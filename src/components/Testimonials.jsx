@@ -36,9 +36,9 @@ export default function Testimonials() {
       <div className="container">
         <motion.div
           ref={ref}
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
+          initial={{ opacity: 0, y: 80, skewY: 5 }}
+          animate={inView ? { opacity: 1, y: 0, skewY: 0 } : {}}
+          transition={{ duration: 0.9, ease: [0.23, 1, 0.32, 1] }}
           className="test-header"
         >
           <span className="section-label">Client Stories</span>
@@ -57,14 +57,14 @@ export default function Testimonials() {
           {/* Main quote card */}
           <div className="test-main">
             <AnimatePresence mode="wait">
-              <motion.div
-                key={active}
-                className="test-quote-card card"
-                initial={{ opacity: 0, y: 20, scale: 0.98 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: -20, scale: 0.98 }}
-                transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
-              >
+                <motion.div
+                  key={active}
+                  className="test-quote-card card"
+                  initial={{ clipPath: 'polygon(0 100%, 100% 100%, 100% 100%, 0 100%)', y: 20 }}
+                  animate={{ clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)', y: 0 }}
+                  exit={{ clipPath: 'polygon(0 0, 100% 0, 100% 0, 0 0)', y: -20 }}
+                  transition={{ duration: 0.5, ease: [0.77, 0, 0.175, 1] }}
+                >
                 {/* Opening quote mark */}
                 <div className="quote-mark" style={{ color: testimonials[active].color }}>"</div>
 
