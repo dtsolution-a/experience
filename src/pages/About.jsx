@@ -67,7 +67,7 @@ const specialties = ['Web Development', 'UI/UX Design', 'SEO & Growth', 'AI Auto
 /* ─── CUSTOM CURSOR ─── */
 function CustomCursor() {
   const cursorRef = useRef(null)
-  const [state, setState] = useState({ visible: false, large: false, label: '↗' })
+  const [state, setState] = useState({ large: false, label: '' })
 
   useEffect(() => {
     const move = (e) => {
@@ -86,8 +86,8 @@ function CustomCursor() {
   }, [])
 
   return (
-    <div ref={cursorRef} className={`custom-cursor ${state.visible ? 'visible' : ''} ${state.large ? 'large' : ''}`}>
-      <span className="cursor-label">{state.label}</span>
+    <div ref={cursorRef} className={`custom-cursor ${state.large ? 'large' : ''}`}>
+      {state.large && <span className="cursor-label">{state.label}</span>}
     </div>
   )
 }
@@ -239,11 +239,11 @@ function TeamPanel() {
 
   const handleEnter = (idx) => {
     if (window.__setCursor) {
-      window.__setCursor({ visible: true, large: true, label: teams[idx].answer.replace('Meet our ', '') })
+      window.__setCursor({ large: true, label: teams[idx].answer.replace('Meet our ', '') })
     }
   }
   const handleLeave = () => {
-    if (window.__setCursor) window.__setCursor({ visible: false, large: false, label: '↗' })
+    if (window.__setCursor) window.__setCursor({ large: false, label: '' })
   }
 
   return (
