@@ -29,6 +29,7 @@ import './components.css'
 import ScrollText from './components/ScrollText'
 
 import ProcessPage from './pages/ProcessPage'
+import ServicesPage from './pages/ServicesPage'
 
 function HomePage() {
   useEffect(() => {
@@ -81,6 +82,7 @@ export default function App() {
             <Route path="/careers" element={<Careers />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/process" element={<ProcessPage />} />
+            <Route path="/services" element={<ServicesPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/legal" element={<Legal />} />
           </Routes>

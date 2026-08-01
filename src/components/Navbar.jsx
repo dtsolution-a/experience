@@ -5,7 +5,7 @@ import TransitionLink from './TransitionLink'
 import { useLocation } from 'react-router-dom'
 
 const navLinks = [
-  { label: 'Services', href: '/#services', isPage: false },
+  { label: 'Services', href: '/services', isPage: true },
   { label: 'Process', href: '/process', isPage: true },
   { label: 'About', href: '/about', isPage: true },
   { label: 'Contact', href: '/contact', isPage: true },

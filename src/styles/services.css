@@ -1,0 +1,309 @@
+/* =====================================================
+   SERVICES PAGE
+   Premium Animations, GSAP Horizontal Scroll, Blur
+   ===================================================== */
+
+/* ─── HERO ─── */
+.srv-hero {
+  position: relative;
+  height: 100vh;
+  min-height: 800px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #000;
+}
+.srv-hero-bg {
+  position: absolute;
+  inset: -10%;
+  width: 120%;
+  height: 120%;
+  object-fit: cover;
+  filter: blur(40px) brightness(0.6);
+  transform: scale(1.1);
+  transition: filter 1s ease, transform 1s ease;
+  z-index: 0;
+}
+.srv-hero-bg.clear {
+  filter: blur(0px) brightness(0.8);
+  transform: scale(1);
+}
+.srv-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, var(--bg) 100%);
+  z-index: 1;
+}
+.srv-hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: #fff;
+  max-width: 1000px;
+  padding: 0 20px;
+}
+.srv-badge {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 8px 24px;
+  border-radius: 100px;
+  margin-bottom: 32px;
+}
+.srv-title {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: clamp(48px, 8vw, 120px);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  margin-bottom: 24px;
+}
+.srv-desc {
+  font-size: clamp(18px, 2vw, 24px);
+  color: rgba(255,255,255,0.7);
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* ─── HORIZONTAL SCROLL GALLERY ─── */
+.srv-horizontal-section {
+  position: relative;
+  background: var(--bg);
+  overflow: hidden;
+}
+.srv-horizontal-container {
+  display: flex;
+  width: max-content;
+  height: 100vh;
+  align-items: center;
+  padding-left: 10vw; /* initial offset */
+}
+.srv-card {
+  position: relative;
+  width: 80vw;
+  max-width: 1000px;
+  height: 70vh;
+  max-height: 800px;
+  margin-right: 8vw;
+  border-radius: 32px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  background: #111;
+  transform-origin: center;
+}
+.srv-card-bg {
+  position: absolute;
+  inset: -10%;
+  width: 120%;
+  height: 120%;
+  object-fit: cover;
+  z-index: 0;
+  /* Will be animated with GSAP parallax */
+}
+.srv-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 50%, transparent 100%);
+  z-index: 1;
+}
+.srv-card-content {
+  position: relative;
+  z-index: 2;
+  padding: 60px;
+  width: 100%;
+}
+.srv-card-title {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: clamp(32px, 5vw, 64px);
+  font-weight: 900;
+  color: #fff;
+  margin-bottom: 16px;
+  line-height: 1.1;
+}
+.srv-card-desc {
+  font-size: 18px;
+  color: rgba(255,255,255,0.7);
+  max-width: 600px;
+  margin-bottom: 32px;
+}
+.srv-card-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.srv-feature-tag {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 8px;
+}
+
+/* ─── WHO DOES WHAT (SPECIALISTS) ─── */
+.srv-specialists {
+  padding: 140px 0;
+  background: var(--bg);
+  position: relative;
+}
+.srv-section-header {
+  text-align: center;
+  margin-bottom: 80px;
+}
+.srv-section-title {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: clamp(40px, 6vw, 72px);
+  font-weight: 900;
+  color: var(--text);
+  margin-bottom: 16px;
+  letter-spacing: -0.04em;
+}
+.srv-section-sub {
+  font-size: 18px;
+  color: var(--text-2);
+}
+.srv-specialist-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 32px;
+}
+.srv-spec-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 40px;
+  transition: transform 0.4s ease, border-color 0.4s ease;
+}
+.srv-spec-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--text);
+}
+.srv-spec-icon {
+  width: 60px;
+  height: 60px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  color: var(--text);
+}
+.srv-spec-title {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+.srv-spec-desc {
+  font-size: 16px;
+  color: var(--text-2);
+  line-height: 1.6;
+}
+
+/* ─── TECH STACK ─── */
+.srv-tech-stack {
+  padding: 100px 0 160px;
+  background: var(--bg);
+  overflow: hidden;
+}
+.srv-tech-marquee {
+  display: flex;
+  gap: 80px;
+  width: max-content;
+  animation: marquee 30s linear infinite;
+}
+.srv-tech-item {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: clamp(60px, 8vw, 120px);
+  font-weight: 900;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--border);
+  transition: -webkit-text-stroke-color 0.3s ease;
+}
+.srv-tech-item:hover {
+  -webkit-text-stroke-color: var(--text);
+}
+@keyframes marquee {
+  to { transform: translateX(calc(-50% - 40px)); }
+}
+
+/* ─── FAQ / ACCORDION ─── */
+.srv-faq {
+  padding: 100px 0 160px;
+  background: var(--bg);
+}
+.srv-faq-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+.srv-faq-item {
+  border-bottom: 1px solid var(--border);
+  padding: 32px 0;
+  cursor: pointer;
+}
+.srv-faq-q {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text);
+}
+.srv-faq-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.4s ease;
+}
+.srv-faq-item.active .srv-faq-icon {
+  transform: rotate(45deg);
+  background: var(--text);
+  color: var(--bg);
+}
+.srv-faq-a {
+  overflow: hidden;
+}
+.srv-faq-a-inner {
+  padding-top: 24px;
+  font-size: 18px;
+  color: var(--text-2);
+  line-height: 1.7;
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 900px) {
+  /* Fallback horizontal scroll to vertical stack on mobile */
+  .srv-horizontal-container {
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    padding: 0 20px;
+    gap: 40px;
+  }
+  .srv-card {
+    width: 100%;
+    margin-right: 0;
+    height: 500px;
+  }
+  .srv-card-content {
+    padding: 30px;
+  }
+}
