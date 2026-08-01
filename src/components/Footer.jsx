@@ -1,3 +1,4 @@
+import { useRef, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import TransitionLink from './TransitionLink'
 
@@ -49,8 +50,21 @@ const socials = [
 ]
 
 export default function Footer() {
+  const footerRef = useRef(null)
+
+  useEffect(() => {
+    if (!footerRef.current) return
+    const resizeObserver = new ResizeObserver((entries) => {
+      for (let entry of entries) {
+        document.documentElement.style.setProperty('--footer-height', `${entry.contentRect.height}px`)
+      }
+    })
+    resizeObserver.observe(footerRef.current)
+    return () => resizeObserver.disconnect()
+  }, [])
+
   return (
-    <footer className="footer">
+    <footer className="section-footer" ref={footerRef}>
       <div className="footer-divider" />
       <div className="container">
         <div className="footer-top">

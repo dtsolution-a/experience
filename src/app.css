@@ -23,6 +23,22 @@
   padding-top: 72px;
 }
 
+/* ── Curtain Reveal Footer Setup ── */
+main {
+  position: relative;
+  z-index: 10;
+  background: var(--bg);
+  margin-bottom: var(--footer-height, 400px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+.section-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+}
+
 /* Background Image Layer (Randomized) */
 .home-hero-bg {
   position: absolute;
