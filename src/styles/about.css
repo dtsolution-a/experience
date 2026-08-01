@@ -319,7 +319,7 @@
 /* Color Wipe Overlay */
 .team-img-wipe {
   position: absolute; inset: 0;
-  background: var(--brand-grad); /* Or use rgba(123,47,247,0.95) */
+  background: var(--accent-1); /* Fallback */
   opacity: 0.95;
   z-index: 2;
   transform: translateY(100%);

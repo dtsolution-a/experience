@@ -297,7 +297,7 @@ function TeamPanel() {
               <div key={team.id} className={`team-img-slide ${activeTeam === i ? 'active' : ''}`}>
                 <img src={team.image} alt={team.answer} />
                 <div className="team-img-overlay" />
-                <div className="team-img-wipe" />
+                <div className="team-img-wipe" style={{ background: team.accent }} />
                 
                 {/* BOTTOM INFO (Default) */}
                 <div className="team-img-info">
