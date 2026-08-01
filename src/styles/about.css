@@ -70,6 +70,8 @@
   height: 100%;
   object-fit: cover;
   object-position: center;
+  filter: blur(6px);
+  transform: scale(1.06); /* prevents white edges from blur */
 }
 .hero-bg-grad {
   position: absolute;
