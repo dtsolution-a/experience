@@ -88,7 +88,7 @@ export default function ProcessPage() {
                 className="process-hero-content"
               >
                 <div className="process-badge">HOW WE WORK</div>
-                <h1 className="process-title">The MediaLoop<br />Process</h1>
+                <h1 className="process-title">The <span className="gradient-text">MediaLoop</span><br />Process</h1>
               </motion.div>
               
               {/* Fill the right side of the hero */}
