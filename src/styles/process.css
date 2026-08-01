@@ -5,7 +5,7 @@
 
 /* ─── BACKGROUND GRID & WATERMARK ─── */
 .process-bg-grid {
-  position: fixed;
+  position: absolute;
   inset: 0;
   background-image: 
     linear-gradient(to right, rgba(128,128,128,0.05) 1px, transparent 1px),

@@ -68,11 +68,11 @@ export default function ProcessPage() {
       <CustomCursor />
       <Navbar />
 
-      {/* Subtle Background Grid */}
-      <div className="process-bg-grid" aria-hidden="true" />
-
-      <main style={{ position: 'relative', zIndex: 10, background: 'transparent', marginBottom: 'var(--footer-height, 400px)' }}>
+      <main style={{ position: 'relative', zIndex: 10, background: 'var(--bg)', marginBottom: 'var(--footer-height, 400px)' }}>
         
+        {/* Subtle Background Grid inside main to cover footer */}
+        <div className="process-bg-grid" aria-hidden="true" />
+
         <section className="process-hero">
           {/* Giant scrolling/fixed watermark */}
           <div className="process-watermark-wrapper">
