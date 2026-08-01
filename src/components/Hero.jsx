@@ -1,8 +1,20 @@
-import { useRef, useState, useCallback } from 'react'
+import { useRef, useState, useCallback, useEffect } from 'react'
 import { motion, useScroll, useTransform, animate } from 'framer-motion'
+
 import DotGrid from './DotGrid'
 
 const GRADIENT_TEXT = 'grow, and outperform.'
+
+const bgImages = [
+  '/bg/1909457_9170.jpg',
+  '/bg/25537441_1dg3_egm8_211202.jpg',
+  '/bg/27287259_z69i_kxes_211202.jpg',
+  '/bg/840867_1242.jpg',
+  '/bg/beautiful-tree-countryside.jpg',
+  '/bg/closeup-shot-colorful-autumn-leaves-garden.jpg',
+  '/bg/dry-tree-with-orange-clouds-background.jpg'
+]
+
 
 const stats = [
   { num: '200+', label: 'Projects Delivered' },
@@ -25,6 +37,11 @@ export default function Hero() {
 
   // Track mouse for parallax
   const [parallax, setParallax] = useState({ x: 0, y: 0 })
+  const [bgImage, setBgImage] = useState('')
+
+  useEffect(() => {
+    setBgImage(bgImages[Math.floor(Math.random() * bgImages.length)])
+  }, [])
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -59,6 +76,12 @@ export default function Hero() {
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
     >
+      {/* Background Image */}
+      <div className="home-hero-bg">
+        {bgImage && <img src={bgImage} alt="" />}
+        <div className="home-hero-overlay" />
+      </div>
+
       {/* Interactive dot grid */}
       <DotGrid sectionRef={sectionRef} />
 

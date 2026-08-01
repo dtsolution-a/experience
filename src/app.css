@@ -23,6 +23,27 @@
   padding-top: 72px;
 }
 
+/* Background Image Layer (Randomized) */
+.home-hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.home-hero-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: blur(8px) brightness(0.3);
+  transform: scale(1.05);
+}
+.home-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 0%, var(--bg) 95%);
+}
+
 /* ── Aurora atmosphere orbs ──
    Very blurred, very slow, very low opacity.
    They create a subtle color field, not a visual feature. */
