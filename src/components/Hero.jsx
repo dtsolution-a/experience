@@ -49,6 +49,10 @@ export default function Hero() {
   })
   const opacity  = useTransform(scrollYProgress, [0, 0.5], [1, 0])
   const yContent = useTransform(scrollYProgress, [0, 1], ['0%', '10%'])
+  
+  // Arch parallax animations
+  const archScaleX = useTransform(scrollYProgress, [0, 1], [1.1, 3])
+  const archHeight = useTransform(scrollYProgress, [0, 1], [120, 0])
 
   const onMouseMove = useCallback((e) => {
     const rect = sectionRef.current?.getBoundingClientRect()
@@ -79,8 +83,13 @@ export default function Hero() {
       {/* Background Image */}
       <div className="home-hero-bg">
         {bgImage && <img src={bgImage} alt="" />}
-        <div className="home-hero-overlay" />
       </div>
+
+      {/* Parallax Arch at bottom */}
+      <motion.div 
+        className="home-hero-arch"
+        style={{ scaleX: archScaleX, height: archHeight }}
+      />
 
       {/* Interactive dot grid */}
       <DotGrid sectionRef={sectionRef} />
