@@ -255,8 +255,12 @@
   opacity: 0.8;
   filter: brightness(0) invert(1);
 }
+.hero-leaf-left {
+  margin-right: -16px;
+}
 .hero-leaf-right {
   transform: scaleX(-1);
+  margin-left: -16px;
 }
 .aurora-stat {
   display: flex;
@@ -269,12 +273,7 @@
   font-size: clamp(18px, 2vw, 22px);
   font-weight: 600;
   letter-spacing: -0.02em;
-  background: var(--brand-grad-diag);
-  background-size: 200% 200%;
-  animation: gradientShift 5s ease infinite;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #fff;
 }
 .aurora-stat-label {
   font-size: 11px;
