@@ -119,44 +119,87 @@ export default function About() {
     <div className="about-page">
       <Navbar />
 
-      {/* ── HERO ── */}
+      {/* ── HERO: Editorial Split Layout ── */}
       <section className="about-hero">
-        <div className="about-hero-orb about-hero-orb-1" />
-        <div className="about-hero-orb about-hero-orb-2" />
-        <div className="about-hero-inner">
-          <motion.span
-            className="about-eyebrow"
+        {/* ── LEFT: Text ── */}
+        <div className="about-hero-left">
+          <motion.div
+            className="about-hero-tag-row"
             initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
           >
-            <span className="about-eyebrow-dot" />
-            Who We Are
-          </motion.span>
+            <span className="about-eyebrow">
+              <span className="about-eyebrow-dot" />
+              MediaLoop Technologies
+            </span>
+          </motion.div>
 
           <motion.h1
             className="about-hero-title"
             initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           >
-            We build the{' '}
-            <span className="gradient-text">internet's</span>
-            <br />best products.
+            We build<br />
+            the <span className="gradient-text">internet's</span><br />
+            best work.
           </motion.h1>
 
           <motion.p
             className="about-hero-sub"
-            initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.2 }}
+            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.25 }}
           >
-            MediaLoop is a full-spectrum digital agency — elite engineers, designers, growth strategists, and AI specialists under one roof.
+            Full-spectrum digital agency — elite engineers, designers, growth strategists, and AI specialists. One roof. Zero compromise.
           </motion.p>
+
+          {/* Stats row */}
+          <motion.div
+            className="about-hero-stats"
+            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.35 }}
+          >
+            {[{ v: '120+', l: 'Projects Shipped' }, { v: '50+', l: 'Global Clients' }, { v: '5★', l: 'Avg. Rating' }].map(s => (
+              <div key={s.l} className="about-hero-stat">
+                <span className="about-hero-stat-val gradient-text">{s.v}</span>
+                <span className="about-hero-stat-label">{s.l}</span>
+              </div>
+            ))}
+          </motion.div>
 
           <motion.div
             className="about-scroll-hint"
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }}
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.7 }}
           >
             <div className="about-scroll-line" />
             <span>Scroll to find your team</span>
           </motion.div>
         </div>
+
+        {/* ── RIGHT: Capability Grid ── */}
+        <motion.div
+          className="about-hero-right"
+          initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <div className="about-cap-grid">
+            {teams.map((team, i) => (
+              <motion.div
+                key={team.id}
+                className="about-cap-card"
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 + i * 0.08, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                whileHover={{ y: -4, scale: 1.02 }}
+                style={{
+                  borderTop: `3px solid ${team.accent}`,
+                  background: `linear-gradient(135deg, var(--card-bg) 0%, ${team.accent}08 100%)`,
+                }}
+              >
+                <div className="about-cap-num" style={{ color: team.accent }}>0{team.id}</div>
+                <div className="about-cap-question">{team.question}</div>
+                <div className="about-cap-answer" style={{ color: team.accent }}>↓ {team.answer}</div>
+                <div className="about-cap-tag">{team.tag}</div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
       </section>
 
       {/* ── SCROLLYTELLING ── */}
