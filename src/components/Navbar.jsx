@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTheme } from '../context/ThemeContext'
 import TransitionLink from './TransitionLink'
+import { useLocation } from 'react-router-dom'
 
 const navLinks = [
   { label: 'Services', href: '/#services', isPage: false },
@@ -15,6 +16,8 @@ export default function Navbar() {
   const { theme, toggle } = useTheme()
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const location = useLocation()
+  const isAboutPage = location.pathname === '/about'
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
@@ -28,7 +31,7 @@ export default function Navbar() {
         initial={{ y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.7, ease: [0.23, 1, 0.32, 1] }}
-        className={`navbar ${scrolled ? 'scrolled' : 'transparent'}`}
+        className={`navbar ${scrolled ? 'scrolled' : 'transparent'} ${!scrolled && isAboutPage ? 'force-white' : ''}`}
         style={{
           background: scrolled ? 'var(--nav-bg)' : 'transparent',
           backdropFilter: scrolled ? 'blur(24px)' : 'none',
@@ -191,11 +194,11 @@ export default function Navbar() {
         .hamburger span.open:nth-child(2) { opacity: 0; }
         .hamburger span.open:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
         
-        /* Force white text on transparent (top) state regardless of theme */
-        .navbar.transparent .nav-link { color: rgba(255,255,255,0.8); }
-        .navbar.transparent .nav-link:hover { color: #fff; background: rgba(255,255,255,0.1); }
-        .navbar.transparent .theme-toggle { color: #fff; border-color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.05); }
-        .navbar.transparent .hamburger span { background: #fff; }
+        /* Force white text on transparent (top) state ONLY on About page */
+        .navbar.force-white .nav-link { color: rgba(255,255,255,0.8); }
+        .navbar.force-white .nav-link:hover { color: #fff; background: rgba(255,255,255,0.1); }
+        .navbar.force-white .theme-toggle { color: #fff; border-color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.05); }
+        .navbar.force-white .hamburger span { background: #fff; }
 
         .mobile-menu {
           position: fixed; top: 72px; left: 0; right: 0;
