@@ -64,17 +64,17 @@ const teams = [
 
 const specialties = ['Web Development', 'UI/UX Design', 'SEO & Growth', 'AI Automation', 'Virtual CTO']
 
-// ─── CUSTOM CURSOR ───
+/* ─── CUSTOM CURSOR ─── */
 function CustomCursor() {
   const cursorRef = useRef(null)
   const [state, setState] = useState({ visible: false, large: false, label: '↗' })
 
   useEffect(() => {
-    const cursor = cursorRef.current
-    if (!cursor) return
     const move = (e) => {
-      cursor.style.left = `${e.clientX}px`
-      cursor.style.top = `${e.clientY}px`
+      if (cursorRef.current) {
+        cursorRef.current.style.left = `${e.clientX}px`
+        cursorRef.current.style.top = `${e.clientY}px`
+      }
     }
     window.addEventListener('pointermove', move, { passive: true })
     return () => window.removeEventListener('pointermove', move)
@@ -86,16 +86,13 @@ function CustomCursor() {
   }, [])
 
   return (
-    <div
-      ref={cursorRef}
-      className={`custom-cursor ${state.visible ? 'visible' : ''} ${state.large ? 'large' : ''}`}
-    >
+    <div ref={cursorRef} className={`custom-cursor ${state.visible ? 'visible' : ''} ${state.large ? 'large' : ''}`}>
       <span className="cursor-label">{state.label}</span>
     </div>
   )
 }
 
-// ─── SVG MASK REVEAL ───
+/* ─── SVG MASK REVEAL ─── */
 function MaskReveal({ onDone }) {
   const ellipseRef = useRef(null)
   const overlayRef = useRef(null)
@@ -117,9 +114,7 @@ function MaskReveal({ onDone }) {
           gsap.to(overlay, {
             opacity: 0,
             duration: 0.3,
-            onComplete: () => {
-              if (onDone) onDone()
-            },
+            onComplete: () => onDone?.(),
           })
         },
       }
@@ -128,35 +123,20 @@ function MaskReveal({ onDone }) {
 
   return (
     <div ref={overlayRef} className="hero-mask-overlay" aria-hidden="true">
-      <svg
-        width="100%" height="100%"
-        viewBox="0 0 1920 1080"
-        preserveAspectRatio="none"
-        className="hero-mask-svg"
-      >
+      <svg width="100%" height="100%" viewBox="0 0 1920 1080" preserveAspectRatio="none" className="hero-mask-svg">
         <defs>
           <mask id="reveal-mask">
             <rect width="100%" height="100%" fill="white" />
-            <ellipse
-              ref={ellipseRef}
-              className="reveal-ellipse"
-              cx="960" cy="1300"
-              rx="0" ry="0"
-              fill="black"
-            />
+            <ellipse ref={ellipseRef} cx="960" cy="1300" rx="0" ry="0" fill="black" />
           </mask>
         </defs>
-        <rect
-          width="100%" height="100%"
-          fill="#0A0A12"
-          mask="url(#reveal-mask)"
-        />
+        <rect width="100%" height="100%" fill="#0A0A12" mask="url(#reveal-mask)" />
       </svg>
     </div>
   )
 }
 
-// ─── HERO ───
+/* ─── HERO ─── */
 function AboutHero() {
   const [maskDone, setMaskDone] = useState(false)
   const contentRef = useRef(null)
@@ -164,45 +144,34 @@ function AboutHero() {
   useEffect(() => {
     if (maskDone && contentRef.current) {
       const els = contentRef.current.querySelectorAll('.reveal-item')
-      gsap.fromTo(
-        els,
+      gsap.fromTo(els,
         { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 0.7, stagger: 0.08, ease: 'power2.out' }
+        { opacity: 1, y: 0, duration: 0.7, stagger: 0.09, ease: 'power2.out' }
       )
     }
   }, [maskDone])
 
   return (
     <section className="about-full-hero">
-      {/* BG image */}
       <div className="hero-bg-img">
-        <img src="/about-hero-bg.jpg" alt="MediaLoop Office" />
+        <img src="/about-hero-bg.jpg" alt="MediaLoop" />
         <div className="hero-bg-grad" />
       </div>
-
-      {/* SVG mask entry animation */}
       {!maskDone && <MaskReveal onDone={() => setMaskDone(true)} />}
 
-      {/* Content */}
       <div ref={contentRef} className={`hero-full-content ${maskDone ? 'content-visible' : ''}`}>
-
-        {/* Top: award/recognition badges */}
         <div className="hero-full-top reveal-item">
           <span className="hero-award-badge">
             <span className="hero-award-dot" />
             Full-Spectrum Digital Agency
           </span>
         </div>
-
-        {/* Center: headline */}
         <div className="hero-full-center">
           <h1 className="hero-full-title reveal-item">
             We Build the<br />
             Internet's Best<br />
             <em>Products.</em>
           </h1>
-
-          {/* Specialties row */}
           <div className="hero-specialties reveal-item">
             {specialties.map((s, i) => (
               <span key={s} className="hero-specialty-chip">
@@ -212,34 +181,153 @@ function AboutHero() {
             ))}
           </div>
         </div>
-
-        {/* Bottom corners */}
         <div className="hero-full-bottom reveal-item">
           <p className="hero-bottom-left">
             End-to-end digital solutions<br />
             <span>Mumbai, India · Global Delivery</span>
           </p>
           <div className="hero-bottom-stats">
-            <div className="hero-bottom-stat">
-              <span className="hero-bottom-stat-val">120+</span>
-              <span className="hero-bottom-stat-label">Projects</span>
-            </div>
-            <div className="hero-bottom-stat">
-              <span className="hero-bottom-stat-val">50+</span>
-              <span className="hero-bottom-stat-label">Clients</span>
-            </div>
-            <div className="hero-bottom-stat">
-              <span className="hero-bottom-stat-val">5★</span>
-              <span className="hero-bottom-stat-label">Rating</span>
-            </div>
+            {[{ v: '120+', l: 'Projects' }, { v: '50+', l: 'Clients' }, { v: '5★', l: 'Rating' }].map(s => (
+              <div key={s.l} className="hero-bottom-stat">
+                <span className="hero-bottom-stat-val">{s.v}</span>
+                <span className="hero-bottom-stat-label">{s.l}</span>
+              </div>
+            ))}
           </div>
         </div>
       </div>
+
+      {/* Arch cutout at bottom — Rise at Seven style */}
+      <div className="hero-arch-bottom" aria-hidden="true" />
     </section>
   )
 }
 
-// ─── SCROLL TEXT ───
+/* ─── SCROLL-PINNED TEAM PANEL ─── */
+function TeamPanel() {
+  const [activeTeam, setActiveTeam] = useState(0)
+  const activeRef = useRef(0)
+  const wrapperRef = useRef(null)
+  const pinRef = useRef(null)
+
+  useEffect(() => {
+    const wrapper = wrapperRef.current
+    const pin = pinRef.current
+    if (!wrapper || !pin) return
+
+    const trigger = ScrollTrigger.create({
+      trigger: wrapper,
+      start: 'top top',
+      end: `+=${teams.length * 100}vh`,
+      pin: pin,
+      pinSpacing: true,
+      scrub: false,
+      onUpdate: (self) => {
+        const newIdx = Math.min(
+          Math.floor(self.progress * teams.length),
+          teams.length - 1
+        )
+        if (newIdx !== activeRef.current) {
+          activeRef.current = newIdx
+          setActiveTeam(newIdx)
+        }
+      },
+    })
+
+    return () => trigger.kill()
+  }, [])
+
+  const handleEnter = (idx) => {
+    if (window.__setCursor) {
+      window.__setCursor({ visible: true, large: true, label: teams[idx].answer.replace('Meet our ', '') })
+    }
+  }
+  const handleLeave = () => {
+    if (window.__setCursor) window.__setCursor({ visible: false, large: false, label: '↗' })
+  }
+
+  return (
+    /* Outer scroll-height container */
+    <div ref={wrapperRef} className="team-scroll-wrapper">
+      {/* The dark rounded card that pins */}
+      <div ref={pinRef} className="team-panel-card">
+        <div className="team-panel-inner">
+
+          {/* LEFT: List */}
+          <div className="team-list-col">
+            <div className="team-list-label">Who does what</div>
+
+            {teams.map((team, i) => (
+              <div
+                key={team.id}
+                className={`team-list-item ${activeTeam === i ? 'active' : ''}`}
+                onMouseEnter={() => handleEnter(i)}
+                onMouseLeave={handleLeave}
+              >
+                <div className="tli-left">
+                  <div className="tli-num" style={{ color: activeTeam === i ? team.accent : 'rgba(255,255,255,0.3)' }}>
+                    0{team.id} — {team.need}
+                  </div>
+                  <div className="tli-question">{team.question}</div>
+                  <div className="tli-answer" style={{ color: activeTeam === i ? team.accent : 'rgba(255,255,255,0.35)' }}>
+                    ↓ {team.answer}
+                  </div>
+                </div>
+                <div className="tli-right">
+                  <span
+                    className="tli-tag"
+                    style={activeTeam === i
+                      ? { color: team.accent, background: `${team.accent}18`, borderColor: `${team.accent}40`, opacity: 1 }
+                      : {}}
+                  >
+                    {team.tag}
+                  </span>
+                  <div className={`tli-arrow ${activeTeam === i ? 'active' : ''}`}
+                    style={activeTeam === i ? { background: team.accent, borderColor: team.accent } : {}}>
+                    <ArrowUpRight size={14} />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* RIGHT: Image panel */}
+          <div className="team-image-col">
+            {teams.map((team, i) => (
+              <div key={team.id} className={`team-img-slide ${activeTeam === i ? 'active' : ''}`}>
+                <img src={team.image} alt={team.answer} />
+                <div className="team-img-overlay" />
+                <div className="team-img-info">
+                  <div className="team-img-tag" style={{ background: team.accent }}>
+                    {team.tag}
+                  </div>
+                  <h3 className="team-img-name">{team.answer}</h3>
+                  <div className="team-img-skills">
+                    {team.skills.map(s => (
+                      <span key={s} className="team-img-skill">{s}</span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
+
+            {/* Progress dots */}
+            <div className="team-img-progress">
+              {teams.map((_, i) => (
+                <div key={i} className={`progress-pip ${activeTeam === i ? 'active' : ''}`}
+                  style={activeTeam === i ? { background: teams[i].accent, width: 24 } : {}}
+                />
+              ))}
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  )
+}
+
+/* ─── SCROLL TEXT ─── */
 function ScrollTextSection() {
   const sectionRef = useRef(null)
   const textRef = useRef(null)
@@ -249,8 +337,7 @@ function ScrollTextSection() {
     const text = textRef.current
     if (!section || !text) return
 
-    const tween = gsap.fromTo(
-      text,
+    const tween = gsap.fromTo(text,
       { x: '12vw' },
       {
         x: '-55vw',
@@ -263,11 +350,7 @@ function ScrollTextSection() {
         },
       }
     )
-
-    return () => {
-      tween.scrollTrigger?.kill()
-      tween.kill()
-    }
+    return () => { tween.scrollTrigger?.kill(); tween.kill() }
   }, [])
 
   return (
@@ -283,80 +366,19 @@ function ScrollTextSection() {
   )
 }
 
-// ─── MAIN ───
+/* ─── PAGE ─── */
 export default function About() {
-  const [activeTeam, setActiveTeam] = useState(0)
   const closingRef = useRef(null)
   const closingInView = useInView(closingRef, { once: true, margin: '-80px' })
-
-  const handleTeamEnter = (idx) => {
-    setActiveTeam(idx)
-    if (window.__setCursor) {
-      window.__setCursor({ visible: true, large: true, label: teams[idx].answer.replace('Meet our ', '') })
-    }
-  }
-  const handleTeamLeave = () => {
-    if (window.__setCursor) window.__setCursor({ visible: false, large: false, label: '↗' })
-  }
 
   return (
     <div className="about-page" style={{ cursor: 'none' }}>
       <CustomCursor />
       <Navbar />
       <AboutHero />
+      <TeamPanel />
 
-      {/* ── HOVER TEAM SECTION ── */}
-      <section className="about-hover-section">
-        <div className="hover-list-col">
-          <div className="hover-section-label">Who does what</div>
-
-          {teams.map((team, i) => (
-            <div
-              key={team.id}
-              className="hover-team-item"
-              onMouseEnter={() => handleTeamEnter(i)}
-              onMouseLeave={handleTeamLeave}
-            >
-              <div className="hover-item-left">
-                <div className="hover-item-num" style={{ color: team.accent }}>0{team.id} — {team.need}</div>
-                <div className="hover-item-question">{team.question}</div>
-                <div className="hover-item-answer" style={{ color: team.accent }}>↓ {team.answer}</div>
-              </div>
-
-              <div className="hover-item-right">
-                <span
-                  className="hover-item-tag"
-                  style={{ color: team.accent, background: `${team.accent}12`, borderColor: `${team.accent}30` }}
-                >
-                  {team.tag}
-                </span>
-                <div className="hover-item-arrow">
-                  <ArrowUpRight size={14} />
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="hover-image-col">
-          {teams.map((team, i) => (
-            <div key={team.id} className={`hover-img-wrap ${activeTeam === i ? 'active' : ''}`}>
-              <img src={team.image} alt={team.answer} />
-              <div className="hover-img-overlay" />
-              <div className="hover-img-info">
-                <h3 className="hover-img-team-name">{team.answer}</h3>
-                <div className="hover-img-skills">
-                  {team.skills.map(s => (
-                    <span key={s} className="hover-img-skill">{s}</span>
-                  ))}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ── CLOSING ── */}
+      {/* Closing */}
       <div className="about-closing-v5" ref={closingRef}>
         <motion.div
           className="closing-v5-row"
@@ -377,17 +399,13 @@ export default function About() {
               <a href="/contact" className="btn-primary">
                 Start a Project <ArrowUpRight size={16} />
               </a>
-              <a href="/work" className="btn-secondary">
-                See Our Work
-              </a>
+              <a href="/work" className="btn-secondary">See Our Work</a>
             </div>
           </div>
         </motion.div>
       </div>
 
-      {/* ── SCROLL TEXT ── */}
       <ScrollTextSection />
-
       <Footer />
     </div>
   )
