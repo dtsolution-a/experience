@@ -1,15 +1,14 @@
 import { motion } from 'framer-motion'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import TeamGSAP from '../components/TeamGSAP'
 import '../styles/inner-pages.css'
 
 export default function About() {
   return (
     <div className="inner-page noise">
-      {/* Ambient Orbs */}
       <div className="inner-bg-orb inner-orb-1"></div>
-      <div className="inner-bg-orb inner-orb-2" style={{ top: '30%', bottom: 'auto' }}></div>
-
+      
       <Navbar />
       
       <main>
@@ -17,44 +16,34 @@ export default function About() {
         <section className="page-hero">
           <div className="container">
             <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}>
-              <span className="page-eyebrow">About Us</span>
+              <span className="page-eyebrow">Who We Are</span>
               <h1 className="page-title">
-                Engineering the <span className="gradient-text">future</span><br/>of digital experiences.
+                Engineering <span className="gradient-text">Excellence.</span>
               </h1>
-              <p className="page-subtitle">We are a collective of engineers, designers, and strategists building scalable, high-performance digital ecosystems for forward-thinking brands.</p>
+              <p className="page-subtitle" style={{ maxWidth: '800px' }}>
+                We are a collective of uncompromising engineers, visionary designers, and growth architects. We don't just build websites; we engineer digital ecosystems for brands that demand the absolute best.
+              </p>
             </motion.div>
           </div>
         </section>
 
-        {/* CONTENT */}
-        <section className="page-section">
-          <div className="container document-content" style={{ position: 'relative', zIndex: 2 }}>
-            <motion.div 
-              className="elevated-card" style={{ padding: '60px', marginBottom: '40px' }}
-              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
-            >
-              <h2>Our Mission</h2>
-              <p>At MediaLoop Technologies, our mission is to bridge the gap between complex engineering and beautiful design. We believe that software shouldn't just work—it should feel effortless, scale infinitely, and leave a lasting impression.</p>
-              
-              <h2>The MediaLoop Standard</h2>
-              <p>We don't do "good enough". Every line of code, every pixel, and every animation is crafted with intent. From AI-driven automation pipelines to high-conversion web applications, our standards are uncompromising.</p>
-              
-              <div className="grid-2" style={{ marginTop: '40px', gap: '20px' }}>
-                <div style={{ padding: '24px', background: 'var(--surface-2)', borderRadius: '16px', border: '1px solid var(--border)' }}>
-                  <h3 style={{ fontSize: '18px', margin: '0 0 10px', color: 'var(--text)' }}>Performance First</h3>
-                  <p style={{ margin: 0, fontSize: '14px' }}>Sub-second load times and 60fps animations across all devices.</p>
-                </div>
-                <div style={{ padding: '24px', background: 'var(--surface-2)', borderRadius: '16px', border: '1px solid var(--border)' }}>
-                  <h3 style={{ fontSize: '18px', margin: '0 0 10px', color: 'var(--text)' }}>Scalable Architecture</h3>
-                  <p style={{ margin: 0, fontSize: '14px' }}>Built to handle tomorrow's traffic and scale dynamically.</p>
-                </div>
-              </div>
+        {/* GSAP INTERACTIVE MEET THE TEAM */}
+        <TeamGSAP />
 
-              <h2>Global Reach, Local Precision</h2>
-              <p>With hubs in Surat, India and Dubai, UAE, we deliver world-class engineering to global enterprises while maintaining the agility and precision of a boutique studio.</p>
+        {/* CORE VALUES / CLOSING FRAME */}
+        <section className="page-section" style={{ padding: '120px 0', textAlign: 'center' }}>
+          <div className="container">
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+              <h2 style={{ fontSize: 'clamp(32px, 5vw, 48px)', fontWeight: 800, letterSpacing: '-0.02em', marginBottom: '24px' }}>
+                Built to <span style={{ fontStyle: 'italic', fontWeight: 400, color: 'var(--accent-1)' }}>scale.</span> Designed to <span style={{ fontStyle: 'italic', fontWeight: 400, color: 'var(--accent-2)' }}>convert.</span>
+              </h2>
+              <p style={{ fontSize: '18px', color: 'var(--text-2)', maxWidth: '600px', margin: '0 auto', lineHeight: 1.8 }}>
+                Every line of code we write, every pixel we push, is obsessively crafted to drive measurable business outcomes. We are the unfair advantage for modern enterprises.
+              </p>
             </motion.div>
           </div>
         </section>
+
       </main>
 
       <Footer />
