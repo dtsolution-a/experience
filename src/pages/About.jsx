@@ -297,12 +297,25 @@ function TeamPanel() {
               <div key={team.id} className={`team-img-slide ${activeTeam === i ? 'active' : ''}`}>
                 <img src={team.image} alt={team.answer} />
                 <div className="team-img-overlay" />
+                <div className="team-img-wipe" />
+                
+                {/* BOTTOM INFO (Default) */}
                 <div className="team-img-info">
                   <div className="team-img-tag" style={{ background: team.accent }}>
                     {team.tag}
                   </div>
                   <h3 className="team-img-name">{team.answer}</h3>
                   <div className="team-img-skills">
+                    {team.skills.map(s => (
+                      <span key={s} className="team-img-skill">{s}</span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* CENTER INFO (Hover) */}
+                <div className="team-img-info-center">
+                  <h3 className="team-img-name-large">{team.answer}</h3>
+                  <div className="team-img-skills center">
                     {team.skills.map(s => (
                       <span key={s} className="team-img-skill">{s}</span>
                     ))}
