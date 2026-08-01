@@ -29,7 +29,7 @@
   font-weight: 900;
   letter-spacing: -0.04em;
   line-height: 1.05;
-  color: #ffffff;
+  color: var(--text);
 }
 
 /* ─── SPLIT SECTION ─── */
@@ -67,7 +67,7 @@
   font-size: clamp(60px, 8vw, 120px);
   font-weight: 900;
   color: transparent;
-  -webkit-text-stroke: 1px rgba(255,255,255,0.4);
+  -webkit-text-stroke: 1px rgba(128,128,128,0.4);
   line-height: 1;
   margin-bottom: 20px;
   transition: -webkit-text-stroke-color 0.4s ease;
@@ -80,7 +80,7 @@
   font-size: clamp(24px, 3vw, 36px);
   font-weight: 800;
   letter-spacing: -0.02em;
-  color: #ffffff;
+  color: var(--text);
   margin-bottom: 16px;
 }
 .step-desc {
@@ -103,8 +103,8 @@
   height: 100%;
   border-radius: 32px;
   overflow: hidden;
-  box-shadow: 0 40px 100px rgba(0,0,0,0.4);
-  border: 1px solid rgba(255,255,255,0.06);
+  box-shadow: 0 40px 100px rgba(0,0,0,0.15);
+  border: 1px solid var(--border);
 }
 .process-image-layer {
   position: absolute;
@@ -127,7 +127,8 @@
 .process-img-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(9,9,11,0.9) 0%, rgba(9,9,11,0.1) 50%, rgba(9,9,11,0) 100%);
+  background: linear-gradient(to top, var(--bg) 0%, transparent 100%);
+  opacity: 0.5;
 }
 
 /* Glass Accent */
@@ -135,10 +136,10 @@
   position: absolute;
   bottom: 30px;
   left: 30px;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(128, 128, 128, 0.1);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid rgba(128,128,128,0.2);
   padding: 12px 24px;
   border-radius: 100px;
   z-index: 10;
@@ -161,7 +162,7 @@
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #fff;
+  color: var(--text);
 }
 
 @keyframes pulse-dot {
@@ -180,7 +181,7 @@
   font-size: clamp(40px, 6vw, 72px);
   font-weight: 900;
   letter-spacing: -0.04em;
-  color: #fff;
+  color: var(--text);
   margin-bottom: 24px;
 }
 .cta-sub {

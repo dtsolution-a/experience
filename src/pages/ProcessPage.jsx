@@ -33,8 +33,13 @@ const processSteps = [
   }
 ]
 
-// Fallback images from the bg folder
-const fallbacks = ['/bg/bg_1.jpg', '/bg/bg_2.jpg', '/bg/bg_3.jpg', '/bg/bg_4.jpg']
+// Valid fallback images from the bg folder
+const fallbacks = [
+  '/bg/beautiful-tree-countryside.jpg',
+  '/bg/closeup-shot-colorful-autumn-leaves-garden.jpg',
+  '/bg/dry-tree-with-orange-clouds-background.jpg',
+  '/bg/1909457_9170.jpg'
+]
 
 export default function ProcessPage() {
   const [activeStep, setActiveStep] = useState(0)
