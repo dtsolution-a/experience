@@ -218,7 +218,7 @@ function TeamPanel() {
     const trigger = ScrollTrigger.create({
       trigger: wrapper,
       start: 'top top',
-      end: `+=${teams.length * 100}vh`,
+      end: `+=${teams.length * 250}vh`, /* Increased from 100vh to 250vh per item for slower progression */
       pin: pin,
       pinSpacing: true,
       scrub: false,
