@@ -17,7 +17,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const location = useLocation()
-  const isAboutPage = location.pathname === '/about'
+  const isDarkHeroPage = location.pathname === '/about' || location.pathname === '/'
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
@@ -31,7 +31,7 @@ export default function Navbar() {
         initial={{ y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.7, ease: [0.23, 1, 0.32, 1] }}
-        className={`navbar ${scrolled ? 'scrolled' : 'transparent'} ${!scrolled && isAboutPage ? 'force-white' : ''}`}
+        className={`navbar ${scrolled ? 'scrolled' : 'transparent'} ${!scrolled && isDarkHeroPage ? 'force-white' : ''}`}
         style={{
           background: scrolled ? 'var(--nav-bg)' : 'transparent',
           backdropFilter: scrolled ? 'blur(24px)' : 'none',
