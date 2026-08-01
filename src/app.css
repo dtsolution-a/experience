@@ -253,7 +253,7 @@
   width: 32px;
   height: auto;
   opacity: 0.8;
-  filter: invert(1) brightness(2); /* assuming the leaf image is dark/black by default, make it white */
+  filter: brightness(0) invert(1);
 }
 .hero-leaf-right {
   transform: scaleX(-1);
