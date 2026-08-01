@@ -3,7 +3,32 @@ import { motion, useScroll, useTransform, animate } from 'framer-motion'
 
 import DotGrid from './DotGrid'
 
-const GRADIENT_TEXT = 'grow, and outperform.'
+const heroTexts = [
+  {
+    line1: 'We engineer digital',
+    line2: 'systems that think,',
+    grad: 'grow, and outperform.',
+    sub: 'AI intelligence · Creative strategy · Digital ecosystems that move markets'
+  },
+  {
+    line1: 'Rooted in data,',
+    line2: 'branching into bold,',
+    grad: 'limitless experiences.',
+    sub: 'Organic growth · Scalable architecture · Ecosystems that adapt'
+  },
+  {
+    line1: 'Cultivating digital',
+    line2: 'landscapes that are',
+    grad: 'alive and adaptive.',
+    sub: 'Symbiotic tech · Living systems · Natural expansion'
+  },
+  {
+    line1: 'Code that flows,',
+    line2: 'design that breathes,',
+    grad: 'products that evolve.',
+    sub: 'Fluid UI/UX · Evolutionary tech · Sustainable scale'
+  }
+]
 
 const bgImages = [
   '/bg/1909457_9170.jpg',
@@ -14,7 +39,6 @@ const bgImages = [
   '/bg/closeup-shot-colorful-autumn-leaves-garden.jpg',
   '/bg/dry-tree-with-orange-clouds-background.jpg'
 ]
-
 
 const stats = [
   { num: '200+', label: 'Projects Delivered' },
@@ -38,9 +62,11 @@ export default function Hero() {
   // Track mouse for parallax
   const [parallax, setParallax] = useState({ x: 0, y: 0 })
   const [bgImage, setBgImage] = useState('')
+  const [activeText, setActiveText] = useState(heroTexts[0])
 
   useEffect(() => {
     setBgImage(bgImages[Math.floor(Math.random() * bgImages.length)])
+    setActiveText(heroTexts[Math.floor(Math.random() * heroTexts.length)])
   }, [])
 
   const { scrollYProgress } = useScroll({
@@ -117,6 +143,7 @@ export default function Hero() {
 
         {/* Heading */}
         <motion.h1
+          key={activeText.line1}
           className="aurora-heading"
           variants={container}
           initial="hidden"
@@ -134,7 +161,7 @@ export default function Hero() {
             }}
             variants={lineIn}
           >
-            We engineer digital
+            {activeText.line1}
           </motion.span>
 
           {/* Line 2 — mid parallax */}
@@ -149,7 +176,7 @@ export default function Hero() {
             }}
             variants={lineIn}
           >
-            systems that think,
+            {activeText.line2}
           </motion.span>
 
           {/* Line 3 — deepest parallax + CSS character wave */}
@@ -163,7 +190,7 @@ export default function Hero() {
             }}
             variants={lineIn}
           >
-            {GRADIENT_TEXT.split('').map((ch, i) => (
+            {activeText.grad.split('').map((ch, i) => (
               <span
                 key={i}
                 className="wave-char-grad"
@@ -186,14 +213,15 @@ export default function Hero() {
           transition={{ duration: 1.1, delay: 1.1, ease: [0.23, 1, 0.32, 1] }}
         />
 
-        {/* Sub */}
+        {/* Dynamic Subtitle */}
         <motion.p
+          key={activeText.sub}
           className="aurora-sub"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.9, delay: 1.2 }}
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
         >
-          AI intelligence · Creative strategy · Digital ecosystems that move markets
+          {activeText.sub}
         </motion.p>
 
         {/* CTAs */}
