@@ -403,37 +403,41 @@ export default function About() {
     <div className="about-page" style={{ cursor: 'none' }}>
       <CustomCursor />
       <Navbar />
-      <AboutHero />
-      <TeamPanel />
+      
+      <main style={{ position: 'relative', zIndex: 10, background: 'var(--bg)', marginBottom: 'var(--footer-height, 400px)' }}>
+        <AboutHero />
+        <TeamPanel />
 
-      {/* Closing */}
-      <div className="about-closing-v5" ref={closingRef}>
-        <motion.div
-          className="closing-v5-row"
-          initial={{ opacity: 0, y: 30 }}
-          animate={closingInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <h2 className="closing-v5-title">
-            One team.<br />
-            <span className="gradient-text">Infinite</span><br />
-            capability.
-          </h2>
-          <div className="closing-v5-right">
-            <p className="closing-v5-sub">
-              Whether you need one specialist or an entire cross-functional squad, MediaLoop assembles the right experts for every challenge — every time.
-            </p>
-            <div className="closing-v5-cta">
-              <a href="/contact" className="btn-primary">
-                Start a Project <ArrowUpRight size={16} />
-              </a>
-              <a href="/work" className="btn-secondary">See Our Work</a>
+        {/* Closing */}
+        <div className="about-closing-v5" ref={closingRef}>
+          <motion.div
+            className="closing-v5-row"
+            initial={{ opacity: 0, y: 30 }}
+            animate={closingInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <h2 className="closing-v5-title">
+              One team.<br />
+              <span className="gradient-text">Infinite</span><br />
+              capability.
+            </h2>
+            <div className="closing-v5-right">
+              <p className="closing-v5-sub">
+                Whether you need one specialist or an entire cross-functional squad, MediaLoop assembles the right experts for every challenge — every time.
+              </p>
+              <div className="closing-v5-cta">
+                <a href="/contact" className="btn-primary">
+                  Start a Project <ArrowUpRight size={16} />
+                </a>
+                <a href="/work" className="btn-secondary">See Our Work</a>
+              </div>
             </div>
-          </div>
-        </motion.div>
-      </div>
+          </motion.div>
+        </div>
 
-      <ScrollTextSection />
+        <ScrollTextSection />
+      </main>
+
       <Footer />
     </div>
   )
