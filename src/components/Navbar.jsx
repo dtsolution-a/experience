@@ -6,8 +6,7 @@ import { useLocation } from 'react-router-dom'
 
 const navLinks = [
   { label: 'Services', href: '/#services', isPage: false },
-  { label: 'Work', href: '/work', isPage: true },
-  { label: 'Process', href: '/#process', isPage: false },
+  { label: 'Process', href: '/process', isPage: true },
   { label: 'About', href: '/about', isPage: true },
   { label: 'Contact', href: '/contact', isPage: true },
 ]

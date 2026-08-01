@@ -12,8 +12,6 @@ const footerLinks = {
   ],
   Company: [
     { label: 'About Us', path: '/about' },
-    { label: 'Our Work', path: '/work' },
-    { label: 'Case Studies', path: '/work' },
     { label: 'Careers', path: '/careers' },
     { label: 'Blog', path: '/blog' }
   ],

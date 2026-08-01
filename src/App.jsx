@@ -18,7 +18,6 @@ import ContactPage from './pages/ContactPage'
 import About from './pages/About'
 import Careers from './pages/Careers'
 import Blog from './pages/Blog'
-import CaseStudies from './pages/CaseStudies'
 import Legal from './pages/Legal'
 import AIAutomation from './pages/AIAutomation'
 import CustomDevelopment from './pages/CustomDevelopment'
@@ -28,6 +27,8 @@ import './app.css'
 import './components.css'
 
 import ScrollText from './components/ScrollText'
+
+import ProcessPage from './pages/ProcessPage'
 
 function HomePage() {
   useEffect(() => {
@@ -79,7 +80,7 @@ export default function App() {
             <Route path="/about" element={<About />} />
             <Route path="/careers" element={<Careers />} />
             <Route path="/blog" element={<Blog />} />
-            <Route path="/work" element={<CaseStudies />} />
+            <Route path="/process" element={<ProcessPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/legal" element={<Legal />} />
           </Routes>

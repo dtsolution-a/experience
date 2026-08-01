@@ -5,6 +5,7 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import CustomCursor from '../components/CustomCursor'
 import '../styles/about.css'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -63,34 +64,6 @@ const teams = [
 ]
 
 const specialties = ['Web Development', 'UI/UX Design', 'SEO & Growth', 'AI Automation', 'Virtual CTO']
-
-/* ─── CUSTOM CURSOR ─── */
-function CustomCursor() {
-  const cursorRef = useRef(null)
-  const [state, setState] = useState({ large: false, label: '' })
-
-  useEffect(() => {
-    const move = (e) => {
-      if (cursorRef.current) {
-        cursorRef.current.style.left = `${e.clientX}px`
-        cursorRef.current.style.top = `${e.clientY}px`
-      }
-    }
-    window.addEventListener('pointermove', move, { passive: true })
-    return () => window.removeEventListener('pointermove', move)
-  }, [])
-
-  useEffect(() => {
-    window.__setCursor = setState
-    return () => { delete window.__setCursor }
-  }, [])
-
-  return (
-    <div ref={cursorRef} className={`custom-cursor ${state.large ? 'large' : ''}`}>
-      {state.large && <span className="cursor-label">{state.label}</span>}
-    </div>
-  )
-}
 
 /* ─── SVG MASK REVEAL ─── */
 function MaskReveal({ onDone }) {
