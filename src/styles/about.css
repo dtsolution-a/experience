@@ -365,7 +365,6 @@
   font-size: clamp(32px, 4vw, 56px);
   font-weight: 800; letter-spacing: -0.02em;
   color: #fff; margin-bottom: 24px; line-height: 1.1;
-  text-shadow: 0 4px 20px rgba(0,0,0,0.5);
 }
 .team-img-skills.center { justify-content: center; }
 .team-img-tag {
