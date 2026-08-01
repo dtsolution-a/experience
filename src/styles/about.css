@@ -176,32 +176,36 @@
   /* scroll height set by JS pin's end point */
 }
 
-/* The pinned dark card */
+/* The pinned dark card wrapper */
 .team-panel-card {
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
-  align-items: stretch;
-  padding: clamp(12px, 2vw, 24px);
+  align-items: center; /* Center vertically in the viewport */
+  justify-content: center; /* Center horizontally */
+  padding: 80px clamp(16px, 3vw, 40px) 24px; /* Extra top padding for navbar */
   background: var(--bg);
 }
 
 /* Inner dark rounded rectangle — THE CARD */
 .team-panel-inner {
   width: 100%;
+  max-width: 1320px; /* Constrain max width */
+  height: 82vh; /* Use percentage of viewport instead of full */
+  min-height: 600px;
+  max-height: 850px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   background: #0D0D16;
-  border-radius: 28px;
+  border-radius: 32px;
   overflow: hidden;
-  min-height: calc(100vh - 48px);
   border: 1px solid rgba(255,255,255,0.06);
-  box-shadow: 0 40px 120px rgba(0,0,0,0.4);
+  box-shadow: 0 40px 120px rgba(0,0,0,0.25);
 }
 
 /* LEFT — dark list */
 .team-list-col {
-  padding: clamp(40px, 5vw, 80px);
+  padding: clamp(32px, 4vw, 64px);
   display: flex;
   flex-direction: column;
   justify-content: center;
