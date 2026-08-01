@@ -351,9 +351,9 @@ function ScrollTextSection() {
     if (!section || !text) return
 
     const tween = gsap.fromTo(text,
-      { x: '12vw' },
+      { x: '100vw' },
       {
-        x: '-55vw',
+        x: '-100vw',
         ease: 'none',
         scrollTrigger: {
           trigger: section,
