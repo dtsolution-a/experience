@@ -7,7 +7,7 @@
   background: var(--bg);
   min-height: 100vh;
   color: var(--text);
-  font-family: 'Inter', sans-serif;
+  font-family: 'Bricolage Grotesque', sans-serif;
   padding-top: 80px; 
   position: relative;
   overflow: hidden;
@@ -202,8 +202,8 @@
   margin: 0 auto;
   font-family: 'Nunito', sans-serif;
 }
-.document-content h2 { font-family: 'Inter', sans-serif; font-size: 32px; font-weight: 800; margin: 64px 0 24px; letter-spacing: -0.02em; }
-.document-content h3 { font-family: 'Inter', sans-serif; font-size: 22px; font-weight: 700; margin: 40px 0 16px; }
+.document-content h2 { font-family: 'Bricolage Grotesque', sans-serif; font-size: 32px; font-weight: 800; margin: 64px 0 24px; letter-spacing: -0.02em; }
+.document-content h3 { font-family: 'Bricolage Grotesque', sans-serif; font-size: 22px; font-weight: 700; margin: 40px 0 16px; }
 .document-content p { font-size: 17px; line-height: 1.8; color: var(--text-2); margin-bottom: 24px; }
 .document-content ul { padding-left: 20px; margin-bottom: 32px; }
 .document-content li { font-size: 17px; line-height: 1.8; color: var(--text-2); margin-bottom: 12px; }

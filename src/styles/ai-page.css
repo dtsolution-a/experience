@@ -28,7 +28,7 @@
 }
 
 /* ── Base ─────────────────────────────────────────────────────── */
-.ai-page { background:#060810; color:#dce8ff; min-height:100vh; font-family:'Inter',sans-serif; }
+.ai-page { background:#060810; color:#dce8ff; min-height:100vh; font-family:'Bricolage Grotesque',sans-serif; }
 .ai-page * { box-sizing:border-box; }
 .ai-con { max-width:1180px; margin:0 auto; padding:0 28px; }
 .ai-grad {

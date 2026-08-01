@@ -111,9 +111,9 @@
   flex-direction: column; align-items: center; gap: 28px;
 }
 .hero-full-title {
-  font-size: clamp(52px, 9vw, 118px);
-  font-weight: 900; letter-spacing: -0.04em; line-height: 0.95;
-  color: #fff; font-family: 'Inter', sans-serif; margin: 0;
+  font-size: clamp(44px, 8vw, 98px);
+  font-weight: 700; letter-spacing: -0.03em; line-height: 0.95;
+  color: #fff; font-family: 'Bricolage Grotesque', sans-serif; margin: 0;
 }
 .hero-full-title em {
   font-style: normal;
@@ -148,8 +148,8 @@
 .hero-bottom-stats { display: flex; gap: 32px; }
 .hero-bottom-stat { text-align: right; display: flex; flex-direction: column; gap: 2px; }
 .hero-bottom-stat-val {
-  font-size: clamp(20px, 2.5vw, 26px); font-weight: 900;
-  letter-spacing: -0.02em; color: #fff; font-family: 'Inter', sans-serif;
+  font-size: clamp(20px, 2.5vw, 26px); font-weight: 700;
+  letter-spacing: -0.02em; color: #fff; font-family: 'Bricolage Grotesque', sans-serif;
 }
 .hero-bottom-stat-label {
   font-size: 10px; color: rgba(255,255,255,0.3);
@@ -443,7 +443,7 @@
 .scroll-text-word {
   font-size: clamp(72px, 14vw, 220px);
   font-weight: 900; letter-spacing: -0.05em; line-height: 0.9;
-  color: var(--text); font-family: 'Inter', sans-serif;
+  color: var(--text); font-family: 'Bricolage Grotesque', sans-serif;
   user-select: none; flex-shrink: 0;
 }
 .scroll-text-word.outline {

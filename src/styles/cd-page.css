@@ -18,7 +18,7 @@
 @keyframes orbDrift2     { 0%,100%{transform:translate(0,0) scale(1)} 33%{transform:translate(-30px,40px) scale(1.1)} 66%{transform:translate(40px,-20px) scale(0.9)} }
 
 /* ── Base ─────────────────────────────────────────────────────── */
-.cd-page { background:#08090D; color:#F0EEE8; min-height:100vh; font-family:'Inter',sans-serif; }
+.cd-page { background:#08090D; color:#F0EEE8; min-height:100vh; font-family:'Bricolage Grotesque',sans-serif; }
 .cd-page * { box-sizing:border-box; }
 .cd-con { max-width:1180px; margin:0 auto; padding:0 28px; }
 .cd-grad { background:linear-gradient(135deg,#F59E0B 0%,#FF6B35 60%,#FFD700 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
@@ -127,7 +127,7 @@
     -3px -3px 10px rgba(255,255,255,0.02),
     inset 0 1px 0 rgba(255,255,255,0.04);
   color:rgba(240,238,232,0.55); font-size:14px; font-weight:500;
-  cursor:pointer; transition:all 0.3s; font-family:'Inter',sans-serif;
+  cursor:pointer; transition:all 0.3s; font-family:'Bricolage Grotesque',sans-serif;
 }
 .cd-tab:hover {
   color:rgba(240,238,232,0.9);
@@ -204,7 +204,7 @@
   padding:9px 20px; border-radius:30px; font-size:13px; font-weight:600;
   background:#0F1016; border:1px solid rgba(255,255,255,0.07);
   box-shadow: 5px 5px 12px rgba(0,0,0,0.65), -3px -3px 8px rgba(255,255,255,0.015);
-  color:rgba(240,238,232,0.5); cursor:pointer; transition:all 0.28s; font-family:'Inter',sans-serif;
+  color:rgba(240,238,232,0.5); cursor:pointer; transition:all 0.28s; font-family:'Bricolage Grotesque',sans-serif;
 }
 .cd-filter-btn:hover { color:rgba(240,238,232,0.85); box-shadow: 6px 6px 16px rgba(0,0,0,0.7), 0 0 16px rgba(245,158,11,0.08); }
 .cd-filter-btn.active {
