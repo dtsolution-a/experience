@@ -2,7 +2,7 @@ import { useRef, useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { Plus, X, ArrowUpRight } from 'lucide-react'
+import { Plus, X, ArrowUpRight, Search, PenTool, Cpu, ShieldCheck } from 'lucide-react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import CustomCursor from '../components/CustomCursor'
@@ -38,10 +38,10 @@ const servicesData = [
 ]
 
 const specialists = [
-  { role: 'SEO Experts', icon: 'S', desc: 'Masters of organic growth, outsmarting search algorithms to put your brand at the top.' },
-  { role: 'UI/UX Architects', icon: 'U', desc: 'Designing buttery-smooth interfaces that prioritize conversion and user delight.' },
-  { role: 'AI Engineers', icon: 'A', desc: 'Building smart, scalable automation to give your business a competitive edge.' },
-  { role: 'Virtual CTOs', icon: 'V', desc: 'Providing strategic technical leadership and architectural oversight for complex builds.' }
+  { role: 'SEO Experts', icon: <Search size={28} />, desc: 'Masters of organic growth, outsmarting search algorithms to put your brand at the top.' },
+  { role: 'UI/UX Architects', icon: <PenTool size={28} />, desc: 'Designing buttery-smooth interfaces that prioritize conversion and user delight.' },
+  { role: 'AI Engineers', icon: <Cpu size={28} />, desc: 'Building smart, scalable automation to give your business a competitive edge.' },
+  { role: 'Virtual CTOs', icon: <ShieldCheck size={28} />, desc: 'Providing strategic technical leadership and architectural oversight for complex builds.' }
 ]
 
 const faqs = [
