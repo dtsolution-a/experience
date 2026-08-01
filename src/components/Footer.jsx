@@ -57,13 +57,13 @@ export default function Footer() {
           {/* Brand col */}
           <div className="footer-brand">
             {/* Full logo — dark background so white text is visible */}
-            <Link to="/" className="footer-logo-full-wrap">
+            <TransitionLink to="/" className="footer-logo-full-wrap">
               <img
                 src="/ml_logo_full.png"
                 alt="MediaLoop Technologies — Tech That Connect"
                 className="footer-full-logo-img"
               />
-            </Link>
+            </TransitionLink>
             <p className="footer-tagline">Engineering intelligent digital ecosystems for brands that demand excellence.</p>
 
             {/* Contact quick-links */}
