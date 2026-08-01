@@ -68,19 +68,57 @@ export default function ProcessPage() {
       <CustomCursor />
       <Navbar />
 
-      <main style={{ position: 'relative', zIndex: 10, background: 'var(--bg)', marginBottom: 'var(--footer-height, 400px)' }}>
+      {/* Subtle Background Grid */}
+      <div className="process-bg-grid" aria-hidden="true" />
+
+      <main style={{ position: 'relative', zIndex: 10, background: 'transparent', marginBottom: 'var(--footer-height, 400px)' }}>
         
         <section className="process-hero">
-          <div className="container">
-            <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: 'easeOut' }}
-              className="process-hero-content"
-            >
-              <div className="process-badge">HOW WE WORK</div>
-              <h1 className="process-title">The MediaLoop<br />Process</h1>
-            </motion.div>
+          {/* Giant scrolling/fixed watermark */}
+          <div className="process-watermark-wrapper">
+            <h1 className="process-watermark">ENGINEERING.</h1>
+          </div>
+
+          <div className="container" style={{ position: 'relative', zIndex: 2 }}>
+            <div className="process-hero-layout">
+              <motion.div 
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, ease: 'easeOut' }}
+                className="process-hero-content"
+              >
+                <div className="process-badge">HOW WE WORK</div>
+                <h1 className="process-title">The MediaLoop<br />Process</h1>
+              </motion.div>
+              
+              {/* Fill the right side of the hero */}
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
+                className="process-hero-right"
+              >
+                <p className="process-hero-sub">
+                  We don't just build software. We engineer scalable ecosystems. 
+                  Our battle-tested methodology bridges the gap between ambitious 
+                  strategy and flawless execution.
+                </p>
+                <div className="process-hero-stats">
+                  <div className="ph-stat">
+                    <span>99%</span>
+                    <label>Uptime</label>
+                  </div>
+                  <div className="ph-stat">
+                    <span>3x</span>
+                    <label>Velocity</label>
+                  </div>
+                  <div className="ph-stat">
+                    <span>100+</span>
+                    <label>Releases</label>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
           </div>
         </section>
 

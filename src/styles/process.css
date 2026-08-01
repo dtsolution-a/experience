@@ -3,10 +3,52 @@
    Dark Split-Scroll Layout
    ===================================================== */
 
+/* ─── BACKGROUND GRID & WATERMARK ─── */
+.process-bg-grid {
+  position: fixed;
+  inset: 0;
+  background-image: 
+    linear-gradient(to right, rgba(128,128,128,0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(128,128,128,0.05) 1px, transparent 1px);
+  background-size: 60px 60px;
+  z-index: 0;
+  pointer-events: none;
+}
+.process-watermark-wrapper {
+  position: absolute;
+  top: 100px;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.03;
+}
+.process-watermark {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: clamp(150px, 25vw, 400px);
+  font-weight: 900;
+  color: transparent;
+  -webkit-text-stroke: 4px var(--text);
+  line-height: 0.8;
+  white-space: nowrap;
+  animation: scroll-watermark 40s linear infinite;
+}
+@keyframes scroll-watermark {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
 /* ─── HERO ─── */
 .process-hero {
-  padding: 200px 0 100px;
-  background: var(--bg);
+  padding: 200px 0 140px;
+  position: relative;
+}
+.process-hero-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
 }
 .process-hero-content {
   max-width: 800px;
@@ -25,11 +67,55 @@
 }
 .process-title {
   font-family: 'Bricolage Grotesque', sans-serif;
-  font-size: clamp(48px, 8vw, 90px);
+  font-size: clamp(48px, 7vw, 90px);
   font-weight: 900;
   letter-spacing: -0.04em;
   line-height: 1.05;
   color: var(--text);
+}
+
+.process-hero-right {
+  max-width: 500px;
+  padding-left: 40px;
+  border-left: 1px solid var(--border);
+}
+.process-hero-sub {
+  font-size: 18px;
+  color: var(--text-2);
+  line-height: 1.6;
+  margin-bottom: 40px;
+}
+.process-hero-stats {
+  display: flex;
+  gap: 40px;
+}
+.ph-stat span {
+  display: block;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.ph-stat label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-2);
+}
+
+@media (max-width: 900px) {
+  .process-hero-layout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .process-hero-right {
+    padding-left: 0;
+    border-left: none;
+    border-top: 1px solid var(--border);
+    padding-top: 40px;
+  }
 }
 
 /* ─── SPLIT SECTION ─── */
