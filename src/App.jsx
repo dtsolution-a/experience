@@ -27,6 +27,8 @@ import './index.css'
 import './app.css'
 import './components.css'
 
+import ScrollText from './components/ScrollText'
+
 function HomePage() {
   useEffect(() => {
     const lenis = new Lenis({ duration: 1.4, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) })
@@ -34,6 +36,13 @@ function HomePage() {
     const id = requestAnimationFrame(raf)
     return () => { lenis.destroy(); cancelAnimationFrame(id) }
   }, [])
+
+  const scrollWords = [
+    { text: "Don't", outline: true },
+    { text: "Just", outline: false },
+    { text: "Compete.", outline: true },
+    { text: "Dominate.", outline: false }
+  ]
 
   return (
     <div className="app">
@@ -44,6 +53,9 @@ function HomePage() {
         <ErrorBoundary><WhyUs /></ErrorBoundary>
         <ErrorBoundary><Process /></ErrorBoundary>
         <ErrorBoundary><Work /></ErrorBoundary>
+        
+        <ErrorBoundary><ScrollText words={scrollWords} className="home-scroll-text" /></ErrorBoundary>
+
         <ErrorBoundary><Testimonials /></ErrorBoundary>
         <ErrorBoundary><CTABanner /></ErrorBoundary>
         <ErrorBoundary><Contact /></ErrorBoundary>

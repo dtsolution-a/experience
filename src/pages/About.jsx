@@ -355,49 +355,19 @@ function TeamPanel() {
   )
 }
 
-/* ─── SCROLL TEXT ─── */
-function ScrollTextSection() {
-  const sectionRef = useRef(null)
-  const textRef = useRef(null)
+import ScrollText from '../components/ScrollText'
 
-  useEffect(() => {
-    const section = sectionRef.current
-    const text = textRef.current
-    if (!section || !text) return
-
-    const tween = gsap.fromTo(text,
-      { x: '100vw' },
-      {
-        x: '-100vw',
-        ease: 'none',
-        scrollTrigger: {
-          trigger: section,
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: 1.2,
-        },
-      }
-    )
-    return () => { tween.scrollTrigger?.kill(); tween.kill() }
-  }, [])
-
-  return (
-    <section ref={sectionRef} className="scroll-text-section">
-      <div ref={textRef} className="scroll-text-inner">
-        <span className="scroll-text-word">Ready</span>
-        <span className="scroll-text-word outline">to</span>
-        <span className="scroll-text-word">Build?</span>
-        <span className="scroll-text-word outline">Let's</span>
-        <span className="scroll-text-word">Talk.</span>
-      </div>
-    </section>
-  )
-}
-
-/* ─── PAGE ─── */
 export default function About() {
   const closingRef = useRef(null)
   const closingInView = useInView(closingRef, { once: true, margin: '-80px' })
+
+  const scrollWords = [
+    { text: 'Ready', outline: false },
+    { text: 'to', outline: true },
+    { text: 'Build?', outline: false },
+    { text: 'Let\'s', outline: true },
+    { text: 'Talk.', outline: false },
+  ]
 
   return (
     <div className="about-page" style={{ cursor: 'none' }}>
@@ -435,7 +405,7 @@ export default function About() {
           </motion.div>
         </div>
 
-        <ScrollTextSection />
+        <ScrollText words={scrollWords} />
       </main>
 
       <Footer />
