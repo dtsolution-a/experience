@@ -1,4 +1,4 @@
-import { createContext, useContext, useRef, useCallback } from 'react'
+import { createContext, useContext, useRef, useCallback, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import gsap from 'gsap'
 
@@ -20,7 +20,7 @@ export function TransitionOverlay() {
         zIndex: 10000,
         pointerEvents: 'none',
         background: 'linear-gradient(135deg, #7B2FF7 0%, #FF2D55 50%, #FF9C00 100%)',
-        clipPath: 'circle(0px at 50% 50%)',
+        clipPath: 'circle(3000px at 50% 50%)', // Fully cover screen initially
         willChange: 'clip-path, transform',
       }}
     />
@@ -31,6 +31,31 @@ export function TransitionOverlay() {
 export function TransitionProvider({ children }) {
   const navigate = useNavigate()
   const isAnimating = useRef(false)
+
+  // Trigger initial wipe animation on full page load / refresh
+  useEffect(() => {
+    const overlay = document.getElementById('page-transition-overlay')
+    if (!overlay) return
+    
+    isAnimating.current = true
+    overlay.style.pointerEvents = 'all'
+
+    gsap.to(overlay, {
+      y: '-100%',
+      duration: 0.7,
+      ease: 'power2.inOut',
+      delay: 0.2, // Small delay so user sees it fully before it wipes out
+      onComplete: () => {
+        gsap.set(overlay, {
+          y: 0,
+          clipPath: 'circle(0px at 50% 50%)',
+        })
+        overlay.style.pointerEvents = 'none'
+        isAnimating.current = false
+      },
+    })
+  }, [])
+
 
   const navigateTo = useCallback((path, event) => {
     if (isAnimating.current) return

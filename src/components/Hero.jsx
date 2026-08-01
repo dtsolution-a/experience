@@ -220,12 +220,14 @@ export default function Hero() {
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 1.55 }}
         >
+          <img src="/l1.png" alt="wreath" className="hero-leaf hero-leaf-left" />
           {stats.map((s, i) => (
             <div key={i} className="aurora-stat">
               <span className="aurora-stat-num">{s.num}</span>
               <span className="aurora-stat-label">{s.label}</span>
             </div>
           ))}
+          <img src="/l1.png" alt="wreath" className="hero-leaf hero-leaf-right" />
         </motion.div>
       </motion.div>
 
