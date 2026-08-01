@@ -1,9 +1,13 @@
 import { useRef, useState, useEffect } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import '../styles/about.css'
+
+gsap.registerPlugin(ScrollTrigger)
 
 const teams = [
   {
@@ -270,7 +274,54 @@ export default function About() {
         </motion.div>
       </div>
 
+      {/* ── HORIZONTAL SCROLL TEXT ── */}
+      <ScrollTextSection />
+
       <Footer />
     </div>
+  )
+}
+
+// Separate component so GSAP effect fires correctly
+function ScrollTextSection() {
+  const sectionRef = useRef(null)
+  const textRef = useRef(null)
+
+  useEffect(() => {
+    const section = sectionRef.current
+    const text = textRef.current
+    if (!section || !text) return
+
+    const tween = gsap.fromTo(
+      text,
+      { x: '12vw' },
+      {
+        x: '-55vw',
+        ease: 'none',
+        scrollTrigger: {
+          trigger: section,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: 1.2,
+        },
+      }
+    )
+
+    return () => {
+      tween.scrollTrigger?.kill()
+      tween.kill()
+    }
+  }, [])
+
+  return (
+    <section ref={sectionRef} className="scroll-text-section">
+      <div ref={textRef} className="scroll-text-inner">
+        <span className="scroll-text-word">Ready</span>
+        <span className="scroll-text-word outline">to</span>
+        <span className="scroll-text-word">Build?</span>
+        <span className="scroll-text-word outline">Let's</span>
+        <span className="scroll-text-word">Talk.</span>
+      </div>
+    </section>
   )
 }
