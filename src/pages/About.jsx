@@ -136,10 +136,25 @@ function MaskReveal({ onDone }) {
   )
 }
 
+const bgImages = [
+  '/bg/1909457_9170.jpg',
+  '/bg/25537441_1dg3_egm8_211202.jpg',
+  '/bg/27287259_z69i_kxes_211202.jpg',
+  '/bg/840867_1242.jpg',
+  '/bg/beautiful-tree-countryside.jpg',
+  '/bg/closeup-shot-colorful-autumn-leaves-garden.jpg',
+  '/bg/dry-tree-with-orange-clouds-background.jpg'
+]
+
 /* ─── HERO ─── */
 function AboutHero() {
   const [maskDone, setMaskDone] = useState(false)
   const contentRef = useRef(null)
+  const [bgImage, setBgImage] = useState('')
+
+  useEffect(() => {
+    setBgImage(bgImages[Math.floor(Math.random() * bgImages.length)])
+  }, [])
 
   useEffect(() => {
     if (maskDone && contentRef.current) {
@@ -154,7 +169,7 @@ function AboutHero() {
   return (
     <section className="about-full-hero">
       <div className="hero-bg-img">
-        <img src="/about-hero-bg.jpg" alt="MediaLoop" />
+        {bgImage && <img src={bgImage} alt="MediaLoop Background" />}
         <div className="hero-bg-grad" />
       </div>
       {!maskDone && <MaskReveal onDone={() => setMaskDone(true)} />}
