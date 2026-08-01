@@ -1,13 +1,14 @@
 import { useState, useEffect, useRef } from 'react'
-import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useTheme } from '../context/ThemeContext'
+import TransitionLink from './TransitionLink'
 
 const navLinks = [
-  { label: 'Services', href: '/#services' },
-  { label: 'Work', href: '/#work' },
-  { label: 'Process', href: '/#process' },
-  { label: 'About', href: '/#about' },
-  { label: 'Contact', href: '/#contact' },
+  { label: 'Services', href: '/#services', isPage: false },
+  { label: 'Work', href: '/work', isPage: true },
+  { label: 'Process', href: '/#process', isPage: false },
+  { label: 'About', href: '/about', isPage: true },
+  { label: 'Contact', href: '/contact', isPage: true },
 ]
 
 export default function Navbar() {
@@ -36,18 +37,19 @@ export default function Navbar() {
         }}
       >
         <div className="nav-inner container-wide">
-          {/* Logo — icon only */}
-          <a href="#" className="nav-logo">
+          {/* Logo */}
+          <TransitionLink to="/" className="nav-logo">
             <img src="/ml_logo_icon.png" alt="MediaLoop Technologies" className="logo-img-icon" />
-          </a>
+          </TransitionLink>
 
           {/* Desktop links */}
           <ul className="nav-links">
             {navLinks.map((l) => (
               <li key={l.label}>
-                <a href={l.href} className="nav-link">
-                  {l.label}
-                </a>
+                {l.isPage
+                  ? <TransitionLink to={l.href} className="nav-link">{l.label}</TransitionLink>
+                  : <a href={l.href} className="nav-link">{l.label}</a>
+                }
               </li>
             ))}
           </ul>
@@ -76,9 +78,9 @@ export default function Navbar() {
                 )}
               </AnimatePresence>
             </button>
-            <a href="#contact" className="btn-primary nav-cta">
+            <TransitionLink to="/contact" className="btn-primary nav-cta">
               Get Started
-            </a>
+            </TransitionLink>
             <button className="hamburger" onClick={() => setMobileOpen(o => !o)} aria-label="Menu">
               <span className={mobileOpen ? 'open' : ''} />
               <span className={mobileOpen ? 'open' : ''} />
@@ -99,20 +101,29 @@ export default function Navbar() {
             transition={{ duration: 0.3 }}
           >
             {navLinks.map((l, i) => (
-              <motion.a
-                key={l.label} href={l.href}
-                className="mobile-link"
-                onClick={() => setMobileOpen(false)}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: i * 0.07 }}
-              >
-                {l.label}
-              </motion.a>
+              l.isPage
+                ? <TransitionLink
+                    key={l.label}
+                    to={l.href}
+                    className="mobile-link"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    {l.label}
+                  </TransitionLink>
+                : <motion.a
+                    key={l.label} href={l.href}
+                    className="mobile-link"
+                    onClick={() => setMobileOpen(false)}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: i * 0.07 }}
+                  >
+                    {l.label}
+                  </motion.a>
             ))}
-            <a href="#contact" className="btn-primary" style={{ width: '100%', justifyContent: 'center', marginTop: '12px' }}>
+            <TransitionLink to="/contact" className="btn-primary" style={{ width: '100%', justifyContent: 'center', marginTop: '12px' }}>
               Get Started
-            </a>
+            </TransitionLink>
           </motion.div>
         )}
       </AnimatePresence>

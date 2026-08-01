@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
+import TransitionLink from './TransitionLink'
 
 const footerLinks = {
   Services: [
@@ -107,7 +107,7 @@ export default function Footer() {
                     {link.path.startsWith('http') || link.path.startsWith('#') ? (
                       <a href={link.path} className="footer-link">{link.label}</a>
                     ) : (
-                      <Link to={link.path} className="footer-link">{link.label}</Link>
+                      <TransitionLink to={link.path} className="footer-link">{link.label}</TransitionLink>
                     )}
                   </li>
                 ))}

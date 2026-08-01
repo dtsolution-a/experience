@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Lenis from 'lenis'
 import { ThemeProvider } from './context/ThemeContext'
+import { TransitionProvider, TransitionOverlay } from './context/TransitionContext'
 import ErrorBoundary from './components/ErrorBoundary'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
@@ -56,18 +57,21 @@ export default function App() {
   return (
     <ThemeProvider>
       <BrowserRouter>
-        <ScrollToTop />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/ai-automation" element={<AIAutomation />} />
-          <Route path="/custom-development" element={<CustomDevelopment />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/careers" element={<Careers />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/work" element={<CaseStudies />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="/legal" element={<Legal />} />
-        </Routes>
+        <TransitionProvider>
+          <ScrollToTop />
+          <TransitionOverlay />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/ai-automation" element={<AIAutomation />} />
+            <Route path="/custom-development" element={<CustomDevelopment />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/careers" element={<Careers />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/work" element={<CaseStudies />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/legal" element={<Legal />} />
+          </Routes>
+        </TransitionProvider>
       </BrowserRouter>
     </ThemeProvider>
   )
