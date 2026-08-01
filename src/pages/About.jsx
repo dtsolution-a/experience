@@ -1,318 +1,274 @@
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { motion, useInView } from 'framer-motion'
-import gsap from 'gsap'
-import { useGSAP } from '@gsap/react'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { ArrowUpRight } from 'lucide-react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import '../styles/about.css'
 
-gsap.registerPlugin(ScrollTrigger)
-
 const teams = [
   {
     id: 1,
-    prefix: 'You need...',
+    need: 'You need...',
     question: 'a Website?',
     answer: 'Meet our Developers',
     tag: 'Full-Stack Engineering',
-    desc: 'React, Next.js, Node — blazing-fast apps that turn browsers into buyers.',
-    skills: ['React / Next.js', 'Node.js', 'TypeScript', 'REST / GraphQL', 'AWS / GCP'],
-    stats: [{ v: '60+', l: 'Projects' }, { v: '4.9★', l: 'Rating' }, { v: '<1s', l: 'Load Time' }],
-    image: '/panel-devs.jpg',
+    skills: ['React / Next.js', 'Node.js', 'TypeScript', 'AWS'],
+    image: '/ws-devs.jpg',
     accent: '#7B2FF7',
+    desc: 'We craft lightning-fast, scalable web applications that convert visitors into revenue.',
   },
   {
     id: 2,
-    prefix: 'Need',
+    need: 'Need',
     question: 'Branding?',
     answer: 'Meet our Designers',
-    tag: 'UI/UX & Visual Identity',
-    desc: 'From logo marks to full design systems — interfaces that feel premium.',
-    skills: ['Brand Identity', 'Figma', 'Motion Design', 'Design Systems', 'User Research'],
-    stats: [{ v: '120+', l: 'Brands Built' }, { v: '3x', l: 'Engagement' }, { v: '100%', l: 'Figma Native' }],
-    image: '/panel-design.jpg',
+    tag: 'UI/UX & Identity',
+    skills: ['Figma', 'Brand Identity', 'Motion Design', 'Design Systems'],
+    image: '/ws-design.jpg',
     accent: '#FF2D55',
+    desc: 'From brand marks to full design systems — interfaces that feel impossibly premium.',
   },
   {
     id: 3,
-    prefix: 'Need',
+    need: 'Need',
     question: 'Growth?',
     answer: 'Meet our SEO Experts',
-    tag: 'Organic Search & Analytics',
-    desc: 'Technical SEO and content loops that compound your rankings month over month.',
-    skills: ['Technical SEO', 'Content Strategy', 'Core Web Vitals', 'GA4 & GSC', 'Link Building'],
-    stats: [{ v: '5x', l: 'Avg. Traffic' }, { v: '8mo', l: 'Avg. to #1' }, { v: '200+', l: 'Keywords' }],
-    image: '/panel-seo.jpg',
+    tag: 'Organic Search',
+    skills: ['Technical SEO', 'Content Strategy', 'Core Web Vitals', 'GA4'],
+    image: '/ws-seo.jpg',
     accent: '#FF9C00',
+    desc: 'Data-driven SEO and content loops that compound your rankings month over month.',
   },
   {
     id: 4,
-    prefix: 'Need',
+    need: 'Need',
     question: 'Automation?',
     answer: 'Meet our AI Specialists',
-    tag: 'Machine Learning & RPA',
-    desc: 'LLMs, custom AI pipelines, and bots that eliminate repetitive work at scale.',
-    skills: ['LLM Fine-tuning', 'LangChain / RAG', 'PyTorch', 'RPA & OCR', 'OpenAI / Gemini'],
-    stats: [{ v: '94%', l: 'Accuracy' }, { v: '10x', l: 'Faster Ops' }, { v: '100%', l: 'Automated' }],
-    image: '/panel-ai.jpg',
+    tag: 'Machine Learning',
+    skills: ['LLM / RAG', 'Python', 'RPA & OCR', 'OpenAI / Gemini'],
+    image: '/ws-ai.jpg',
     accent: '#7B2FF7',
+    desc: 'Custom AI pipelines and bots that eliminate repetitive work and unlock intelligent ops.',
   },
   {
     id: 5,
-    prefix: 'Need',
+    need: 'Need',
     question: 'Business Tech?',
     answer: 'Meet our Virtual CTO',
-    tag: 'Technology Strategy',
-    desc: 'Senior CTO-level architecture and roadmapping — on demand, not full-time salary.',
-    skills: ['Tech Roadmapping', 'Stack Selection', 'Security Audits', 'Team Structuring', 'Due Diligence'],
-    stats: [{ v: '50+', l: 'Startups' }, { v: '$2M+', l: 'Cost Saved' }, { v: '15yr', l: 'Experience' }],
-    image: '/panel-cto.jpg',
+    tag: 'Tech Strategy',
+    skills: ['Architecture Review', 'Stack Selection', 'Security Audits', 'Team Structuring'],
+    image: '/ws-cto.jpg',
     accent: '#FF9C00',
+    desc: 'Senior CTO-level advisory, on demand — without the full-time salary.',
   },
 ]
 
-export default function About() {
-  const scrollyRef = useRef(null)
-  const scrollyPin = useRef(null)
-  const [activePanel, setActivePanel] = useState(0)
+// Custom cursor component
+function CustomCursor() {
+  const cursorRef = useRef(null)
+  const [state, setState] = useState({ visible: false, large: false, label: '↗' })
 
-  useGSAP(() => {
-    const panels = gsap.utils.toArray('.ab-panel')
-    const total = panels.length
+  useEffect(() => {
+    const cursor = cursorRef.current
+    if (!cursor) return
 
-    // Hide all panels except first
-    gsap.set(panels, { autoAlpha: 0, yPercent: 5, scale: 0.98, filter: 'blur(16px)' })
-    gsap.set(panels[0], { autoAlpha: 1, yPercent: 0, scale: 1, filter: 'blur(0px)' })
+    const move = (e) => {
+      cursor.style.left = `${e.clientX}px`
+      cursor.style.top = `${e.clientY}px`
+    }
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: scrollyRef.current,
-        start: 'top top',
-        end: `+=${total * 120}%`,
-        pin: scrollyPin.current,
-        scrub: 1.2,
-        anticipatePin: 1,
-        onUpdate: (self) => {
-          const idx = Math.min(Math.floor(self.progress * total), total - 1)
-          setActivePanel(idx)
-        },
-      },
-    })
+    window.addEventListener('pointermove', move, { passive: true })
+    return () => window.removeEventListener('pointermove', move)
+  }, [])
 
-    panels.forEach((panel, i) => {
-      if (i === 0) return
-      const prev = panels[i - 1]
-
-      tl.to(prev, { autoAlpha: 0, yPercent: -5, scale: 1.02, filter: 'blur(20px)', duration: 0.7, ease: 'power2.in' })
-      tl.to(panel, { autoAlpha: 1, yPercent: 0, scale: 1, filter: 'blur(0px)', duration: 0.8, ease: 'power2.out' }, '<0.2')
-      tl.to({}, { duration: 1.4 })
-    })
-
-    return () => ScrollTrigger.getAll().forEach(t => t.kill())
-  }, { scope: scrollyRef })
-
-  const closingRef = useRef(null)
-  const closingInView = useInView(closingRef, { once: true, margin: '-100px' })
+  // Expose setState to the page
+  useEffect(() => {
+    window.__setCursor = setState
+    return () => { delete window.__setCursor }
+  }, [])
 
   return (
-    <div className="about-page">
+    <div
+      ref={cursorRef}
+      className={`custom-cursor ${state.visible ? 'visible' : ''} ${state.large ? 'large' : ''}`}
+    >
+      <span className="cursor-label">{state.label}</span>
+    </div>
+  )
+}
+
+// staggered text animation
+const titleVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.06 } },
+}
+const wordVariant = {
+  hidden: { opacity: 0, y: 40, skewY: 3 },
+  visible: { opacity: 1, y: 0, skewY: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } },
+}
+
+export default function About() {
+  const [activeTeam, setActiveTeam] = useState(0)
+  const closingRef = useRef(null)
+  const closingInView = useInView(closingRef, { once: true, margin: '-80px' })
+
+  const handleTeamEnter = (idx) => {
+    setActiveTeam(idx)
+    if (window.__setCursor) {
+      window.__setCursor({ visible: true, large: true, label: teams[idx].answer.replace('Meet our ', '') })
+    }
+  }
+  const handleTeamLeave = () => {
+    if (window.__setCursor) {
+      window.__setCursor({ visible: false, large: false, label: '↗' })
+    }
+  }
+
+  return (
+    <div className="about-page" style={{ cursor: 'none' }}>
+      <CustomCursor />
       <Navbar />
 
-      {/* ── HERO: Editorial Split Layout ── */}
-      <section className="about-hero">
-        {/* ── LEFT: Text ── */}
-        <div className="about-hero-left">
+      {/* ── HERO ── */}
+      <section className="about-hero-v5">
+        <div className="hero-v5-inner">
           <motion.div
-            className="about-hero-tag-row"
-            initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
+            className="hero-v5-tag"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
           >
-            <span className="about-eyebrow">
-              <span className="about-eyebrow-dot" />
-              MediaLoop Technologies
-            </span>
+            <span className="hero-v5-tag-dot" />
+            MediaLoop Technologies
           </motion.div>
 
           <motion.h1
-            className="about-hero-title"
-            initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            className="hero-v5-title"
+            variants={titleVariants}
+            initial="hidden"
+            animate="visible"
           >
-            We build<br />
-            the <span className="gradient-text">internet's</span><br />
-            best work.
+            {['We', 'build', 'the'].map((w, i) => (
+              <motion.span key={i} variants={wordVariant} style={{ display: 'inline-block', marginRight: '0.25em' }}>
+                {w}
+              </motion.span>
+            ))}
+            <motion.em variants={wordVariant} style={{ display: 'inline-block', marginRight: '0.25em' }}>
+              internet's
+            </motion.em>
+            {['best', 'products.'].map((w, i) => (
+              <motion.span key={i} variants={wordVariant} style={{ display: 'inline-block', marginRight: '0.25em' }}>
+                {w}
+              </motion.span>
+            ))}
           </motion.h1>
 
-          <motion.p
-            className="about-hero-sub"
-            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.25 }}
-          >
-            Full-spectrum digital agency — elite engineers, designers, growth strategists, and AI specialists. One roof. Zero compromise.
-          </motion.p>
-
-          {/* Stats row */}
           <motion.div
-            className="about-hero-stats"
-            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.35 }}
+            className="hero-v5-bottom"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.5 }}
           >
-            {[{ v: '120+', l: 'Projects Shipped' }, { v: '50+', l: 'Global Clients' }, { v: '5★', l: 'Avg. Rating' }].map(s => (
-              <div key={s.l} className="about-hero-stat">
-                <span className="about-hero-stat-val gradient-text">{s.v}</span>
-                <span className="about-hero-stat-label">{s.l}</span>
-              </div>
-            ))}
-          </motion.div>
-
-          <motion.div
-            className="about-scroll-hint"
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.7 }}
-          >
-            <div className="about-scroll-line" />
-            <span>Scroll to find your team</span>
+            <p className="hero-v5-sub">
+              MediaLoop is a full-spectrum digital agency — elite engineers, designers, growth strategists, and AI specialists. One team. Zero compromise.
+            </p>
+            <div className="hero-v5-stats">
+              {[{ v: '120+', l: 'Projects' }, { v: '50+', l: 'Clients' }, { v: '5★', l: 'Rating' }].map(s => (
+                <div key={s.l} className="hero-v5-stat">
+                  <span className="hero-v5-stat-val gradient-text">{s.v}</span>
+                  <span className="hero-v5-stat-label">{s.l}</span>
+                </div>
+              ))}
+            </div>
           </motion.div>
         </div>
-
-        {/* ── RIGHT: Capability Grid ── */}
-        <motion.div
-          className="about-hero-right"
-          initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <div className="about-cap-grid">
-            {teams.map((team, i) => (
-              <motion.div
-                key={team.id}
-                className="about-cap-card"
-                initial={{ opacity: 0, y: 24 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 + i * 0.08, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                whileHover={{ y: -4, scale: 1.02 }}
-                style={{
-                  borderTop: `3px solid ${team.accent}`,
-                  background: `linear-gradient(135deg, var(--card-bg) 0%, ${team.accent}08 100%)`,
-                }}
-              >
-                <div className="about-cap-num" style={{ color: team.accent }}>0{team.id}</div>
-                <div className="about-cap-question">{team.question}</div>
-                <div className="about-cap-answer" style={{ color: team.accent }}>↓ {team.answer}</div>
-                <div className="about-cap-tag">{team.tag}</div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
       </section>
 
-      {/* ── SCROLLYTELLING ── */}
-      <div
-        ref={scrollyRef}
-        className="scrolly-section"
-        style={{ height: `${(teams.length + 1) * 120}vh` }}
-      >
-        <div ref={scrollyPin} className="scrolly-pin">
+      {/* ── HOVER TEAM SECTION ── */}
+      <section className="about-hover-section">
+
+        {/* LEFT: List */}
+        <div className="hover-list-col">
+          <div className="hover-section-label">Who does what</div>
+
           {teams.map((team, i) => (
             <div
               key={team.id}
-              className="scrolly-panel ab-panel"
-              style={{ pointerEvents: activePanel === i ? 'all' : 'none' }}
+              className="hover-team-item"
+              onMouseEnter={() => handleTeamEnter(i)}
+              onMouseLeave={handleTeamLeave}
             >
-              {/* ══ LEFT: Question ══ */}
-              <div className="panel-left">
-                <span className="panel-ghost-num">0{team.id}</span>
-
-                <div className="panel-left-inner">
-                  <div className="panel-need-prefix">{team.prefix}</div>
-
-                  <h2 className="panel-question">
-                    <span className="panel-question-accent">{team.question}</span>
-                  </h2>
-
-                  <div className="panel-skills">
-                    {team.skills.map(s => (
-                      <span key={s} className="panel-skill-tag">{s}</span>
-                    ))}
-                  </div>
-
-                  <div className="panel-stats">
-                    {team.stats.map(stat => (
-                      <div key={stat.l} className="panel-stat">
-                        <div className="panel-stat-value" style={{ color: team.accent }}>{stat.v}</div>
-                        <div className="panel-stat-label">{stat.l}</div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+              <div className="hover-item-left">
+                <div className="hover-item-num" style={{ color: team.accent }}>0{team.id} — {team.need}</div>
+                <div className="hover-item-question">{team.question}</div>
+                <div className="hover-item-answer" style={{ color: team.accent }}>↓ {team.answer}</div>
               </div>
 
-              {/* ══ RIGHT: Illustration + Answer ══ */}
-              <div className="panel-right" style={{ background: `${team.accent}08` }}>
-                {/* Illustration fills most of right panel */}
-                <div className="panel-img-fill">
-                  <img src={team.image} alt={team.answer} />
-                </div>
-
-                {/* Gradient so answer block is readable */}
-                <div
-                  className="panel-img-grad"
-                  style={{ background: `linear-gradient(to top, ${team.accent}22 0%, transparent 60%)` }}
-                />
-
-                {/* Answer block pinned at bottom */}
-                <div className="panel-answer-block">
-                  <div
-                    className="panel-arrow-icon"
-                    style={{ background: team.accent, boxShadow: `0 8px 24px ${team.accent}50` }}
-                  >
-                    ↓
-                  </div>
-                  <div className="panel-answer-text">
-                    <span
-                      className="panel-answer-tag"
-                      style={{ color: team.accent }}
-                    >
-                      {team.tag}
-                    </span>
-                    <div className="panel-answer-title">{team.answer}</div>
-                    <p className="panel-answer-desc">{team.desc}</p>
-                  </div>
+              <div className="hover-item-right">
+                <span
+                  className="hover-item-tag"
+                  style={{ color: team.accent, background: `${team.accent}12`, borderColor: `${team.accent}30` }}
+                >
+                  {team.tag}
+                </span>
+                <div className="hover-item-arrow">
+                  <ArrowUpRight size={14} />
                 </div>
               </div>
             </div>
           ))}
         </div>
 
-        {/* Progress pill */}
-        <div className="scrolly-progress-bar">
-          {teams.map((t, i) => (
+        {/* RIGHT: Sticky image panel */}
+        <div className="hover-image-col">
+          {teams.map((team, i) => (
             <div
-              key={i}
-              className={`progress-dot ${activePanel === i ? 'active' : ''}`}
-              style={activePanel === i ? { background: teams[i].accent } : {}}
-            />
+              key={team.id}
+              className={`hover-img-wrap ${activeTeam === i ? 'active' : ''}`}
+            >
+              <img src={team.image} alt={team.answer} />
+              <div className="hover-img-overlay" />
+              <div className="hover-img-info">
+                <h3 className="hover-img-team-name">{team.answer}</h3>
+                <div className="hover-img-skills">
+                  {team.skills.map(s => (
+                    <span key={s} className="hover-img-skill">{s}</span>
+                  ))}
+                </div>
+              </div>
+            </div>
           ))}
         </div>
-      </div>
+      </section>
 
       {/* ── CLOSING ── */}
-      <section className="about-closing" ref={closingRef}>
-        <div className="about-closing-orb" />
+      <div className="about-closing-v5" ref={closingRef}>
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          className="closing-v5-row"
+          initial={{ opacity: 0, y: 30 }}
           animate={closingInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-          <h2 className="about-closing-title">
+          <h2 className="closing-v5-title">
             One team.<br />
-            <span className="gradient-text">Infinite capability.</span>
+            <span className="gradient-text">Infinite</span><br />
+            capability.
           </h2>
-          <p className="about-closing-sub">
-            Whether you need one specialist or an entire cross-functional squad, MediaLoop assembles the right experts for every challenge.
-          </p>
-          <div className="about-cta-row">
-            <a href="/contact" className="btn-primary">Start a Project</a>
-            <a href="/work" className="btn-secondary">See Our Work</a>
+          <div className="closing-v5-right">
+            <p className="closing-v5-sub">
+              Whether you need one specialist or an entire cross-functional squad, MediaLoop assembles the right experts for every challenge — every time.
+            </p>
+            <div className="closing-v5-cta">
+              <a href="/contact" className="btn-primary">
+                Start a Project <ArrowUpRight size={16} />
+              </a>
+              <a href="/work" className="btn-secondary">
+                See Our Work
+              </a>
+            </div>
           </div>
         </motion.div>
-      </section>
+      </div>
 
       <Footer />
     </div>
