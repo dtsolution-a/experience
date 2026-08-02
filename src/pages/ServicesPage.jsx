@@ -59,6 +59,12 @@ export default function ServicesPage() {
   const [activeFaq, setActiveFaq] = useState(null)
 
   useEffect(() => {
+    // Force refresh GSAP after a slight delay to ensure DOM & images are fully painted 
+    // when navigating via React Router
+    const timer = setTimeout(() => {
+      ScrollTrigger.refresh()
+    }, 100)
+
     // GSAP Horizontal Scroll
     const container = containerRef.current
     if (window.innerWidth > 900 && container) {
@@ -93,7 +99,8 @@ export default function ServicesPage() {
       })
 
       return () => {
-        tween.kill()
+        clearTimeout(timer)
+        if (tween) tween.kill()
         ScrollTrigger.getAll().forEach(t => t.kill())
       }
     }
@@ -109,7 +116,7 @@ export default function ServicesPage() {
         {/* HERO SECTION */}
         <section className="srv-hero" style={{ background: 'transparent' }}>
           <SectionBackground 
-            lightSrc="/bg/sections/light_bg/Floating_silk_fabric_flowing_space_202608020545.jpeg"
+            lightSrc="/bg/sections/light_bg/Floating_glass_panels_crystal_st._202608020543.jpeg"
             darkSrc="/bg/sections/dark_bg/Gradient_ribbons_twisting_throug._2K_202608020544.jpeg"
             blur="8px"
             opacity={0.9}

@@ -69,7 +69,7 @@ export default function SectionBackground({
               width: '100%',
               height: '100%',
               objectFit: 'cover',
-              filter: `blur(${blur})`,
+              filter: `blur(${blur}) ${theme === 'dark' ? 'brightness(1.3) contrast(1.2)' : ''}`,
               y: y
             }}
           />
