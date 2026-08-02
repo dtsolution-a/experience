@@ -139,23 +139,104 @@ export default function ServicesPage() {
           )}
           <div className="srv-hero-overlay"></div>
 
+          {/* Ambient Glowing Orbs */}
+          <div className="srv-hero-orb srv-hero-orb-1"></div>
+          <div className="srv-hero-orb srv-hero-orb-2"></div>
+
+          {/* Floating Tech Badges around Hero */}
+          <motion.div 
+            className="srv-floating-pill pill-pos-1"
+            animate={{ y: [0, -12, 0], rotate: [0, 1.5, 0] }}
+            transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+          >
+            <span className="srv-floating-pill-icon">⚡</span>
+            <span>AI & Machine Learning</span>
+          </motion.div>
+
+          <motion.div 
+            className="srv-floating-pill pill-pos-2"
+            animate={{ y: [0, 10, 0], rotate: [0, -2, 0] }}
+            transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
+          >
+            <span className="srv-floating-pill-icon">🌐</span>
+            <span>Cloud Architecture</span>
+          </motion.div>
+
+          <motion.div 
+            className="srv-floating-pill pill-pos-3"
+            animate={{ y: [0, -10, 0], rotate: [0, -1.5, 0] }}
+            transition={{ duration: 5.5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+          >
+            <span className="srv-floating-pill-icon">✨</span>
+            <span>60fps Web Craft</span>
+          </motion.div>
+
+          <motion.div 
+            className="srv-floating-pill pill-pos-4"
+            animate={{ y: [0, 12, 0], rotate: [0, 2, 0] }}
+            transition={{ duration: 4.8, repeat: Infinity, ease: 'easeInOut', delay: 1.5 }}
+          >
+            <span className="srv-floating-pill-icon">🔒</span>
+            <span>Enterprise Systems</span>
+          </motion.div>
+
           <div className="srv-hero-content">
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 35 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
+              transition={{ duration: 0.9, delay: 0.2, ease: [0.23, 1, 0.32, 1] }}
             >
-              <div className="srv-badge">Digital Craftsmanship</div>
-              <h1 className="srv-title">Engineering<br/>Ecosystems.</h1>
+              <div className="srv-badge">
+                <span style={{ display: 'inline-block', width: 6, height: 6, borderRadius: '50%', background: 'var(--accent-1)', marginRight: 8, boxShadow: '0 0 8px var(--accent-1)' }} />
+                Digital Craftsmanship & Architecture
+              </div>
+              
+              <h1 className="srv-title">
+                Engineering<br />
+                <span className="srv-title-gradient">Ecosystems.</span>
+              </h1>
+              
               <p className="srv-desc">
-                We merge creative vision with deep technical architecture. Our services are designed to scale, adapt, and dominate in the digital landscape.
+                We merge creative vision with deep technical architecture. Our services are engineered to scale, adapt, and dominate in the modern digital landscape.
               </p>
+
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 16 }}>
+                <a href="#services-gallery" className="btn-primary nav-cta" style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+                  Explore Specializations <ArrowUpRight size={16} />
+                </a>
+                <a href="/contact" className="btn-secondary" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, color: '#fff', borderColor: 'rgba(255,255,255,0.2)' }}>
+                  Start a Project
+                </a>
+              </div>
             </motion.div>
+          </div>
+
+          {/* Hero Bottom Capabilities Strip */}
+          <div className="srv-hero-bottom-strip">
+            <div className="srv-hero-stat-item">
+              <span className="srv-hero-stat-dot" />
+              <span>01. Digital Marketing</span>
+            </div>
+            <div className="srv-hero-stat-divider" />
+            <div className="srv-hero-stat-item">
+              <span className="srv-hero-stat-dot" />
+              <span>02. Web Development</span>
+            </div>
+            <div className="srv-hero-stat-divider" />
+            <div className="srv-hero-stat-item">
+              <span className="srv-hero-stat-dot" />
+              <span>03. AI & Automation</span>
+            </div>
+            <div className="srv-hero-stat-divider" />
+            <div className="srv-hero-stat-item">
+              <span className="srv-hero-stat-dot" />
+              <span>04. Custom Dev</span>
+            </div>
           </div>
         </section>
 
         {/* HORIZONTAL SCROLL GALLERY */}
-        <section className="srv-horizontal-section" ref={horizontalRef}>
+        <section className="srv-horizontal-section" id="services-gallery" ref={horizontalRef}>
           <div className="srv-horizontal-container" ref={containerRef}>
             {servicesData.map((srv, idx) => (
               <div className="srv-card" key={idx}>
