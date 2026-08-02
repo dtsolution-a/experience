@@ -14,25 +14,25 @@ const servicesData = [
   {
     title: 'Digital Marketing',
     desc: 'Data-driven campaigns, SEO, and social strategies that dominate search algorithms and engage target audiences.',
-    bg: '/bg/1909457_9170.jpg',
+    bg: '/bg/digital_marketing.jpeg',
     tags: ['SEO', 'PPC', 'Content Strategy', 'Social Media']
   },
   {
     title: 'Web Development',
     desc: 'Premium, high-performance web applications built on modern stacks. Fast, accessible, and designed for conversion.',
-    bg: '/bg/beautiful-tree-countryside.jpg',
+    bg: '/bg/web_dev.jpeg',
     tags: ['React / Next.js', 'Headless CMS', 'Web Animations', 'E-commerce']
   },
   {
     title: 'AI & Automation',
     desc: 'Integrating Large Language Models and RPA to automate workflows, reduce overhead, and scale operations intelligently.',
-    bg: '/bg/dry-tree-with-orange-clouds-background.jpg',
+    bg: '/bg/ai_automation.jpeg',
     tags: ['LLM Integration', 'RAG Systems', 'Process Automation', 'Custom AI Agents']
   },
   {
-    title: 'Custom Solutions',
+    title: 'Custom Development',
     desc: 'Bespoke software architecture for complex business logic. Cloud-native solutions that grow with your enterprise.',
-    bg: '/bg/27287259_z69i_kxes_211202.jpg',
+    bg: '/bg/custom_dev.jpeg',
     tags: ['Cloud Architecture', 'API Development', 'Microservices', 'Enterprise Software']
   }
 ]
