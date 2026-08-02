@@ -25,8 +25,8 @@ export default function WhyUs() {
       <SectionBackground 
         lightSrc="/bg/sections/light_bg/Floating_silk_fabric_flowing_space_202608020545.jpeg"
         darkSrc="/bg/sections/dark_bg/Floating_silk_fabric_flowing_space_202608020542.jpeg"
-        blur="100px"
-        opacity={0.4}
+        blur="12px"
+        opacity={0.7}
       />
 
       <div className="container">

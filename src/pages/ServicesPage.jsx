@@ -111,8 +111,8 @@ export default function ServicesPage() {
           <SectionBackground 
             lightSrc="/bg/sections/light_bg/Floating_glass_panels_crystal_st._202608020543.jpeg"
             darkSrc="/bg/sections/dark_bg/Gradient_ribbons_twisting_throug._2K_202608020544.jpeg"
-            blur="24px" // Less blur for hero so it's more visible
-            opacity={0.8}
+            blur="8px"
+            opacity={0.9}
             scaleBase={1.05}
             scaleMax={1.15}
           />
@@ -159,8 +159,8 @@ export default function ServicesPage() {
           <SectionBackground 
             lightSrc="/bg/sections/light_bg/Abstract_liquid_sculpture_with_c._202608020542.jpeg"
             darkSrc="/bg/sections/dark_bg/Abstract_liquid_sculpture_with_c._202608020543.jpeg"
-            blur="80px"
-            opacity={0.3}
+            blur="12px"
+            opacity={0.7}
           />
           <div className="container" style={{ position: 'relative', zIndex: 2 }}>
             <div className="srv-section-header">

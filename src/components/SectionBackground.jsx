@@ -10,8 +10,8 @@ import { useTheme } from '../context/ThemeContext'
 export default function SectionBackground({ 
   lightSrc, 
   darkSrc, 
-  blur = '60px', 
-  opacity = 0.5,
+  blur = '16px', 
+  opacity = 0.8,
   scaleBase = 1.1,
   scaleMax = 1.25
 }) {
