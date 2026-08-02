@@ -204,7 +204,7 @@ export default function ServicesPage() {
                 <a href="#services-gallery" className="btn-primary nav-cta" style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
                   Explore Specializations <ArrowUpRight size={16} />
                 </a>
-                <a href="/contact" className="btn-secondary" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, color: '#fff', borderColor: 'rgba(255,255,255,0.2)' }}>
+                <a href="/contact" className="btn-secondary" style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
                   Start a Project
                 </a>
               </div>
