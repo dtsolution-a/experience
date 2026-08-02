@@ -283,26 +283,91 @@ export default function ServicesPage() {
           </div>
         </section>
 
-        {/* TECH STACK MARQUEE */}
-        <section className="srv-tech-stack">
-          <div className="srv-tech-marquee">
-            <div className="srv-tech-item">REACT / NEXT.JS</div>
-            <div className="srv-tech-item">·</div>
-            <div className="srv-tech-item">GSAP / FRAMER</div>
-            <div className="srv-tech-item">·</div>
-            <div className="srv-tech-item">OPENAI / LLMS</div>
-            <div className="srv-tech-item">·</div>
-            <div className="srv-tech-item">NODE / AWS</div>
-            <div className="srv-tech-item">·</div>
-            {/* Duplicate for infinite effect */}
-            <div className="srv-tech-item">REACT / NEXT.JS</div>
-            <div className="srv-tech-item">·</div>
-            <div className="srv-tech-item">GSAP / FRAMER</div>
-            <div className="srv-tech-item">·</div>
-            <div className="srv-tech-item">OPENAI / LLMS</div>
-            <div className="srv-tech-item">·</div>
-            <div className="srv-tech-item">NODE / AWS</div>
-            <div className="srv-tech-item">·</div>
+        {/* TECH STACK MATRIX */}
+        <section className="srv-tech-stack" style={{ position: 'relative', overflow: 'hidden' }}>
+          <SectionBackground 
+            lightSrc="/bg/sections/light_bg/floating-silk-fabric-light.jpeg"
+            darkSrc="/bg/sections/dark_bg/gradient-ribbons-dark.jpeg"
+            opacity={0.35}
+          />
+          <div className="container" style={{ position: 'relative', zIndex: 2 }}>
+            <div className="srv-tech-stack-header">
+              <div className="srv-tech-stack-eyebrow">
+                <span style={{ display: 'inline-block', width: 6, height: 6, borderRadius: '50%', background: 'var(--accent-3)', marginRight: 4 }} />
+                Architecture & Tech Matrix
+              </div>
+              <h2 className="srv-tech-stack-title">Engineered with Battle-Tested Stacks.</h2>
+              <p className="srv-tech-stack-sub">
+                We don't experiment on client budgets. We deploy enterprise-grade, high-throughput modern technology stacks.
+              </p>
+            </div>
+
+            {/* Dual Track Marquee */}
+            <div className="srv-marquee-wrapper">
+              <div className="srv-marquee-track srv-marquee-track-left">
+                {[
+                  { name: 'React 19', icon: '⚛️', tag: 'Frontend' },
+                  { name: 'Next.js 15', icon: '▲', tag: 'Fullstack' },
+                  { name: 'TypeScript', icon: '🔷', tag: 'Language' },
+                  { name: 'OpenAI & LLMs', icon: '🤖', tag: 'AI Engine' },
+                  { name: 'GSAP Motion', icon: '⚡', tag: 'Animation' },
+                  { name: 'Node.js', icon: '🟢', tag: 'Backend' },
+                  { name: 'React 19', icon: '⚛️', tag: 'Frontend' },
+                  { name: 'Next.js 15', icon: '▲', tag: 'Fullstack' },
+                  { name: 'TypeScript', icon: '🔷', tag: 'Language' },
+                  { name: 'OpenAI & LLMs', icon: '🤖', tag: 'AI Engine' },
+                  { name: 'GSAP Motion', icon: '⚡', tag: 'Animation' },
+                  { name: 'Node.js', icon: '🟢', tag: 'Backend' },
+                ].map((item, i) => (
+                  <div key={i} className="srv-tech-card">
+                    <span className="srv-tech-card-icon">{item.icon}</span>
+                    <span>{item.name}</span>
+                    <span className="srv-tech-card-badge">{item.tag}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="srv-marquee-track srv-marquee-track-right">
+                {[
+                  { name: 'AWS Infrastructure', icon: '☁️', tag: 'Cloud' },
+                  { name: 'Python & PyTorch', icon: '🐍', tag: 'ML Stack' },
+                  { name: 'PostgreSQL', icon: '🐘', tag: 'Database' },
+                  { name: 'Framer Motion', icon: '🎨', tag: 'Interactions' },
+                  { name: 'GraphQL & REST', icon: '🕸️', tag: 'APIs' },
+                  { name: 'Docker & K8s', icon: '🐳', tag: 'DevOps' },
+                  { name: 'AWS Infrastructure', icon: '☁️', tag: 'Cloud' },
+                  { name: 'Python & PyTorch', icon: '🐍', tag: 'ML Stack' },
+                  { name: 'PostgreSQL', icon: '🐘', tag: 'Database' },
+                  { name: 'Framer Motion', icon: '🎨', tag: 'Interactions' },
+                  { name: 'GraphQL & REST', icon: '🕸️', tag: 'APIs' },
+                  { name: 'Docker & K8s', icon: '🐳', tag: 'DevOps' },
+                ].map((item, i) => (
+                  <div key={i} className="srv-tech-card">
+                    <span className="srv-tech-card-icon">{item.icon}</span>
+                    <span>{item.name}</span>
+                    <span className="srv-tech-card-badge">{item.tag}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Category Highlights Grid */}
+            <div className="srv-tech-categories">
+              {[
+                { title: 'Frontend & Motion', icon: '⚛️', desc: 'React 19, Next.js 15, GSAP 3, Framer Motion, Tailwind CSS' },
+                { title: 'AI & Data Science', icon: '🤖', desc: 'OpenAI GPT-4o, RAG Pipelines, PyTorch, LangChain, Vector DBs' },
+                { title: 'Cloud & Infrastructure', icon: '☁️', desc: 'AWS, Vercel Enterprise, Docker, Kubernetes, Serverless' },
+                { title: 'Backend & APIs', icon: '⚡', desc: 'Node.js, TypeScript, PostgreSQL, Redis, GraphQL APIs' },
+              ].map((cat, idx) => (
+                <div key={idx} className="srv-tech-cat-item">
+                  <div className="srv-tech-cat-title">
+                    <span>{cat.icon}</span>
+                    <span>{cat.title}</span>
+                  </div>
+                  <div className="srv-tech-cat-tags">{cat.desc}</div>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 

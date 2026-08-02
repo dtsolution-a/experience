@@ -373,29 +373,160 @@
 
 /* ─── TECH STACK ─── */
 .srv-tech-stack {
-  padding: 100px 0 160px;
+  padding: 120px 0 140px;
   background: var(--bg);
+  position: relative;
   overflow: hidden;
 }
-.srv-tech-marquee {
-  display: flex;
-  gap: 80px;
-  width: max-content;
-  animation: marquee 30s linear infinite;
+.srv-tech-stack-header {
+  text-align: center;
+  margin-bottom: 64px;
 }
-.srv-tech-item {
+.srv-tech-stack-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--glow-3);
+  border: 1px solid rgba(123, 47, 247, 0.25);
+  color: var(--accent-3);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 6px 18px;
+  border-radius: 100px;
+  margin-bottom: 20px;
+}
+.srv-tech-stack-title {
   font-family: 'Bricolage Grotesque', sans-serif;
-  font-size: clamp(60px, 8vw, 120px);
+  font-size: clamp(36px, 5vw, 64px);
   font-weight: 900;
-  color: transparent;
-  -webkit-text-stroke: 1px var(--border);
-  transition: -webkit-text-stroke-color 0.3s ease;
+  color: var(--text);
+  margin-bottom: 16px;
+  letter-spacing: -0.03em;
 }
-.srv-tech-item:hover {
-  -webkit-text-stroke-color: var(--text);
+.srv-tech-stack-sub {
+  font-family: 'Nunito', sans-serif;
+  font-size: clamp(15px, 1.8vw, 18px);
+  color: var(--text-2);
+  max-width: 620px;
+  margin: 0 auto;
+  line-height: 1.6;
 }
-@keyframes marquee {
-  to { transform: translateX(calc(-50% - 40px)); }
+
+/* Dual Marquee Track Container */
+.srv-marquee-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 64px;
+  position: relative;
+}
+.srv-marquee-track {
+  display: flex;
+  gap: 20px;
+  width: max-content;
+  will-change: transform;
+}
+.srv-marquee-track-left {
+  animation: marqueeLeft 35s linear infinite;
+}
+.srv-marquee-track-right {
+  animation: marqueeRight 35s linear infinite;
+}
+@keyframes marqueeLeft {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes marqueeRight {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+
+/* Rich Tech Card Pill */
+.srv-tech-card {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 28px;
+  border-radius: 20px;
+  background: var(--card-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+  color: var(--text);
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 18px;
+  font-weight: 800;
+  white-space: nowrap;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  cursor: pointer;
+}
+.srv-tech-card:hover {
+  transform: translateY(-4px) scale(1.03);
+  border-color: var(--accent-1);
+  box-shadow: 0 16px 40px var(--glow-1);
+}
+.srv-tech-card-badge {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  background: var(--surface-2);
+  padding: 4px 10px;
+  border-radius: 100px;
+  border: 1px solid var(--border);
+  font-family: 'Nunito', sans-serif;
+}
+.srv-tech-card-icon {
+  font-size: 22px;
+  line-height: 1;
+}
+
+/* Tech Category Highlights Grid */
+.srv-tech-categories {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-top: 40px;
+}
+.srv-tech-cat-item {
+  background: var(--card-bg);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 28px;
+  transition: all 0.3s ease;
+}
+.srv-tech-cat-item:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent-3);
+  box-shadow: 0 16px 40px var(--glow-3);
+}
+.srv-tech-cat-title {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.srv-tech-cat-tags {
+  font-family: 'Nunito', sans-serif;
+  font-size: 13px;
+  color: var(--text-2);
+  line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+  .srv-tech-categories { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .srv-tech-categories { grid-template-columns: 1fr; }
 }
 
 /* ─── FAQ / ACCORDION ─── */
