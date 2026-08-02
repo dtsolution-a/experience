@@ -6,10 +6,11 @@ import { Plus, X, ArrowUpRight, Search, PenTool, Cpu, ShieldCheck } from 'lucide
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import CustomCursor from '../components/CustomCursor'
+import SectionBackground from '../components/SectionBackground'
 import '../styles/services.css'
 
 gsap.registerPlugin(ScrollTrigger)
-
+// ... keeping existing data ...
 const servicesData = [
   {
     title: 'Digital Marketing',
@@ -54,26 +55,10 @@ const faqs = [
 export default function ServicesPage() {
   const horizontalRef = useRef(null)
   const containerRef = useRef(null)
-  const heroBgRef = useRef(null)
-
+  
   const [activeFaq, setActiveFaq] = useState(null)
 
   useEffect(() => {
-    // Hero Blur Effect on Scroll
-    ScrollTrigger.create({
-      trigger: '.srv-hero',
-      start: 'top top',
-      end: 'bottom center',
-      onUpdate: (self) => {
-        if (!heroBgRef.current) return
-        const progress = self.progress
-        // Blur goes from 40px to 0px
-        const blurValue = Math.max(0, 40 - (progress * 50))
-        heroBgRef.current.style.filter = `blur(${blurValue}px) brightness(${0.6 + (progress * 0.2)})`
-        heroBgRef.current.style.transform = `scale(${1.1 - (progress * 0.1)})`
-      }
-    })
-
     // GSAP Horizontal Scroll
     const container = containerRef.current
     if (window.innerWidth > 900 && container) {
@@ -122,14 +107,16 @@ export default function ServicesPage() {
       <main style={{ position: 'relative', zIndex: 10, background: 'var(--bg)', marginBottom: 'var(--footer-height, 400px)' }}>
         
         {/* HERO SECTION */}
-        <section className="srv-hero">
-          <img 
-            ref={heroBgRef}
-            src="/bg/closeup-shot-colorful-autumn-leaves-garden.jpg" 
-            alt="Nature Tech Background" 
-            className="srv-hero-bg" 
+        <section className="srv-hero" style={{ background: 'transparent' }}>
+          <SectionBackground 
+            lightSrc="/bg/sections/light bg/Floating_glass_panels_crystal_st._202608020543.jpeg"
+            darkSrc="/bg/sections/dark bg/Gradient_ribbons_twisting_throug._2K_202608020544.jpeg"
+            blur="24px" // Less blur for hero so it's more visible
+            opacity={0.8}
+            scaleBase={1.05}
+            scaleMax={1.15}
           />
-          <div className="srv-hero-overlay"></div>
+          <div className="srv-hero-overlay" style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, var(--bg) 100%)' }}></div>
           
           <div className="srv-hero-content">
             <motion.div
@@ -138,8 +125,8 @@ export default function ServicesPage() {
               transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
             >
               <div className="srv-badge">Digital Craftsmanship</div>
-              <h1 className="srv-title">Engineering<br/>Ecosystems.</h1>
-              <p className="srv-desc">
+              <h1 className="srv-title" style={{ color: 'var(--text)' }}>Engineering<br/>Ecosystems.</h1>
+              <p className="srv-desc" style={{ color: 'var(--text-2)' }}>
                 We merge creative vision with deep technical architecture. Our services are designed to scale, adapt, and dominate in the digital landscape.
               </p>
             </motion.div>
@@ -168,8 +155,14 @@ export default function ServicesPage() {
         </section>
 
         {/* SPECIALISTS (WHO DOES WHAT) */}
-        <section className="srv-specialists">
-          <div className="container">
+        <section className="srv-specialists" style={{ background: 'transparent' }}>
+          <SectionBackground 
+            lightSrc="/bg/sections/light bg/Abstract_liquid_sculpture_with_c._202608020542.jpeg"
+            darkSrc="/bg/sections/dark bg/Abstract_liquid_sculpture_with_c._202608020543.jpeg"
+            blur="80px"
+            opacity={0.3}
+          />
+          <div className="container" style={{ position: 'relative', zIndex: 2 }}>
             <div className="srv-section-header">
               <h2 className="srv-section-title">The Masters Behind the Craft</h2>
               <p className="srv-section-sub">Meet the dedicated specialists driving your digital evolution.</p>

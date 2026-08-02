@@ -7,6 +7,7 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import CustomCursor from '../components/CustomCursor'
 import '../styles/process.css'
+import SectionBackground from '../components/SectionBackground'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -14,40 +15,58 @@ const processSteps = [
   {
     num: '01',
     title: 'Discovery & Strategy',
-    desc: 'We dive deep into your business logic, market position, and technical constraints to map out a foolproof architecture.'
+    desc: 'We dive deep into your business logic, market position, and technical constraints to map out a blueprint that guarantees ROI.',
+    img: '/bg/business-concept-with-graphic-holography.jpg'
   },
   {
     num: '02',
-    title: 'Creative Architecture',
-    desc: 'Crafting premium aesthetics with high-performance UX, mapping out user journeys that convert and engage.'
+    title: 'Architecture Design',
+    desc: 'Our senior engineers architect the infrastructure. We prioritize scalable, cloud-native solutions that handle growth gracefully.',
+    img: '/bg/25537441_1dg3_egm8_211202.jpg'
   },
   {
     num: '03',
-    title: 'Agile Development',
-    desc: 'Building robust, scalable ecosystems using modern tech stacks. Clean code, rigorous testing, rapid iterations.'
+    title: 'Development & AI Integration',
+    desc: 'We write clean, modular code. We integrate automation and LLMs where they add tangible value, not just hype.',
+    img: '/bg/close-up-businessman-with-digital-tablet.jpg'
   },
   {
     num: '04',
-    title: 'Launch & Scale',
-    desc: 'Deployment is just the beginning. We optimize, maintain, and aggressively scale your product in the market.'
+    title: 'Testing & QA',
+    desc: 'Rigorous automated and manual testing ensures your product is impenetrable, lightning-fast, and universally accessible.',
+    img: '/bg/rpa-concept-with-blurry-hand-touching-screen.jpg'
+  },
+  {
+    num: '05',
+    title: 'Deployment & Scale',
+    desc: 'We launch seamlessly and set up CI/CD pipelines for continuous iteration. Your ecosystem is now alive and growing.',
+    img: '/bg/close-up-business-man-hand-typing-laptop.jpg'
   }
-]
-
-// Valid fallback images from the bg folder
-const fallbacks = [
-  '/bg/beautiful-tree-countryside.jpg',
-  '/bg/closeup-shot-colorful-autumn-leaves-garden.jpg',
-  '/bg/dry-tree-with-orange-clouds-background.jpg',
-  '/bg/1909457_9170.jpg'
 ]
 
 export default function ProcessPage() {
   const [activeStep, setActiveStep] = useState(0)
   const stepsRef = useRef([])
+  const containerRef = useRef(null)
 
   useEffect(() => {
     // Refresh ScrollTrigger to ensure accurate layout calculations
     ScrollTrigger.refresh()
+
+    // MediaLoop gradient animation
+    gsap.to('.hero-grad-text', {
+      backgroundPosition: '200% center',
+      ease: 'linear',
+      duration: 8,
+      repeat: -1
+    })
+
+    // GSAP ScrollTrigger for pinning image logic
+    const images = gsap.utils.toArray('.pr-img-wrapper img')
+
+    // Initial state: first image visible, rest hidden
+    gsap.set(images, { opacity: 0, scale: 1.1 })
+    gsap.set(images[0], { opacity: 1, scale: 1 })
 
     stepsRef.current.forEach((step, i) => {
       if (!step) return
@@ -55,8 +74,16 @@ export default function ProcessPage() {
         trigger: step,
         start: 'top 50%',
         end: 'bottom 50%',
-        onEnter: () => setActiveStep(i),
-        onEnterBack: () => setActiveStep(i),
+        onEnter: () => {
+          setActiveStep(i)
+          gsap.to(images, { opacity: 0, scale: 1.1, duration: 0.8, ease: 'power3.out' })
+          gsap.to(images[i], { opacity: 1, scale: 1, duration: 0.8, ease: 'power3.out' })
+        },
+        onEnterBack: () => {
+          setActiveStep(i)
+          gsap.to(images, { opacity: 0, scale: 1.1, duration: 0.8, ease: 'power3.out' })
+          gsap.to(images[i], { opacity: 1, scale: 1, duration: 0.8, ease: 'power3.out' })
+        }
       })
     })
 
@@ -68,7 +95,15 @@ export default function ProcessPage() {
       <CustomCursor />
       <Navbar />
 
-      <main style={{ position: 'relative', zIndex: 10, background: 'var(--bg)', marginBottom: 'var(--footer-height, 400px)' }}>
+      <main style={{ position: 'relative', zIndex: 10, background: 'transparent', marginBottom: 'var(--footer-height, 400px)' }}>
+        
+        {/* Breathing Background spanning entire process main */}
+        <SectionBackground 
+          lightSrc="/bg/sections/light bg/Floating_glass_panels_crystal_st._202608020543.jpeg"
+          darkSrc="/bg/sections/dark bg/Neural_ecosystem_glowing_nodes_l._202608020544.jpeg"
+          blur="80px"
+          opacity={0.3}
+        />
         
         {/* Subtle Background Grid inside main to cover footer */}
         <div className="process-bg-grid" aria-hidden="true" />
