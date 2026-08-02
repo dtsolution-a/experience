@@ -216,8 +216,8 @@ export default function BlogPost() {
                 </div>
                 <div className="bp-share">
                   <span className="bp-share-label">Share</span>
-                  <button className="bp-share-btn"><Twitter size={16} /></button>
-                  <button className="bp-share-btn"><Linkedin size={16} /></button>
+                  <button className="bp-share-btn"><ExternalLink size={16} /></button>
+                  <button className="bp-share-btn"><Share2 size={16} /></button>
                   <button className="bp-share-btn" onClick={() => navigator.clipboard.writeText(window.location.href)}><Share2 size={16} /></button>
                 </div>
               </div>
@@ -259,8 +259,8 @@ export default function BlogPost() {
                   </div>
                   <div className="bp-share">
                     <span className="bp-share-label">Share article</span>
-                    <button className="bp-share-btn"><Twitter size={16} /></button>
-                    <button className="bp-share-btn"><Linkedin size={16} /></button>
+                    <button className="bp-share-btn"><ExternalLink size={16} /></button>
+                    <button className="bp-share-btn"><Share2 size={16} /></button>
                     <button className="bp-share-btn" onClick={() => navigator.clipboard.writeText(window.location.href)}><Share2 size={16} /></button>
                   </div>
                 </div>
