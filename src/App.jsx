@@ -18,6 +18,7 @@ import ContactPage from './pages/ContactPage'
 import About from './pages/About'
 import Careers from './pages/Careers'
 import Blog from './pages/Blog'
+import BlogPost from './pages/BlogPost'
 import Legal from './pages/Legal'
 import AIAutomation from './pages/AIAutomation'
 import CustomDevelopment from './pages/CustomDevelopment'
@@ -81,6 +82,7 @@ export default function App() {
             <Route path="/about" element={<About />} />
             <Route path="/careers" element={<Careers />} />
             <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:id" element={<BlogPost />} />
             <Route path="/process" element={<ProcessPage />} />
             <Route path="/services" element={<ServicesPage />} />
             <Route path="/contact" element={<ContactPage />} />

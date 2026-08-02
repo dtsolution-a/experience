@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import { ArrowRight, ArrowUpRight, BookOpen, Clock, TrendingUp } from 'lucide-react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
@@ -149,14 +150,14 @@ const topics = [
 // ─── ARTICLE CARD COMPONENT ───
 function BlogCard({ post, className = '' }) {
   return (
-    <motion.a
-      href="#"
+    <motion.div
       className={`blog-card ${className}`}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-80px' }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
     >
+      <Link to={`/blog/${post.id}`} style={{ textDecoration: 'none', color: 'inherit', display: 'contents' }}>
       <div className={`blog-card-img-wrap ${post.size === 'large' ? 'tall' : ''}`}>
         <img src={post.bg} alt={post.title} className="blog-card-img" />
         <div className="blog-card-img-overlay" />
@@ -179,7 +180,8 @@ function BlogCard({ post, className = '' }) {
           </div>
         </div>
       </div>
-    </motion.a>
+      </Link>
+    </motion.div>
   )
 }
 
@@ -266,14 +268,13 @@ export default function Blog() {
         ═══════════════════════════════════════════ */}
         <section className="blog-featured">
           <div className="container">
-            <motion.a
-              href="#"
-              className="blog-featured-card"
+            <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, ease: 'easeOut' }}
             >
+            <Link to={`/blog/1`} className="blog-featured-card">
               <div className="blog-featured-label">Featured Story</div>
               <img src={featuredPost.bg} alt={featuredPost.title} className="blog-featured-bg" />
               <div className="blog-featured-gradient" />
@@ -294,7 +295,8 @@ export default function Blog() {
               <div className="blog-featured-read">
                 <ArrowRight size={22} />
               </div>
-            </motion.a>
+            </Link>
+            </motion.div>
           </div>
         </section>
 
@@ -406,20 +408,20 @@ export default function Blog() {
             <div className="blog-trending-grid">
               {trendingPosts.map((t, i) => (
                 <>
-                  <motion.a
+                  <motion.div
                     key={t.num}
-                    href="#"
-                    className="blog-trending-item"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.1, duration: 0.5 }}
                   >
+                  <Link to={`/blog/${i + 5}`} className="blog-trending-item">
                     <div className="blog-trending-num">{t.num}</div>
                     <div className="blog-trending-tag">{t.tag}</div>
                     <div className="blog-trending-title">{t.title}</div>
                     <div className="blog-trending-meta">{t.date} · {t.readTime} read</div>
-                  </motion.a>
+                  </Link>
+                  </motion.div>
                   {i < trendingPosts.length - 1 && <div className="blog-trending-divider" />}
                 </>
               ))}
