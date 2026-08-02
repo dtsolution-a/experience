@@ -16,7 +16,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const location = useLocation()
-  const isDarkHeroPage = location.pathname === '/about' || location.pathname === '/'
+  const isDarkHeroPage = location.pathname === '/about' || location.pathname === '/' || location.pathname === '/services'
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)

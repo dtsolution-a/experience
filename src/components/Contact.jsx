@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
-import SectionBackground from './SectionBackground'
 
 /* ── Real SVG Social Icons ── */
 const SocialIcons = {
@@ -53,12 +52,6 @@ export default function Contact() {
 
   return (
     <section id="contact" className="section contact-section" style={{ position: 'relative', overflow: 'hidden' }}>
-      <SectionBackground 
-        lightSrc="/bg/sections/light_bg/Abstract_liquid_sculpture_with_c._202608020542.jpeg"
-        darkSrc="/bg/sections/dark_bg/Gradient_ribbons_twisting_throug._2K_202608020544.jpeg"
-        blur="12px"
-        opacity={0.7}
-      />
       <div className="container" style={{ position: 'relative', zIndex: 2 }}>
         <div className="contact-grid" ref={ref}>
 

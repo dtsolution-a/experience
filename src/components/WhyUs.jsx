@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
-import SectionBackground from './SectionBackground'
 
 const stats = [
   { num: '200+', label: 'Projects Delivered', desc: 'Across 15+ industries globally' },
@@ -22,13 +21,6 @@ export default function WhyUs() {
 
   return (
     <section ref={ref} className="whyus-section" style={{ position: 'relative', overflow: 'hidden' }}>
-      <SectionBackground 
-        lightSrc="/bg/sections/light_bg/Floating_silk_fabric_flowing_space_202608020545.jpeg"
-        darkSrc="/bg/sections/dark_bg/Floating_silk_fabric_flowing_space_202608020542.jpeg"
-        blur="12px"
-        opacity={0.7}
-      />
-
       <div className="container" style={{ position: 'relative', zIndex: 2 }}>
         {/* Stats Grid — 4 columns */}
         <motion.div

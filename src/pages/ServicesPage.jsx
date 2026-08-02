@@ -6,10 +6,17 @@ import { Plus, X, ArrowUpRight, Search, PenTool, Cpu, ShieldCheck } from 'lucide
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import CustomCursor from '../components/CustomCursor'
-import SectionBackground from '../components/SectionBackground'
 import '../styles/services.css'
 
 gsap.registerPlugin(ScrollTrigger)
+
+const heroBgImages = [
+  '/bg/sections/dark_bg/neural-ecosystem-dark.jpeg',
+  '/bg/sections/dark_bg/neural-ecosystem-dark-alt.jpeg',
+  '/bg/sections/dark_bg/abstract-liquid-dark.jpeg',
+  '/bg/sections/dark_bg/gradient-ribbons-dark.jpeg',
+]
+
 // ... keeping existing data ...
 const servicesData = [
   {
@@ -55,8 +62,13 @@ const faqs = [
 export default function ServicesPage() {
   const horizontalRef = useRef(null)
   const containerRef = useRef(null)
-  
+
   const [activeFaq, setActiveFaq] = useState(null)
+  const [heroBg, setHeroBg] = useState('')
+
+  useEffect(() => {
+    setHeroBg(heroBgImages[Math.floor(Math.random() * heroBgImages.length)])
+  }, [])
 
   useEffect(() => {
     // GSAP Context for proper React lifecycle & route transitions
@@ -111,16 +123,22 @@ export default function ServicesPage() {
       <CustomCursor />
       <Navbar />
 
-      <main style={{ position: 'relative', zIndex: 10, background: 'transparent', marginBottom: 'var(--footer-height, 400px)' }}>
-        
+      <main style={{ position: 'relative', zIndex: 10, background: 'var(--bg)', marginBottom: 'var(--footer-height, 400px)' }}>
+
         {/* HERO SECTION */}
-        <section className="srv-hero" style={{ background: 'transparent' }}>
-          <SectionBackground 
-            lightSrc="/bg/sections/light_bg/Floating_glass_panels_crystal_st._202608020543.jpeg"
-            darkSrc="/bg/sections/dark_bg/Neural_ecosystem_glowing_nodes_l._202608020544.jpeg"
-          />
-          <div className="srv-hero-overlay" style={{ background: 'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.3) 100%)' }}></div>
-          
+        <section className="srv-hero">
+          {heroBg && (
+            <motion.img
+              src={heroBg}
+              alt=""
+              className="srv-hero-bg"
+              initial={{ opacity: 0, scale: 1.1, filter: 'blur(40px) brightness(0.6)' }}
+              animate={{ opacity: 1, scale: 1, filter: 'blur(0px) brightness(0.8)' }}
+              transition={{ duration: 1.4, ease: 'easeOut' }}
+            />
+          )}
+          <div className="srv-hero-overlay"></div>
+
           <div className="srv-hero-content">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -128,8 +146,8 @@ export default function ServicesPage() {
               transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
             >
               <div className="srv-badge">Digital Craftsmanship</div>
-              <h1 className="srv-title" style={{ color: 'var(--text)' }}>Engineering<br/>Ecosystems.</h1>
-              <p className="srv-desc" style={{ color: 'var(--text-2)' }}>
+              <h1 className="srv-title">Engineering<br/>Ecosystems.</h1>
+              <p className="srv-desc">
                 We merge creative vision with deep technical architecture. Our services are designed to scale, adapt, and dominate in the digital landscape.
               </p>
             </motion.div>
@@ -159,10 +177,6 @@ export default function ServicesPage() {
 
         {/* SPECIALISTS (WHO DOES WHAT) */}
         <section className="srv-specialists" style={{ background: 'transparent', overflow: 'hidden' }}>
-          <SectionBackground 
-            lightSrc="/bg/sections/light_bg/Abstract_liquid_sculpture_with_c._202608020542.jpeg"
-            darkSrc="/bg/sections/dark_bg/Abstract_liquid_sculpture_with_c._202608020543.jpeg"
-          />
           <div className="container" style={{ position: 'relative', zIndex: 2 }}>
             <div className="srv-section-header">
               <h2 className="srv-section-title">The Masters Behind the Craft</h2>

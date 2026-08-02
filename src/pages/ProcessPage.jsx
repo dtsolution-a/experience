@@ -6,7 +6,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import CustomCursor from '../components/CustomCursor'
-import SectionBackground from '../components/SectionBackground'
 import '../styles/process.css'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -47,21 +46,31 @@ export default function ProcessPage() {
   const stepsRef = useRef([])
 
   useEffect(() => {
-    // Refresh ScrollTrigger to ensure accurate layout calculations
-    ScrollTrigger.refresh()
-
+    const triggers = []
     stepsRef.current.forEach((step, i) => {
       if (!step) return
-      ScrollTrigger.create({
+      triggers.push(ScrollTrigger.create({
         trigger: step,
-        start: 'top 50%',
-        end: 'bottom 50%',
+        start: 'top 65%',
+        end: 'bottom 35%',
         onEnter: () => setActiveStep(i),
         onEnterBack: () => setActiveStep(i),
-      })
+      }))
     })
 
-    return () => ScrollTrigger.getAll().forEach(t => t.kill())
+    // Refresh after layout settles — route-transition, and again once web
+    // fonts finish loading (the step numbers use a custom display font whose
+    // late swap can reflow the column and desync the trigger positions).
+    const refresh = () => ScrollTrigger.refresh()
+    const timer = setTimeout(refresh, 150)
+    document.fonts?.ready?.then(refresh)
+    window.addEventListener('load', refresh)
+
+    return () => {
+      clearTimeout(timer)
+      window.removeEventListener('load', refresh)
+      triggers.forEach(t => t.kill())
+    }
   }, [])
 
   return (
@@ -69,14 +78,8 @@ export default function ProcessPage() {
       <CustomCursor />
       <Navbar />
 
-      <main style={{ position: 'relative', zIndex: 10, background: 'transparent', marginBottom: 'var(--footer-height, 400px)', overflow: 'hidden' }}>
-        
-        {/* Breathing Background spanning entire process main */}
-        <SectionBackground 
-          lightSrc="/bg/sections/light_bg/Floating_glass_panels_crystal_st._202608020543.jpeg"
-          darkSrc="/bg/sections/dark_bg/Neural_ecosystem_glowing_nodes_l._202608020545.jpeg"
-        />
-        
+      <main style={{ position: 'relative', zIndex: 10, background: 'var(--bg)', marginBottom: 'var(--footer-height, 400px)', overflow: 'hidden' }}>
+
         {/* Subtle Background Grid inside main to cover footer */}
         <div className="process-bg-grid" aria-hidden="true" />
 

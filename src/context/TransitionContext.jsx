@@ -31,38 +31,56 @@ export function TransitionOverlay() {
 export function TransitionProvider({ children }) {
   const navigate = useNavigate()
   const isAnimating = useRef(false)
+  const safetyTimer = useRef(null)
+
+  // Guarantees the overlay is never left blocking clicks if a tween gets
+  // interrupted (backgrounded tab, fast repeat navigation, etc.)
+  const resetOverlay = useCallback(() => {
+    clearTimeout(safetyTimer.current)
+    const overlay = document.getElementById('page-transition-overlay')
+    if (overlay) {
+      gsap.killTweensOf(overlay)
+      gsap.set(overlay, { y: 0, clipPath: 'circle(0px at 50% 50%)' })
+      overlay.style.pointerEvents = 'none'
+    }
+    isAnimating.current = false
+  }, [])
+
+  const armSafety = useCallback((ms) => {
+    clearTimeout(safetyTimer.current)
+    safetyTimer.current = setTimeout(resetOverlay, ms)
+  }, [resetOverlay])
 
   // Trigger initial wipe animation on full page load / refresh
   useEffect(() => {
     const overlay = document.getElementById('page-transition-overlay')
     if (!overlay) return
-    
+
     isAnimating.current = true
     overlay.style.pointerEvents = 'all'
+    armSafety(2000)
 
     gsap.to(overlay, {
       y: '-100%',
       duration: 0.7,
       ease: 'power2.inOut',
       delay: 0.2, // Small delay so user sees it fully before it wipes out
-      onComplete: () => {
-        gsap.set(overlay, {
-          y: 0,
-          clipPath: 'circle(0px at 50% 50%)',
-        })
-        overlay.style.pointerEvents = 'none'
-        isAnimating.current = false
-      },
+      onComplete: resetOverlay,
     })
-  }, [])
+
+    return () => clearTimeout(safetyTimer.current)
+  }, [armSafety, resetOverlay])
 
 
   const navigateTo = useCallback((path, event) => {
-    if (isAnimating.current) return
     if (!path || path === window.location.pathname) return
 
     // Skip hash-only links
     if (path.startsWith('#')) return
+
+    // If a previous transition is somehow still "animating", don't get stuck —
+    // just reset and proceed rather than silently swallowing the click.
+    if (isAnimating.current) resetOverlay()
 
     const overlay = document.getElementById('page-transition-overlay')
     if (!overlay) { navigate(path); return }
@@ -73,6 +91,7 @@ export function TransitionProvider({ children }) {
 
     isAnimating.current = true
     overlay.style.pointerEvents = 'all'
+    armSafety(3000)
 
     // ── Phase 1: COVER — circle grows from click point ──
     gsap.set(overlay, {
@@ -95,19 +114,11 @@ export function TransitionProvider({ children }) {
           duration: 0.6,
           ease: 'power2.inOut',
           delay: 0.06,
-          onComplete: () => {
-            // Reset for next use
-            gsap.set(overlay, {
-              y: 0,
-              clipPath: 'circle(0px at 50% 50%)',
-            })
-            overlay.style.pointerEvents = 'none'
-            isAnimating.current = false
-          },
+          onComplete: resetOverlay,
         })
       },
     })
-  }, [navigate])
+  }, [navigate, armSafety, resetOverlay])
 
   return (
     <TransitionContext.Provider value={{ navigateTo }}>
