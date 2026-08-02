@@ -6,6 +6,7 @@ import { Plus, X, ArrowUpRight, Search, PenTool, Cpu, ShieldCheck } from 'lucide
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import CustomCursor from '../components/CustomCursor'
+import SectionBackground from '../components/SectionBackground'
 import '../styles/services.css'
 
 gsap.registerPlugin(ScrollTrigger)
