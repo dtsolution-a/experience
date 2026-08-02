@@ -44,6 +44,14 @@ const processSteps = [
   }
 ]
 
+// Valid fallback images from the bg folder
+const fallbacks = [
+  '/bg/beautiful-tree-countryside.jpg',
+  '/bg/closeup-shot-colorful-autumn-leaves-garden.jpg',
+  '/bg/dry-tree-with-orange-clouds-background.jpg',
+  '/bg/1909457_9170.jpg'
+]
+
 export default function ProcessPage() {
   const [activeStep, setActiveStep] = useState(0)
   const stepsRef = useRef([])
@@ -99,8 +107,8 @@ export default function ProcessPage() {
         
         {/* Breathing Background spanning entire process main */}
         <SectionBackground 
-          lightSrc="/bg/sections/light bg/Floating_glass_panels_crystal_st._202608020543.jpeg"
-          darkSrc="/bg/sections/dark bg/Neural_ecosystem_glowing_nodes_l._202608020544.jpeg"
+          lightSrc="/bg/sections/light_bg/Floating_glass_panels_crystal_st._202608020543.jpeg"
+          darkSrc="/bg/sections/dark_bg/Neural_ecosystem_glowing_nodes_l._202608020544.jpeg"
           blur="80px"
           opacity={0.3}
         />

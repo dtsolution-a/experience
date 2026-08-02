@@ -109,8 +109,8 @@ export default function ServicesPage() {
         {/* HERO SECTION */}
         <section className="srv-hero" style={{ background: 'transparent' }}>
           <SectionBackground 
-            lightSrc="/bg/sections/light bg/Floating_glass_panels_crystal_st._202608020543.jpeg"
-            darkSrc="/bg/sections/dark bg/Gradient_ribbons_twisting_throug._2K_202608020544.jpeg"
+            lightSrc="/bg/sections/light_bg/Floating_glass_panels_crystal_st._202608020543.jpeg"
+            darkSrc="/bg/sections/dark_bg/Gradient_ribbons_twisting_throug._2K_202608020544.jpeg"
             blur="24px" // Less blur for hero so it's more visible
             opacity={0.8}
             scaleBase={1.05}
@@ -157,8 +157,8 @@ export default function ServicesPage() {
         {/* SPECIALISTS (WHO DOES WHAT) */}
         <section className="srv-specialists" style={{ background: 'transparent' }}>
           <SectionBackground 
-            lightSrc="/bg/sections/light bg/Abstract_liquid_sculpture_with_c._202608020542.jpeg"
-            darkSrc="/bg/sections/dark bg/Abstract_liquid_sculpture_with_c._202608020543.jpeg"
+            lightSrc="/bg/sections/light_bg/Abstract_liquid_sculpture_with_c._202608020542.jpeg"
+            darkSrc="/bg/sections/dark_bg/Abstract_liquid_sculpture_with_c._202608020543.jpeg"
             blur="80px"
             opacity={0.3}
           />
