@@ -29,7 +29,7 @@ export default function WhyUs() {
         opacity={0.7}
       />
 
-      <div className="container">
+      <div className="container" style={{ position: 'relative', zIndex: 2 }}>
         {/* Stats Grid — 4 columns */}
         <motion.div
           ref={statsRef}

@@ -109,14 +109,14 @@ export default function ServicesPage() {
         {/* HERO SECTION */}
         <section className="srv-hero" style={{ background: 'transparent' }}>
           <SectionBackground 
-            lightSrc="/bg/sections/light_bg/Floating_glass_panels_crystal_st._202608020543.jpeg"
+            lightSrc="/bg/sections/light_bg/Floating_silk_fabric_flowing_space_202608020545.jpeg"
             darkSrc="/bg/sections/dark_bg/Gradient_ribbons_twisting_throug._2K_202608020544.jpeg"
             blur="8px"
             opacity={0.9}
             scaleBase={1.05}
             scaleMax={1.15}
           />
-          <div className="srv-hero-overlay" style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, var(--bg) 100%)' }}></div>
+            <div className="srv-hero-overlay" style={{ background: 'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.2) 100%)' }}></div>
           
           <div className="srv-hero-content">
             <motion.div
@@ -155,7 +155,7 @@ export default function ServicesPage() {
         </section>
 
         {/* SPECIALISTS (WHO DOES WHAT) */}
-        <section className="srv-specialists" style={{ background: 'transparent' }}>
+        <section className="srv-specialists" style={{ background: 'transparent', overflow: 'hidden' }}>
           <SectionBackground 
             lightSrc="/bg/sections/light_bg/Abstract_liquid_sculpture_with_c._202608020542.jpeg"
             darkSrc="/bg/sections/dark_bg/Abstract_liquid_sculpture_with_c._202608020543.jpeg"
