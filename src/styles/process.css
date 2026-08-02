@@ -135,10 +135,10 @@
   padding-top: 40px;
 }
 .process-bottom-spacer {
-  height: 40vh; /* gives room to scroll past the last item */
+  height: 65vh; /* gives room to scroll past the last item without un-sticking prematurely */
 }
 .process-step-item {
-  margin-bottom: 120px;
+  margin-bottom: 140px;
   opacity: 0.3;
   transform: translateX(-20px);
   transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
@@ -179,9 +179,9 @@
 /* RIGHT SIDE - Sticky */
 .process-right {
   position: sticky;
-  top: 140px; /* offset from navbar */
-  height: calc(100vh - 180px);
-  min-height: 500px;
+  top: 110px; /* Safe 110px offset below 72px navbar */
+  height: clamp(460px, 65vh, 560px);
+  margin-top: 20px;
 }
 .process-sticky-container {
   position: relative;
