@@ -47,11 +47,8 @@ export default function ProcessPage() {
   const stepsRef = useRef([])
 
   useEffect(() => {
-    // Force refresh GSAP after a slight delay to ensure DOM & images are fully painted 
-    // when navigating via React Router
-    const timer = setTimeout(() => {
-      ScrollTrigger.refresh()
-    }, 100)
+    // Refresh ScrollTrigger to ensure accurate layout calculations
+    ScrollTrigger.refresh()
 
     stepsRef.current.forEach((step, i) => {
       if (!step) return
@@ -64,10 +61,7 @@ export default function ProcessPage() {
       })
     })
 
-    return () => {
-      clearTimeout(timer)
-      ScrollTrigger.getAll().forEach(t => t.kill())
-    }
+    return () => ScrollTrigger.getAll().forEach(t => t.kill())
   }, [])
 
   return (
@@ -75,19 +69,13 @@ export default function ProcessPage() {
       <CustomCursor />
       <Navbar />
 
-      <main style={{ position: 'relative', zIndex: 10, background: 'transparent', marginBottom: 'var(--footer-height, 400px)' }}>
+      <main style={{ position: 'relative', zIndex: 10, background: 'transparent', marginBottom: 'var(--footer-height, 400px)', overflow: 'hidden' }}>
         
-        {/* Sticky wrapper for Background to prevent massive height stretching and layout breakage */}
-        <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0 }}>
-          <div style={{ position: 'sticky', top: 0, left: 0, width: '100%', height: '100vh', overflow: 'hidden' }}>
-            <SectionBackground 
-              lightSrc="/bg/sections/light_bg/Abstract_liquid_sculpture_with_c._202608020542.jpeg"
-              darkSrc="/bg/sections/dark_bg/Neural_ecosystem_glowing_nodes_l._202608020544.jpeg"
-              blur="12px"
-              opacity={0.7}
-            />
-          </div>
-        </div>
+        {/* Breathing Background spanning entire process main */}
+        <SectionBackground 
+          lightSrc="/bg/sections/light_bg/Floating_glass_panels_crystal_st._202608020543.jpeg"
+          darkSrc="/bg/sections/dark_bg/Neural_ecosystem_glowing_nodes_l._202608020545.jpeg"
+        />
         
         {/* Subtle Background Grid inside main to cover footer */}
         <div className="process-bg-grid" aria-hidden="true" />

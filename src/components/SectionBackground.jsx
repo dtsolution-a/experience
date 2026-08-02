@@ -4,16 +4,16 @@ import { useTheme } from '../context/ThemeContext'
 
 /**
  * A universal reusable component that adds a "breathing" and "parallax"
- * blurred background effect behind any section.
+ * background effect behind any section.
  * The section MUST have `position: relative` and `overflow: hidden`.
  */
 export default function SectionBackground({ 
   lightSrc, 
   darkSrc, 
-  blur = '16px', 
-  opacity = 0.8,
-  scaleBase = 1.1,
-  scaleMax = 1.25
+  blur = '0px', 
+  opacity,
+  scaleBase = 1.05,
+  scaleMax = 1.18
 }) {
   const { theme } = useTheme()
   const ref = useRef(null)
@@ -24,14 +24,14 @@ export default function SectionBackground({
     offset: ['start end', 'end start']
   })
   
-  const y = useTransform(scrollYProgress, [0, 1], ['-10%', '10%'])
+  const y = useTransform(scrollYProgress, [0, 1], ['-8%', '8%'])
 
   // The breathing animation using motion variants
   const breatheVariants = {
     animate: {
       scale: [scaleBase, scaleMax, scaleBase],
       transition: {
-        duration: 20,
+        duration: 22,
         ease: "easeInOut",
         repeat: Infinity,
       }
@@ -39,13 +39,15 @@ export default function SectionBackground({
   }
 
   const activeSrc = theme === 'light' ? lightSrc : darkSrc
+  // Default opacities: high visibility in dark mode (0.85), subtle overlay in light mode (0.65)
+  const activeOpacity = opacity !== undefined ? opacity : (theme === 'light' ? 0.65 : 0.85)
 
   return (
     <div 
       ref={ref}
       style={{
         position: 'absolute',
-        inset: '-20%', // Oversized to allow parallax and blur without edge clipping
+        inset: '-10%', // Oversized to allow parallax without edge clipping
         zIndex: 0,
         pointerEvents: 'none',
         overflow: 'hidden'
@@ -55,9 +57,9 @@ export default function SectionBackground({
         <motion.div
           key={activeSrc}
           initial={{ opacity: 0 }}
-          animate={{ opacity: opacity }}
+          animate={{ opacity: activeOpacity }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 1.5, ease: 'easeInOut' }}
+          transition={{ duration: 1.2, ease: 'easeInOut' }}
           style={{ width: '100%', height: '100%' }}
         >
           <motion.img
@@ -69,7 +71,7 @@ export default function SectionBackground({
               width: '100%',
               height: '100%',
               objectFit: 'cover',
-              filter: `blur(${blur}) ${theme === 'dark' ? 'brightness(1.3) contrast(1.2)' : ''}`,
+              filter: blur && blur !== '0px' ? `blur(${blur})` : 'none',
               y: y
             }}
           />

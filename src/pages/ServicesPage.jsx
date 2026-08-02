@@ -59,50 +59,50 @@ export default function ServicesPage() {
   const [activeFaq, setActiveFaq] = useState(null)
 
   useEffect(() => {
-    // Force refresh GSAP after a slight delay to ensure DOM & images are fully painted 
-    // when navigating via React Router
-    const timer = setTimeout(() => {
-      ScrollTrigger.refresh()
-    }, 100)
+    // GSAP Context for proper React lifecycle & route transitions
+    let ctx = gsap.context(() => {
+      const container = containerRef.current
+      if (window.innerWidth > 900 && container && horizontalRef.current) {
+        const scrollAmount = container.scrollWidth - window.innerWidth
 
-    // GSAP Horizontal Scroll
-    const container = containerRef.current
-    if (window.innerWidth > 900 && container) {
-      const scrollAmount = container.scrollWidth - window.innerWidth
-
-      const tween = gsap.to(container, {
-        x: -scrollAmount,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: horizontalRef.current,
-          start: 'top top',
-          end: `+=${scrollAmount}`,
-          pin: true,
-          scrub: 1,
-          invalidateOnRefresh: true,
-        }
-      })
-
-      // Optional Parallax on Cards Background
-      const cards = gsap.utils.toArray('.srv-card-bg')
-      cards.forEach(card => {
-        gsap.to(card, {
-          x: 100,
+        gsap.to(container, {
+          x: -scrollAmount,
           ease: 'none',
           scrollTrigger: {
             trigger: horizontalRef.current,
             start: 'top top',
             end: `+=${scrollAmount}`,
-            scrub: 1
+            pin: true,
+            scrub: 1,
+            invalidateOnRefresh: true,
           }
         })
-      })
 
-      return () => {
-        clearTimeout(timer)
-        if (tween) tween.kill()
-        ScrollTrigger.getAll().forEach(t => t.kill())
+        // Parallax on Cards Background
+        const cards = gsap.utils.toArray('.srv-card-bg')
+        cards.forEach(card => {
+          gsap.to(card, {
+            x: 100,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: horizontalRef.current,
+              start: 'top top',
+              end: `+=${scrollAmount}`,
+              scrub: 1
+            }
+          })
+        })
       }
+    }, containerRef)
+
+    // Force ScrollTrigger refresh after client-side route animation completes
+    const timer = setTimeout(() => {
+      ScrollTrigger.refresh()
+    }, 150)
+
+    return () => {
+      clearTimeout(timer)
+      ctx.revert()
     }
   }, [])
 
@@ -111,19 +111,15 @@ export default function ServicesPage() {
       <CustomCursor />
       <Navbar />
 
-      <main style={{ position: 'relative', zIndex: 10, background: 'var(--bg)', marginBottom: 'var(--footer-height, 400px)' }}>
+      <main style={{ position: 'relative', zIndex: 10, background: 'transparent', marginBottom: 'var(--footer-height, 400px)' }}>
         
         {/* HERO SECTION */}
         <section className="srv-hero" style={{ background: 'transparent' }}>
           <SectionBackground 
             lightSrc="/bg/sections/light_bg/Floating_glass_panels_crystal_st._202608020543.jpeg"
-            darkSrc="/bg/sections/dark_bg/Gradient_ribbons_twisting_throug._2K_202608020544.jpeg"
-            blur="8px"
-            opacity={0.9}
-            scaleBase={1.05}
-            scaleMax={1.15}
+            darkSrc="/bg/sections/dark_bg/Neural_ecosystem_glowing_nodes_l._202608020544.jpeg"
           />
-            <div className="srv-hero-overlay" style={{ background: 'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.2) 100%)' }}></div>
+          <div className="srv-hero-overlay" style={{ background: 'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.3) 100%)' }}></div>
           
           <div className="srv-hero-content">
             <motion.div
@@ -166,8 +162,6 @@ export default function ServicesPage() {
           <SectionBackground 
             lightSrc="/bg/sections/light_bg/Abstract_liquid_sculpture_with_c._202608020542.jpeg"
             darkSrc="/bg/sections/dark_bg/Abstract_liquid_sculpture_with_c._202608020543.jpeg"
-            blur="12px"
-            opacity={0.7}
           />
           <div className="container" style={{ position: 'relative', zIndex: 2 }}>
             <div className="srv-section-header">
