@@ -5,10 +5,12 @@ import TransitionLink from './TransitionLink'
 import { useLocation } from 'react-router-dom'
 
 const navLinks = [
+  { label: 'Home', href: '/', isPage: true },
+  { label: 'About', href: '/about', isPage: true },
   { label: 'Services', href: '/services', isPage: true },
   { label: 'Process', href: '/process', isPage: true },
-  { label: 'About', href: '/about', isPage: true },
-  { label: 'Contact', href: '/contact', isPage: true },
+  { label: 'Blogs', href: '/blog', isPage: true },
+  { label: 'Careers', href: '/careers', isPage: true },
 ]
 
 export default function Navbar() {
